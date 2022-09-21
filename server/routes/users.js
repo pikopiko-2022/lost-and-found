@@ -17,6 +17,8 @@ router.get('/', checkJwt, (req, res) => {
   }
 })
 
+
+// POST createUser
 router.post('/', checkJwt, (req, res) => {
   const auth0_id = req.user?.sub
   const { username } = req.body

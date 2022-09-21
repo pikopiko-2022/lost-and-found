@@ -8,6 +8,7 @@ export function getUser(token) {
     .then((res) => res.body)
     .catch(logError)
 }
+
 export function addUser(user, token) {
   return request
     .post(`${rootUrl}/users`)
