@@ -15,11 +15,20 @@ module.exports = {
       filename: ':memory:',
     },
     useNullAsDefault: true,
+    seeds: {
+      directory: path.join(__dirname, 'seeds'),
+    },
+    migrations: {
+      directory: path.join(__dirname, 'migrations'),
+    },
   },
 
   production: {
     client: 'postgresql',
-    connection: process.env.DATABASE_URL,
+    connection: {
+      connectionString: process.env.DATABASE_URL,
+      ssl: { rejectUnauthorized: false },
+    },
     pool: {
       min: 2,
       max: 10,

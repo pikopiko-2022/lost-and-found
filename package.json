@@ -44,6 +44,7 @@
     "express-jwt": "^6.1.0",
     "express-jwt-authz": "^2.4.1",
     "jwks-rsa": "^2.0.4"
+
   },
   "devDependencies": {
     "@babel/core": "^7.15.6",

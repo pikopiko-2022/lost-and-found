@@ -2,9 +2,11 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import store from './store'
+
 import { Auth0Provider } from '@auth0/auth0-react'
+
 import App from './components/App'
-import {BrowserRouter as Router} from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
@@ -14,13 +16,13 @@ document.addEventListener('DOMContentLoaded', () => {
       redirectUri={window.location.origin}
       audience="https://lost-and-found/api"
     >
-      
       <Provider store={store}>
-      <Router>
-        <App />
+        <Router>
+          <App />
         </Router>
       </Provider>
     </Auth0Provider>,
+
     document.getElementById('app')
   )
 })
