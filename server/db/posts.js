@@ -15,7 +15,9 @@ function getAllPosts(db = connection) {
 }
 
 function addPost(post, db = connection) {
-  return db('posts').insert(post)
+  return db('posts')
+    .insert(post)
+    .then(() => getAllPosts(db))
 }
 
 module.exports = { getAllPosts, addPost }

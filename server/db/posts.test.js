@@ -26,7 +26,7 @@ describe('getAllPosts', () => {
 })
 
 describe('addPost', () => {
-  it('adds a post into the posts table in the database', () => {
+  it('adds a post into the posts table in the database then returns all the posts', () => {
     const fakePost = {
       id: 2,
       uploader_id: '3',
@@ -39,10 +39,8 @@ describe('addPost', () => {
       location: 'Christchurch',
     }
 
-    return addPost(fakePost, testDb)
-      .then(() => getAllPosts(testDb))
-      .then((res) => {
-        expect(res[1].title).toContain('cat')
-      })
+    return addPost(fakePost, testDb).then((res) => {
+      expect(res[1].title).toContain('cat')
+    })
   })
 })
