@@ -1,38 +1,38 @@
 import request from 'superagent'
-const rootUrl = '/api/v1'
+const url = '/api/v1'
 
-export function getUser(token) {
+export function addOrGetUser(name, token) {
   return request
-    .get(rootUrl + '/users')
+    .post(url)
     .set('Authorization', `Bearer ${token}`)
-    .then((res) => res.body)
-    .catch(logError)
+    .send({ name })
+    .then((res) => {
+      return res.body
+    })
 }
 
-export function addUser(user, token) {
-  return request
-    .post(`${rootUrl}/users`)
-    .set('Authorization', `Bearer ${token}`)
-    .send(user)
-    .catch(logError)
-}
+// function logError(err) {
+//   if (err.response.text === 'Username Taken') {
+//     throw new Error('Username already taken - please choose another')
+//   } else
+//     console.error('Error consuming the API (in client.api.js):', err.message)
+//   throw err
+// }
 
-function logError(err) {
-  if (err.response.text === 'Username Taken') {
-    throw new Error('Username already taken - please choose another')
-  } else
-    console.error('Error consuming the API (in client.api.js):', err.message)
-  throw err
-}
-
-// export function addOrGetUser(name, token) {
+// export function getUser(token) {
 //   return request
-//     .post(url)
+//     .get(rootUrl + '/users')
 //     .set('Authorization', `Bearer ${token}`)
-//     .send({ name })
-//     .then((res) => {
-//       return res.body
-//     })
+//     .then((res) => res.body)
+//     .catch(logError)
+// }
+
+// export function addUser(user, token) {
+//   return request
+//     .post(`${rootUrl}/users`)
+//     .set('Authorization', `Bearer ${token}`)
+//     .send(user)
+//     .catch(logError)
 // }
 
 // router.post('/', checkJwt, (req, res) => {
