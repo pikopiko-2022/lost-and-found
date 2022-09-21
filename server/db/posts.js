@@ -14,4 +14,8 @@ function getAllPosts(db = connection) {
   )
 }
 
-module.exports = { getAllPosts }
+function addPost(post, db = connection) {
+  return db('posts').insert(post)
+}
+
+module.exports = { getAllPosts, addPost }

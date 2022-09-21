@@ -2,7 +2,7 @@ const knex = require('knex')
 const testConfig = require('./knexfile').test
 const testDb = knex(testConfig)
 
-const { getAllPosts } = require('./posts')
+const { getAllPosts, addPost } = require('./posts')
 
 beforeAll(() => {
   return testDb.migrate.latest()
@@ -22,5 +22,27 @@ describe('getAllPosts', () => {
       expect(posts).toHaveLength(1)
       expect(posts[0].title).toContain('beanie')
     })
+  })
+})
+
+describe('addPost', () => {
+  it('adds a post into the posts table in the database', () => {
+    const fakePost = {
+      id: 2,
+      uploader_id: '3',
+      category: 'Lost',
+      title: 'Missing ginger cat',
+      date: '01/06/2022',
+      description:
+        'Mittens went missing about two weeks ago in the Somerfield area',
+      image_url: 'fakeUrl',
+      location: 'Christchurch',
+    }
+
+    return addPost(fakePost, testDb)
+      .then(() => getAllPosts(testDb))
+      .then((res) => {
+        expect(res[1].title).toContain('cat')
+      })
   })
 })
