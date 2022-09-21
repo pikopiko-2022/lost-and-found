@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+// import { useDispatch, useSelector } from 'react-redux'
 import LandingPage from './LandingPage'
-import { fetchFruits } from '../actions'
+// import { fetchFruits } from '../actions'
 import { Routes, Route } from 'react-router-dom'
 import CreateProfile from './CreateProfile'
 import Profile from './Profile'
@@ -11,21 +11,15 @@ import CreatePost from './CreatePost'
 import Nav from './Nav'
 
 function App() {
-  const fruits = useSelector((state) => state.fruits)
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(fetchFruits())
+    // dispatch(fetchFruits())
   }, [])
 
   return (
     <>
       <div className="app">
         <h1>Fullstack Boilerplate - with Fruits!</h1>
-        <ul>
-          {fruits.map((fruit) => (
-            <li key={fruit}>{fruit}</li>
-          ))}
-        </ul>
       </div>
       <LandingPage />
       <Nav />
