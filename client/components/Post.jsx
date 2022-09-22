@@ -11,9 +11,9 @@ export default function Post(props) {
         src={props.image}
         alt={props.title}
       ></img>
+      <h3>{props.description}</h3>
       <h2>
-        {props.category} by {props.uploader}
-        {/* need to work on joins to make props.uploader name rather than auth0 id */}
+        {props.category} by {props.uploader} in {props.location} on {props.date}
       </h2>
     </>
   )
