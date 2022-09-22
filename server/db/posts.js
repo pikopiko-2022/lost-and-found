@@ -7,7 +7,7 @@ function getAllPosts(db = connection) {
     .select(
       'users.name as uploaderName',
       'users.location as userLocation',
-      'posts.id as id',
+      'posts.id',
       'posts.uploader_id as uploaderId',
       'posts.category as category',
       'posts.title as title',
@@ -18,10 +18,20 @@ function getAllPosts(db = connection) {
     )
 }
 
+async function getAllPostsWithComments(db = connection) {
+  const posts = await getAllPosts(db)
+  const postIds = posts.map((post) => post.id)
+  const comments = await db('comments').whereIn('post_id', postIds)
+  posts.forEach((post) => {
+    post.comments = comments.filter((comment) => comment.post_id === post.id)
+  })
+  return posts
+}
+
 function addPost(post, db = connection) {
   return db('posts')
     .insert(post)
-    .then(() => getAllPosts(db))
+    .then(() => getAllPostsWithComments(db))
 }
 
-module.exports = { getAllPosts, addPost }
+module.exports = { getAllPosts, addPost, getAllPostsWithComments }

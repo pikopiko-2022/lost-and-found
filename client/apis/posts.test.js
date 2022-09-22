@@ -1,5 +1,5 @@
 import nock from 'nock'
-import { getAllPosts, addPost } from './posts'
+import { getAllPostsAndComments, addPost } from './posts'
 
 const fakePosts = [
   {
@@ -25,13 +25,13 @@ const fakePosts = [
   },
 ]
 
-describe('getAllPosts', () => {
+describe('getAllPostsAndComments', () => {
   it('gets all posts from database through local api', () => {
     const scope = nock('http://localhost')
       .get('/api/v1/posts')
       .reply(200, fakePosts)
 
-    return getAllPosts().then((result) => {
+    return getAllPostsAndComments().then((result) => {
       expect(scope.isDone()).toBe(true)
       expect(result).toHaveLength(2)
     })

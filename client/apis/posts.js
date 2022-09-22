@@ -2,7 +2,7 @@ import request from 'superagent'
 
 const rootUrl = '/api/v1'
 
-export function getAllPosts() {
+export function getAllPostsAndComments() {
   return request.get(rootUrl + '/posts').then((res) => {
     return res.body
   })
