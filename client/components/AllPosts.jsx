@@ -15,7 +15,7 @@ export default function AllPosts() {
   return (
     <>
       <Link to="/createPost">Create a post</Link>
-      {posts.map((post) => {
+      {posts.reverse().map((post) => {
         return (
           <Post
             key={post.id}
