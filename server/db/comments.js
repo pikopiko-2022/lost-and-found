@@ -3,13 +3,16 @@ const config = require('./knexfile').development
 const connection = require('knex')(config)
 
 function getComments(db = connection) {
-  return db('comments').select(
-    'id',
-    'commenter_id as commenterId',
-    'date_commented as dateCommented',
-    'comment',
-    'post_id as postId'
-  )
+  return db('comments')
+    .join('posts', 'comments.post_id', 'posts.id')
+    .select(
+      'comments.id',
+      'comments.commenter_id as commenterId',
+      'comments.date_commented as dateCommented',
+      'comments.comment',
+      'comments.post_id as commentPostId',
+      'posts.id as postId'
+    )
 }
 
 function addComment(comment, db = connection) {

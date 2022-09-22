@@ -1,26 +1,21 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchComments } from '../actions/comments'
+import React from 'react'
+import Comment from './Comment'
 
-function Comments() {
-  const dispatch = useDispatch()
-  const comments = useSelector((state) => state.comments)
-  useEffect(() => {
-    dispatch(fetchComments())
-  }, [])
-
+function Comments(props) {
   return (
     <>
-      <p>Comments</p>
-      {comments.map((comment) => (
-        <li key={comment.id}>
-          {comment.commenterId}
-          {comment.dateCommented}
-          {comment.comment}
-        </li>
-      ))}
-    </>
-  )
-}
+      {props.comments.map((comment) => (
+        <Comment
+          key={comment.id}
+          commenter={comment.commenterId}
+          commentDate={comment.dateCommented}
+          comment={comment.comment}
+          postId={comment.postId}
+        />
+       ))}
+     </>
+    )
+   }
+
 
 export default Comments
