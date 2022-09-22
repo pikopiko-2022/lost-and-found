@@ -7,7 +7,8 @@ function getComments(db = connection) {
     'id',
     'commenter_id as commenterId',
     'date_commented as dateCommented',
-    'comment'
+    'comment',
+    'post_id as postId'
   )
 }
 
