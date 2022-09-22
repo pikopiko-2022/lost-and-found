@@ -28,7 +28,10 @@ export default function Location() {
         setCurrentLocation(res[0].formatted_address)
         setIsSearched(true)
       })
-      .catch(() => setErrorMsg('Please enter real address'))
+      .catch(() => {
+        setErrorMsg('Please enter real address')
+      })
+
     // add error handling for now results
   }
 

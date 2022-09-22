@@ -1,20 +1,15 @@
-import React, { useState as useStateMock } from 'react'
+import React from 'react'
 import Location from '../Location'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { addLocation } from '../../apis/location'
-import { act } from 'react-dom/test-utils'
 import { updateLocation } from '../../actions/location'
 
 jest.mock('../../actions/location')
 jest.mock('../../apis/location')
 jest.mock('react-redux')
-// jest.mock('react') - partialMock
-
-const mockLocation = [{ formatted_address: '518 Colombo Street' }]
-addLocation.mockImplementation(() => Promise.resolve(mockLocation))
 
 const fakeDispatch = jest.fn()
 useDispatch.mockReturnValue(fakeDispatch)
@@ -30,6 +25,8 @@ describe('<Location />', () => {
   })
 
   it('click the button and location rendered on page', async () => {
+    const mockLocation = [{ formatted_address: '518 Colombo Street' }]
+    addLocation.mockImplementation(() => Promise.resolve(mockLocation))
     render(<Location />)
     await userEvent.type(screen.getByLabelText(/location/i), '518 Colo')
     await userEvent.click(screen.getByRole('button', { name: /search/i }))
@@ -38,7 +35,9 @@ describe('<Location />', () => {
     expect(screen.getByText(/518 Colombo/i)).toBeInTheDocument()
   })
 
-  it('dispatches updateLocation on button click', async () => {
+  it('displays and hides button based on state', async () => {
+    const mockLocation = [{ formatted_address: '518 Colombo Street' }]
+    addLocation.mockImplementation(() => Promise.resolve(mockLocation))
     render(<Location />)
     await userEvent.type(screen.getByLabelText(/location/i), '518 Colo')
     await userEvent.click(screen.getByRole('button', { name: /search/i }))
@@ -48,8 +47,16 @@ describe('<Location />', () => {
     expect(
       screen.queryByRole('button', { name: /add location/i })
     ).not.toBeInTheDocument()
-    screen.debug()
     expect(screen.getByLabelText(/location/i)).toBeEmptyDOMElement()
     expect(screen.getByText(/518 Colo/i)).toBeInTheDocument()
+  })
+
+  it('catch error', async () => {
+    addLocation.mockImplementation(() => Promise.reject(new Error('failure')))
+    render(<Location />)
+    await userEvent.type(screen.getByLabelText(/location/i), '!')
+    await userEvent.click(screen.getByRole('button', { name: /search/i }))
+    screen.debug()
+    expect(screen.getByText(/real address/i)).toBeInTheDocument()
   })
 })
