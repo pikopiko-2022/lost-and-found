@@ -7,7 +7,7 @@ function createUser(user, db = connection) {
 }
 
 function getUserById(auth0Id, db = connection) {
-  return db('users').where('auth0_id', auth0Id)
+  return db('users').where('auth0_id', auth0Id).first()
 }
 
 function getUsers(db = connection) {

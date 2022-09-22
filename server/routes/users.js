@@ -60,7 +60,7 @@ router.patch('/', checkJwt, (req, res) => {
     username,
   }
   db.updateUser(auth0_id, userDetails)
-    .then(() => res.sendStatus(200))
+    .then(() => res.json(userDetails))
     .catch((err) => console.error(err))
 })
 
