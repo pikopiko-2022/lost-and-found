@@ -26,6 +26,7 @@ export default function AllPosts() {
             description={post.description}
             image={post.imageUrl}
             location={post.itemLocation}
+            comments={post.comments}
           />
         )
       })}
