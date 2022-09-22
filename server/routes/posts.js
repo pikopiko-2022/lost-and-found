@@ -16,7 +16,18 @@ router.get('/', (req, res) => {
 
 //POST /api/v1/posts
 router.post('/', (req, res) => {
-  const post = req.body
+  const { description, category, title, date, image_url, location } = req.body
+  //todo: replace with auth0 token
+  const uploader_id = '3'
+  const post = {
+    description,
+    uploader_id,
+    category,
+    title,
+    date,
+    image_url,
+    location,
+  }
   addPost(post)
     .then((posts) => res.json(posts))
     .catch(() => res.status(500).send(errorMessage))
