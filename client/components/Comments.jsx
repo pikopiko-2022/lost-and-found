@@ -12,10 +12,9 @@ function Comments(props) {
           comment={comment.comment}
           postId={comment.postId}
         />
-       ))}
-     </>
-    )
-   }
-
+      ))}
+    </>
+  )
+}
 
 export default Comments
