@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
 //POST /api/v1/posts
 router.post('/', (req, res) => {
   const { description, category, title, date, image_url, location } = req.body
-  //todo: replace with auth0 token
+  //todo: replace with req.user?.sub
   const uploader_id = '3'
   const post = {
     description,
