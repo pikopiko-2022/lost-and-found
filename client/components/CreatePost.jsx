@@ -1,9 +1,10 @@
+import { useSelector, useDispatch } from 'react-redux'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
 import { addNewPost } from '../actions/posts'
 
 export default function CreatePost() {
+  const currentLocation = useSelector((state) => state.locationReducer)
   const initialState = {
     category: '',
     title: '',
