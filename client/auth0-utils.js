@@ -10,7 +10,6 @@ export function useCacheUser() {
     Boolean(state.loggedInUser?.token)
   )
 
-  console.log(tokenInRedux)
   const { isAuthenticated, getAcessTokenSilently, user } = useAuth0()
 
   if (isAuthenticated && !tokenInRedux) {
