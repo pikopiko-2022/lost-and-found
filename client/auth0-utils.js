@@ -16,6 +16,7 @@ export function useCacheUser() {
     try {
       getAcessTokenSilently()
         .then((token) => {
+          console.log(token)
           const userToSave = {
             auth0id: user?.sub,
             email: user?.email,

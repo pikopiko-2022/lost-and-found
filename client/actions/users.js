@@ -1,4 +1,4 @@
-import { addOrGetUser } from '../apis/users.api'
+import { createUser, getUser, updateUser } from '../apis/users'
 export const SET_USER = 'SET_USER'
 
 export function updateLoggedInUser(userToSave) {

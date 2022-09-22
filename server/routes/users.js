@@ -4,17 +4,29 @@ const db = require('../db/users')
 const router = express.Router()
 
 // GET api/v1/users
-router.get('/', checkJwt, (req, res) => {
+router.get('/singleuser', checkJwt, (req, res) => {
   const auth0_id = req.user?.sub
+  console.log(req.user)
   if (!auth0_id) {
     res.send(null)
   } else {
-    db.getUsers()
+    db.getUserById(auth0_id)
       .then((user) => {
         res.json(user ? user : null)
       })
       .catch((err) => res.status(500).send(err.message))
   }
+})
+
+router.get('/', (req, res) => {
+  db.getUsers()
+    .then((user) => {
+      res.json(user)
+    })
+    .catch((e) => {
+      console.error(e)
+      res.status(500).send(e.message)
+    })
 })
 
 // POST createUser
@@ -61,7 +73,7 @@ router.patch('/', checkJwt, (req, res) => {
   }
   db.updateUser(auth0_id, userDetails)
     .then(() => res.json(userDetails))
-    .catch((err) => console.error(err))
+    .catch((err) => res.status(500).send(err.message))
 })
 
 module.exports = router

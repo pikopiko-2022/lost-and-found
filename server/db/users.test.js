@@ -60,14 +60,16 @@ describe('create new user user db', () => {
 
   it('creates a new user', () => {
     // expect.assertions(5)
-    return createUser(fakeNewUser, testDb).then(() => {
-      return getUserById(30, testDb).then((user) => {
+    return createUser(fakeNewUser, testDb)
+      .then(() => {
+        return getUserById(30, testDb)
+      })
+      .then((user) => {
         expect(user.name).toBe('Sally')
         expect(user.username).toBe('SillySally')
         expect(user.email).toBe('sally@fakemail.com')
         expect(user.location).toBe('Christchurch')
       })
-    })
   })
 })
 
