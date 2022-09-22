@@ -1,9 +1,9 @@
-import { getAllPosts, addPost } from '../apis/posts'
+import { getAllPostsAndComments, addPost } from '../apis/posts'
 export const SET_POSTS_SUCCESS = 'SET_POSTS_SUCCESS'
 
 export function fetchPosts() {
   return (dispatch) => {
-    return getAllPosts()
+    return getAllPostsAndComments()
       .then((posts) => {
         dispatch(setPostsSuccess(posts))
       })
