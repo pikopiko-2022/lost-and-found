@@ -44,7 +44,6 @@ export default function Location() {
 
   return (
     <>
-      <h2>Location</h2>
       {errorMsg && <div style={{ color: 'red' }}>{errorMsg}</div>}
       <form action="" onSubmit={handleSearch}>
         <label htmlFor="location">Enter location</label>
