@@ -1,5 +1,9 @@
 import React from 'react'
 
 export default function Comment(props) {
-  return <>{props.comment}</>
+  return (
+    <>
+      <li>{props.comment}</li>
+    </>
+  )
 }
