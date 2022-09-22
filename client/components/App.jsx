@@ -9,6 +9,7 @@ import UserHomePage from './UserHomePage'
 import EditProfile from './EditProfile'
 import CreatePost from './CreatePost'
 import Nav from './Nav'
+import Location from './Location'
 
 function App() {
   // const dispatch = useDispatch()
@@ -23,6 +24,7 @@ function App() {
       </div>
       <LandingPage />
       <Nav />
+      <Location />
       <Routes>
         <Route path="/" element={<UserHomePage />} />
         <Route path="/createProfile" element={<CreateProfile />} />

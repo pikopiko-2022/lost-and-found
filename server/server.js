@@ -6,6 +6,7 @@ const userRoutes = require('./routes/users')
 
 const postRoutes = require('./routes/posts')
 const commentRoutes = require('./routes/comments')
+const locationRoutes = require('./routes/location')
 
 const server = express()
 
@@ -16,6 +17,7 @@ server.use('/api/v1/users', userRoutes)
 
 server.use('/api/v1/posts', postRoutes)
 server.use('/api/v1/comments', commentRoutes)
+server.use('/api/v1/location', locationRoutes)
 
 server.use('/v1/*', (req, res) => res.sendStatus(404))
 
