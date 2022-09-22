@@ -10,14 +10,23 @@ function getUser(db = connection) {
   return db('users').select()
 }
 
-function updateUser(newUser, db = connection) {
-  return db('users').where('id', newUser).update(newUser)
+function updateUser(auth0Id, newUserProfile, db = connection) {
+  return db('users').where('auth0_id', auth0Id).first().update(newUserProfile)
 }
 
-function userExist(username, db = connection) {
+// function updateTask(id, toBeUpdateTask, db = connection) {
+//   return db('todos').update({ task: toBeUpdateTask }).where('id', id)
+// }
+function userExists(name, db = connection) {
   return db('users')
-    .where('username', username)
+    .where('name', name)
     .then((usersfound) => usersfound.length > 0)
+}
+
+function userAuth0IdExist(auth0_id, db = connection) {
+  return db('users')
+    .where('auth0_id', auth0_id)
+    .then((idfound) => idfound.length > 0)
 }
 
 function userCanEdit(id, auth0Id, db = connection) {
@@ -36,5 +45,6 @@ module.exports = {
   getUser,
   updateUser,
   userCanEdit,
-  userExist,
+  userExists,
+  userAuth0IdExist,
 }
