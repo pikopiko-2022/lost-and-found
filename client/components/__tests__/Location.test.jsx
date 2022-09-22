@@ -1,21 +1,25 @@
 import React, { useState as useStateMock } from 'react'
 import Location from '../Location'
 import { render, screen, fireEvent } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addLocation } from '../../apis/location'
 import { act } from 'react-dom/test-utils'
-// import { updateLocation } from '../../actions/location'
+import { updateLocation } from '../../actions/location'
 
 jest.mock('../../actions/location')
 jest.mock('../../apis/location')
 jest.mock('react-redux')
+// jest.mock('react') - partialMock
 
 const mockLocation = [{ formatted_address: '518 Colombo Street' }]
 addLocation.mockImplementation(() => Promise.resolve(mockLocation))
 
 const fakeDispatch = jest.fn()
 useDispatch.mockReturnValue(fakeDispatch)
+useSelector.mockReturnValue('518 Colo')
+updateLocation.mockReturnValue('Hello')
 
 describe('<Location />', () => {
   it('render title', () => {
@@ -27,56 +31,25 @@ describe('<Location />', () => {
 
   it('click the button and location rendered on page', async () => {
     render(<Location />)
-    const button = screen.getByRole('button')
+    await userEvent.type(screen.getByLabelText(/location/i), '518 Colo')
+    await userEvent.click(screen.getByRole('button', { name: /search/i }))
 
-    await act(async () => {
-      await fireEvent.click(button)
-      /* fire events that update state */
-    })
-    const text = screen.getByTestId('testLocation')
-
-    expect(text).toContainHTML('518 Colombo')
-  })
-})
-
-// import { render, screen } from '@testing-library/react';
-// import userEvent from '@testing-library/user-event';
-
-// afterEach(cleanup);
-
-// test("form", async () => {
-//   const user = userEvent.setup();
-//   const { getByPlaceholderText, getByText } = render(<TestForm />);
-
-//   await user.type(getByPlaceholderText("placeholder"), "new value");
-
-//   await waitFor(() => {
-//     expect(getByText("Input has changed")).toBeInTheDocument();
-//   });
-// });
-
-describe('Some message', () => {
-  // const useStateMock = (initState: any) => [initState, setState]
-  // const useStateMock = (initState: any) => [initState, setState];
-  afterEach(() => {
-    jest.restoreAllMocks()
-    // jest.clearAllMocks()
+    expect(addLocation).toHaveBeenCalledWith('518 Colo')
+    expect(screen.getByText(/518 Colombo/i)).toBeInTheDocument()
   })
 
-  it('Is a test where we want to mock useState', () => {
-    const setState = jest.fn()
-    let useStateMock = function (initState = 'new mode value') {
-      return [initState, setState]
-    }
-
-    jest.spyOn(React, 'useState').mockImplementation(() => useStateMock)
+  it('dispatches updateLocation on button click', async () => {
     render(<Location />)
-    const input = screen.getByTestId('testBox')
+    await userEvent.type(screen.getByLabelText(/location/i), '518 Colo')
+    await userEvent.click(screen.getByRole('button', { name: /search/i }))
+    await userEvent.click(screen.getByRole('button', { name: /add location/i }))
 
-    // trigger setState somehow
-    fireEvent.change(input, { target: { value: 'bananas' } })
-    console.log(input.value)
-    expect(setState).toHaveBeenCalledWith(1)
-    // Other tests here
+    expect(fakeDispatch).toHaveBeenCalledWith('Hello')
+    expect(
+      screen.queryByRole('button', { name: /add location/i })
+    ).not.toBeInTheDocument()
+    screen.debug()
+    expect(screen.getByLabelText(/location/i)).toBeEmptyDOMElement()
+    expect(screen.getByText(/518 Colo/i)).toBeInTheDocument()
   })
 })
