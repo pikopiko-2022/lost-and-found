@@ -9,9 +9,6 @@ const router = express.Router()
 router.get('/', (req, res) => {
   const text = req.query.text
 
-  console.log(text)
-
-  console.log(process.env.GOOGLE_APIKEY)
   return request
     .get('https://maps.googleapis.com/maps/api/place/textsearch/json')
     .query({
@@ -20,9 +17,12 @@ router.get('/', (req, res) => {
       key: process.env.GOOGLE_APIKEY,
     })
     .then((response) => {
-      console.log(response.body)
+      // console.log(response.body)
       res.json(response.body.results)
       return null
+    })
+    .catch(() => {
+      res.status(500).send('Internal Server Error')
     })
 })
 
