@@ -20,7 +20,6 @@ export default function Location() {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    console.log(form)
     addLocation(form)
       .then((res) => {
         setCurrentLocation(res[0].formatted_address)
@@ -29,10 +28,10 @@ export default function Location() {
       .catch((err) => setErrorMsg(err.message))
     // add error handling for now results
   }
-  console.log('Out: ' + currentLocation)
+
   return (
     <>
-      <div>Location</div>
+      <h2>Location</h2>
       <form action="" onSubmit={handleSubmit}>
         <label htmlFor="location">Enter location</label>
         <input
@@ -41,10 +40,13 @@ export default function Location() {
           id="location"
           onChange={handleChange}
           value={form}
+          data-testid="testBox"
         />
         <button>Add location</button>
       </form>
-      {currentLocation && <div>{currentLocation}</div>}
+      {currentLocation && (
+        <div data-testid="testLocation">{currentLocation}</div>
+      )}
     </>
   )
 }

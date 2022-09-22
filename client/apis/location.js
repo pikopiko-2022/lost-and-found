@@ -7,7 +7,6 @@ export function addLocation(location) {
     .get(`${rootUrl}/location`)
     .query({ text: location })
     .then((res) => {
-      console.log('addlocation called', res.body)
       return res.body
     })
 }
