@@ -8,7 +8,10 @@ const errorMessage = 'There was a problem. Please try again.'
 router.get('/', (req, res) => {
   getAllPosts()
     .then((posts) => res.json(posts))
-    .catch(() => res.status(500).send(errorMessage))
+    .catch((err) => {
+      console.error(err.message)
+      res.status(500).send(errorMessage)
+    })
 })
 
 //POST /api/v1/posts
