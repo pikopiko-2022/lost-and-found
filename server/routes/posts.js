@@ -1,12 +1,12 @@
 const express = require('express')
-const { getAllPosts, addPost } = require('../db/posts')
+const { addPost, getAllPostsWithComments } = require('../db/posts')
 const router = express.Router()
 
 const errorMessage = 'There was a problem. Please try again.'
 
 //GET /api/v1/posts
 router.get('/', (req, res) => {
-  getAllPosts()
+  getAllPostsWithComments()
     .then((posts) => res.json(posts))
     .catch((err) => {
       console.error(err.message)
