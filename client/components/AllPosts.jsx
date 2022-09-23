@@ -19,7 +19,7 @@ export default function AllPosts() {
         return (
           <Post
             key={post.id}
-            id= {post.id}
+            id={post.id}
             title={post.title}
             uploader={post.uploaderName}
             category={post.category}
