@@ -1,8 +1,8 @@
 const request = require('supertest')
-const server = require('../server')
+const server = require('../../server')
 
-const { getAllPostsWithComments, addPost } = require('../db/posts')
-jest.mock('../db/posts')
+const { getAllPostsWithComments, addPost } = require('../../db/posts')
+jest.mock('../../db/posts')
 jest.spyOn(console, 'error')
 
 afterEach(() => {
