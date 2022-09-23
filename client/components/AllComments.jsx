@@ -1,13 +1,14 @@
 import React from 'react'
+
 import Comment from './Comment'
 
-function Comments(props) {
+function AllComments(props) {
   return (
     <>
       {props.comments.map((comment) => (
         <Comment
           key={comment.id}
-          commenter={comment.commenterId}
+          commenter={comment.commenter_id}
           commentDate={comment.dateCommented}
           comment={comment.comment}
           postId={comment.postId}
@@ -17,4 +18,4 @@ function Comments(props) {
   )
 }
 
-export default Comments
+export default AllComments
