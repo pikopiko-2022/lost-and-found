@@ -18,12 +18,16 @@ export default function CreatePost() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [formData, setFormData] = useState(initialState)
+  const [selectedImage, setSelectedImage] = useState(null)
 
   function changeHandler(event) {
     const { name, value } = event.target
     setFormData({ ...formData, [name]: value })
   }
 
+  function handleImageChange(e) {
+    setSelectedImage(e.target.files[0])
+  }
   function submitHandler(event) {
     event.preventDefault()
     const newData = { ...formData, location: currentLocation }
@@ -31,6 +35,7 @@ export default function CreatePost() {
     setFormData(initialState)
     navigate('/')
   }
+
   return (
     <>
       <p>CreatePost</p>
@@ -72,16 +77,39 @@ export default function CreatePost() {
             value={formData.description}
           ></input>
         </div>
+
         <div>
-          <label htmlFor="image_url">Image link: </label>
+          {selectedImage && (
+            <div>
+              <img
+                alt="not found"
+                width={'250px'}
+                src={URL.createObjectURL(selectedImage)}
+              />
+              <br />
+              <button
+                onClick={(e) => {
+                  e.preventDefault()
+                  setSelectedImage(null)
+                }}
+              >
+                Remove
+              </button>
+            </div>
+          )}
+        </div>
+        <div>
+          <label htmlFor="profile">Upload your photo</label>
           <input
-            name="image_url"
-            onChange={changeHandler}
-            value={formData.image_url}
-          ></input>
+            type="file"
+            name="profile"
+            id="profile"
+            onChange={handleImageChange}
+          />
         </div>
       </form>
       <Location />
+
       <div>
         <button onClick={submitHandler}>Save new post</button>
       </div>
