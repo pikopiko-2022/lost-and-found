@@ -9,7 +9,6 @@ export default function CreatePost() {
   const initialState = {
     category: '',
     title: '',
-    date: '',
     description: '',
     image_url: '',
     location: '',
@@ -54,15 +53,6 @@ export default function CreatePost() {
             <option value="Lost">Lost</option>
             <option value="Found">Found</option>
           </select>
-        </div>
-        <div>
-          <label htmlFor="date">Date lost or found: </label>
-          <input
-            type="date"
-            name="date"
-            onChange={changeHandler}
-            value={formData.date}
-          ></input>
         </div>
         <div>
           <label htmlFor="description">Description: </label>

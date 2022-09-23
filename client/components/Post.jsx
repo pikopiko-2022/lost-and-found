@@ -1,5 +1,5 @@
 import React from 'react'
-import Comments from './Comments'
+import Comments from './AllComments'
 import CreateComment from './CreateComment'
 
 export default function Post(props) {
