@@ -2,6 +2,7 @@ import React from 'react'
 import Comments from './Comments'
 
 export default function Post(props) {
+  console.log(props.image)
   return (
     <>
       <h1>

@@ -30,8 +30,15 @@ export default function CreatePost() {
   }
   function submitHandler(event) {
     event.preventDefault()
-    const newData = { ...formData, location: currentLocation }
-    dispatch(addNewPost(newData))
+    const allFormData = new FormData()
+    allFormData.append('title', formData.title)
+    allFormData.append('category', formData.category)
+    allFormData.append('date', formData.date)
+    allFormData.append('description', formData.description)
+    allFormData.append('image', selectedImage)
+    allFormData.append('location', currentLocation)
+    // const newData = { ...formData, location: currentLocation }
+    dispatch(addNewPost(allFormData))
     setFormData(initialState)
     navigate('/')
   }
@@ -39,14 +46,10 @@ export default function CreatePost() {
   return (
     <>
       <p>CreatePost</p>
-      <form>
+      <form encType="multipart/form-data">
         <div>
           <label htmlFor="title">Title of post: </label>
-          <input
-            name="title"
-            onChange={changeHandler}
-            value={formData.title}
-          ></input>
+          <input name="title" onChange={changeHandler} value={formData.title} />
         </div>
         <div>
           <label htmlFor="category">Lost or Found: </label>
@@ -67,15 +70,16 @@ export default function CreatePost() {
             name="date"
             onChange={changeHandler}
             value={formData.date}
-          ></input>
+          />
         </div>
         <div>
           <label htmlFor="description">Description: </label>
-          <input
+          <textarea
+            type="text-area"
             name="description"
             onChange={changeHandler}
             value={formData.description}
-          ></input>
+          />
         </div>
 
         <div>
