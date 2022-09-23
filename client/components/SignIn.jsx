@@ -10,23 +10,22 @@ import CreateProfile from './CreateProfile'
 
 import LandingPage from './LandingPage'
 
-function SignIn() {
-  useCacheUser()
-  const dispatch = useDispatch()
-  const { isAuthenticated, getAccessTokenSilently } = useAuth0()
+function SignIn() {  useCacheUser()
+  // const dispatch = useDispatch()
+//   const { isAuthenticated, getAccessTokenSilently } = useAuth0()
   const userInData = useSelector((state) => state.usersReducer)
-  useEffect(() => {
-    if (!isAuthenticated) {
-      dispatch(clearLoggedInUser())
-    } else {
-      getAccessTokenSilently()
-        .then((token) => getUser(token))
-        .then((userInDb) => {
-          dispatch(updateLoggedInUser(userInDb))
-        })
-        .catch((err) => console.error(err))
-    }
-  }, [isAuthenticated])
+  // useEffect(() => {
+  //   if (!isAuthenticated) {
+  //     dispatch(clearLoggedInUser())
+  //   } else {
+  //     getAccessTokenSilently()
+  //       .then((token) => getUser(token))
+  //       .then((userInDb) => {
+  //         dispatch(updateLoggedInUser(userInDb))
+  //       })
+  //       .catch((err) => console.error(err))
+  //   }
+  // }, [isAuthenticated])
   return (
     <>
       <IfAuthenticated>

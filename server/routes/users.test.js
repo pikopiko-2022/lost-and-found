@@ -76,7 +76,7 @@ describe('GET /api/v1/users', () => {
 })
 
 // come back to test for !auth0_id, res.send(null)
-describe('GET /api/v1/users/userprofile', () => {
+describe('GET /api/v1/users/profile', () => {
   it('get single user with auth0_id', () => {
     const User = [
       {
@@ -90,7 +90,7 @@ describe('GET /api/v1/users/userprofile', () => {
     getUserById.mockReturnValue(Promise.resolve(User))
 
     return request(server)
-      .get('/api/v1/users/userprofile')
+      .get('/api/v1/users/profile')
       .then((res) => {
         console.log(res.body)
         expect(res.status).toBe(200)
@@ -101,7 +101,7 @@ describe('GET /api/v1/users/userprofile', () => {
     getUserById.mockImplementation(() => Promise.reject(new Error('you lose')))
 
     return request(server)
-      .get('/api/v1/users/userprofile')
+      .get('/api/v1/users/profile')
       .then((res) => {
         console.log(res.body)
         expect(res.status).toBe(500)
@@ -110,7 +110,7 @@ describe('GET /api/v1/users/userprofile', () => {
   })
 })
 
-describe('POST /api/v1/users', () => {
+describe('POST /api/v1/users/createprofile', () => {
   const newUser = {
     auth0_id: '1234',
     name: 'Sam',
@@ -124,7 +124,7 @@ describe('POST /api/v1/users', () => {
     createUser.mockReturnValue(Promise.resolve(newUser))
 
     return request(server)
-      .post('/api/v1/users/')
+      .post('/api/v1/users/createprofile')
       .send(newUser)
       .then((res) => {
         expect(res.body.location).toBe('Palmy')
@@ -135,7 +135,7 @@ describe('POST /api/v1/users', () => {
       Promise.reject(new Error('Username taken'))
     )
     return request(server)
-      .post('/api/v1/users')
+      .post('/api/v1/users/createprofile')
       .then((res) => {
         expect(res.status).toBe(403)
         expect(res.text).toBe('Username taken')
@@ -147,7 +147,7 @@ describe('POST /api/v1/users', () => {
       Promise.reject(new Error('Auth0Id already exist'))
     )
     return request(server)
-      .post('/api/v1/users')
+      .post('/api/v1/users/createprofile')
       .then((res) => {
         expect(res.status).toBe(403)
         expect(res.text).toBe('Auth0Id already exist')
@@ -161,14 +161,14 @@ describe('POST /api/v1/users', () => {
     )
 
     return request(server)
-      .post('/api/v1/users')
+      .post('/api/v1/users/createprofile')
       .then((res) => {
         expect(res.status).toBe(500)
       })
   })
 })
 
-describe('PATCH /api/v1/users', () => {
+describe('PATCH /api/v1/users/profile/editProfile', () => {
   const updatedFakeUserInfo = {
     auth0_id: '1234',
     username: 'Fafala',
@@ -179,7 +179,7 @@ describe('PATCH /api/v1/users', () => {
   it('check if update userinfo is working', () => {
     updateUser.mockReturnValue(Promise.resolve(updatedFakeUserInfo))
     return request(server)
-      .patch('/api/v1/users')
+      .patch('/api/v1/users/profile/editProfile')
       .send(updatedFakeUserInfo)
       .then((res) => {
         expect(res.body.username).toBe('Fafala')
@@ -190,7 +190,7 @@ describe('PATCH /api/v1/users', () => {
       Promise.reject(new Error('come on! you can do better'))
     )
     return request(server)
-      .patch('/api/v1/users')
+      .patch('/api/v1/users/profile/editProfile')
       .send(updatedFakeUserInfo)
       .then((res) => {
         expect(res.text).toBe('come on! you can do better')
