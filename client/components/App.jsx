@@ -1,11 +1,8 @@
-import React, { useEffect } from 'react'
-// import { useDispatch, useSelector } from 'react-redux'
-import LandingPage from './LandingPage'
-// import { fetchFruits } from '../actions'
+import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import CreateProfile from './CreateProfile'
 import Profile from './Profile'
-import UserHomePage from './UserHomePage'
+
 import EditProfile from './EditProfile'
 import CreatePost from './CreatePost'
 import Nav from './Nav'

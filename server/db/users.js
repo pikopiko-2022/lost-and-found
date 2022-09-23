@@ -6,16 +6,16 @@ function createUser(user, db = connection) {
     .then(() => getUserById(user.auth0_id, db))
 }
 
-function getUserById(auth0Id, db = connection) {
-  return db('users').where('auth0_id', auth0Id).first()
+function getUserById(auth0_id, db = connection) {
+  return db('users').where('auth0_id', auth0_id).first()
 }
 
 function getUsers(db = connection) {
   return db('users').select()
 }
 
-function updateUser(auth0Id, newUserProfile, db = connection) {
-  return db('users').where('auth0_id', auth0Id).first().update(newUserProfile)
+function updateUser(auth0_id, newUserProfile, db = connection) {
+  return db('users').where('auth0_id', auth0_id).first().update(newUserProfile)
 }
 
 function userExists(username, db = connection) {

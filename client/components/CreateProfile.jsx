@@ -14,7 +14,6 @@ export default function CreateProfile() {
     email: '',
     location: '',
   })
-  // dispatch(setUser(user))
   console.log(user)
   useEffect(() => {
     if (user?.username) navigate('/')
@@ -30,7 +29,7 @@ export default function CreateProfile() {
   const handleSubmit = (evt) => {
     evt.preventDefault()
     const userInfo = {
-      auth0Id: user.auth0Id,
+      auth0_Id: user.auth0_Id,
       ...form,
     }
     createUser(userInfo, user.token)

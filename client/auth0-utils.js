@@ -16,7 +16,7 @@ export function useCacheUser() {
         .then((token) => {
           console.log(token)
           const userToSave = {
-            auth0id: user?.sub,
+            auth0_id: user?.sub,
             email: user?.email,
             token: token,
           }

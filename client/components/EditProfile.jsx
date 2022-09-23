@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { useAuth0 } from '@auth0/auth0-react'
-import { Link, useNavigate } from 'react-router-dom'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateLoggedInUser, clearLoggedInUser } from '../actions/loggedInUser'
+import { updateLoggedInUser } from '../actions/loggedInUser'
 import { updateUser } from '../apis/users'
 
 export default function EditProfile() {
-  const { getAccessTokenSilently } = useAuth0()
   const user = useSelector((state) => state.usersReducer)
   console.log(user)
   const [form, setForm] = useState({
@@ -25,13 +23,10 @@ export default function EditProfile() {
   }
 
   const handleSubmit = (evt) => {
+    console.log('user token', user.token)
     evt.preventDefault()
-    console.log(user.token)
-    getAccessTokenSilently()
-      .then((token) => updateUser(token))
-      .then((userInDb) => {
-        userInDb && dispatch(updateLoggedInUser(userInDb))
-      })
+    updateUser(user.token, form)
+      .then(() => dispatch(updateLoggedInUser(form)))
       .then(navigate('/profile'))
       .catch((err) => console.error(err.message))
   }
@@ -48,7 +43,7 @@ export default function EditProfile() {
               type="text"
               name="username"
               placeholder="Username you will be using"
-              onChange={(evt) => handleChange(evt)}
+              onChange={handleChange}
               value={form.username}
             />
             <label htmlFor="email">E-mail:</label>
@@ -57,7 +52,7 @@ export default function EditProfile() {
               type="text"
               name="email"
               placeholder="your email"
-              onChange={(evt) => handleChange(evt)}
+              onChange={handleChange}
               value={form.email}
             />
             <label htmlFor="Location">Location:</label>
@@ -66,7 +61,7 @@ export default function EditProfile() {
               type="text"
               name="location"
               placeholder="location"
-              onChange={(evt) => handleChange(evt)}
+              onChange={handleChange}
               value={form.location}
             />
             <input type="submit" onClick={handleSubmit} />

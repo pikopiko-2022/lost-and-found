@@ -30,10 +30,11 @@ export function getAllusers(token) {
     })
 }
 
-export function updateUser(token) {
+export function updateUser(token, updatedUser) {
   return request
     .patch(`${url}/users/profile/editProfile`)
     .set('Authorization', `Bearer ${token}`)
+    .send(updatedUser)
     .then((res) => {
       return res.body
     })

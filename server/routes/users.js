@@ -72,6 +72,7 @@ router.patch('/profile/editProfile', checkJwt, (req, res) => {
     location,
     username,
   }
+  console.log('test to server route')
   db.updateUser(auth0_id, userDetails)
     .then(() => res.json(userDetails))
     .catch((err) => res.status(500).send(err.message))
