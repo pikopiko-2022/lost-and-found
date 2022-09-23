@@ -4,6 +4,7 @@ const db = require('../db/users')
 const router = express.Router()
 
 // GET api/v1/users
+
 router.get('/profile', checkJwt, (req, res) => {
   const auth0_id = req.user?.sub
   console.log(req.user)

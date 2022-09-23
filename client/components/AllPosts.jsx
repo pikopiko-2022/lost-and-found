@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchPosts } from '../actions/posts'
 import Post from './Post'
@@ -13,10 +14,12 @@ export default function AllPosts() {
 
   return (
     <>
-      {posts.map((post) => {
+      <Link to="/createPost">Create a post</Link>
+      {posts.reverse().map((post) => {
         return (
           <Post
             key={post.id}
+            id={post.id}
             title={post.title}
             uploader={post.uploaderName}
             category={post.category}
@@ -24,6 +27,7 @@ export default function AllPosts() {
             description={post.description}
             image={post.imageUrl}
             location={post.itemLocation}
+            comments={post.comments}
           />
         )
       })}

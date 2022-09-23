@@ -6,10 +6,10 @@ import { updateLoggedInUser } from './actions/loggedInUser'
 
 export function useCacheUser() {
   const dispatch = useDispatch()
+
   const tokenInRedux = useSelector((state) => state.usersReducer?.token)
 
   const { isAuthenticated, getAccessTokenSilently, user } = useAuth0()
-  console.log(tokenInRedux)
   if (isAuthenticated && !tokenInRedux) {
     try {
       getAccessTokenSilently()
