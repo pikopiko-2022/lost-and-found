@@ -8,9 +8,7 @@ export function useCacheUser() {
   const dispatch = useDispatch()
   const tokenInRedux = useSelector((state) =>
     Boolean(state.loggedInUser?.token)
-  )
-
-  console.log(tokenInRedux)
+  )(tokenInRedux)
   const { isAuthenticated, getAcessTokenSilently, user } = useAuth0()
 
   if (isAuthenticated && !tokenInRedux) {

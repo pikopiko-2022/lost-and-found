@@ -1,4 +1,5 @@
 import React from 'react'
+
 import Comment from './Comment'
 
 function Comments(props) {
@@ -12,10 +13,9 @@ function Comments(props) {
           comment={comment.comment}
           postId={comment.postId}
         />
-       ))}
-     </>
-    )
-   }
-
+      ))}
+    </>
+  )
+}
 
 export default Comments

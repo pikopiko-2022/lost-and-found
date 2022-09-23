@@ -6,15 +6,16 @@ const router = express.Router()
 // GET api/v1/users
 router.get('/', checkJwt, (req, res) => {
   const auth0_id = 1
-  // if (!auth0_id) {
-  //   res.send(null)
-  // } else {
-  // db.getUser(auth0_id)
-  db.getUser()
-    .then((user) => {
-      res.json(user ? user : null)
-    })
-    .catch((err) => res.status(500).send(err.message))
+  if (!auth0_id) {
+    res.send(null)
+  } else {
+    db.getUser(auth0_id)
+    db.getUser()
+      .then((user) => {
+        res.json(user ? user : null)
+      })
+      .catch((err) => res.status(500).send(err.message))
+  }
 })
 
 // POST createUser
