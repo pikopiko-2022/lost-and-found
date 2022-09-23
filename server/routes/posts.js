@@ -31,7 +31,10 @@ router.post('/', (req, res) => {
   }
   addPost(post)
     .then((posts) => res.json(posts))
-    .catch(() => res.status(500).send(errorMessage))
+    .catch((err) => {
+      console.error(err.message)
+      res.status(500).send(errorMessage)
+    })
 })
 
 module.exports = router

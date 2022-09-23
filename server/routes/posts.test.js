@@ -3,6 +3,11 @@ const server = require('../server')
 
 const { getAllPostsWithComments, addPost } = require('../db/posts')
 jest.mock('../db/posts')
+jest.spyOn(console, 'error')
+
+afterEach(() => {
+  console.error.mockReset()
+})
 
 const fakePosts = [
   {
@@ -10,7 +15,7 @@ const fakePosts = [
     uploaderId: '3',
     category: 'Found',
     title: 'Keys',
-    date: '07/06/2022',
+    date: new Date().toDateString(),
     description: 'These have a distinct key chain, let me know what it is!',
     imageUrl: '/fakeURL',
     location: 'Hokitika',
@@ -19,7 +24,7 @@ const fakePosts = [
         id: 1,
         commenter_id: '1',
         post_id: 1,
-        date_commented: new Date(Date.now()),
+        date_commented: new Date().toDateString(),
         comment: 'Is the key chain fluffy?',
       },
     ],
@@ -29,7 +34,7 @@ const fakePosts = [
     uploaderId: '5',
     category: 'Lost',
     title: 'Wallet',
-    date: '08/09/2022',
+    date: new Date().toDateString(),
     description:
       "I lost my wallet, it's brown leather and should have my id in it",
     imageUrl: '/fakeURL',
@@ -39,7 +44,7 @@ const fakePosts = [
         id: 2,
         commenter_id: '2',
         post_id: 2,
-        date_commented: new Date(Date.now()),
+        date_commented: new Date().toDateString(),
         comment: 'Hey, I think I found this.',
       },
     ],
@@ -60,14 +65,15 @@ describe('GET /api/v1/projects', () => {
   })
   it('returns status 500 and sends and error message if there is a problem', () => {
     getAllPostsWithComments.mockImplementation(() =>
-      Promise.reject(new Error())
+      Promise.reject(new Error('problem'))
     )
 
     return request(server)
       .get('/api/v1/posts')
       .then((res) => {
         expect(res.status).toBe(500)
-        expect(res.text).toContain('problem')
+        expect(res.text).toContain('try again')
+        expect(console.error).toHaveBeenCalledWith('problem')
       })
   })
 })
@@ -80,6 +86,18 @@ describe('POST /api/v1/projects', () => {
       .post('/api/v1/posts')
       .then((res) => {
         expect(res.body[1].title).toBe('Wallet')
+      })
+  })
+
+  it('returns status 500 and sends and error message if there is a problem', () => {
+    addPost.mockImplementation(() => Promise.reject(new Error('problem')))
+
+    return request(server)
+      .post('/api/v1/posts')
+      .then((res) => {
+        expect(res.status).toBe(500)
+        expect(res.text).toContain('try again')
+        expect(console.error).toHaveBeenCalledWith('problem')
       })
   })
 })
