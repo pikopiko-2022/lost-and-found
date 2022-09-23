@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { addNewPost } from '../actions/posts'
+import Location from './Location'
 
 export default function CreatePost() {
   const currentLocation = useSelector((state) => state.locationReducer)
@@ -25,7 +26,8 @@ export default function CreatePost() {
 
   function submitHandler(event) {
     event.preventDefault()
-    dispatch(addNewPost(formData))
+    const newData = { ...formData, location: currentLocation }
+    dispatch(addNewPost(newData))
     setFormData(initialState)
     navigate('/')
   }
@@ -33,15 +35,15 @@ export default function CreatePost() {
     <>
       <p>CreatePost</p>
       <form>
-        <p>
+        <div>
           <label htmlFor="title">Title of post: </label>
           <input
             name="title"
             onChange={changeHandler}
             value={formData.title}
           ></input>
-        </p>
-        <p>
+        </div>
+        <div>
           <label htmlFor="category">Lost or Found: </label>
           <select
             name="category"
@@ -52,8 +54,8 @@ export default function CreatePost() {
             <option value="Lost">Lost</option>
             <option value="Found">Found</option>
           </select>
-        </p>
-        <p>
+        </div>
+        <div>
           <label htmlFor="date">Date lost or found: </label>
           <input
             type="date"
@@ -61,33 +63,28 @@ export default function CreatePost() {
             onChange={changeHandler}
             value={formData.date}
           ></input>
-        </p>
-        <p>
+        </div>
+        <div>
           <label htmlFor="description">Description: </label>
           <input
             name="description"
             onChange={changeHandler}
             value={formData.description}
           ></input>
-        </p>
-        <p>
+        </div>
+        <div>
           <label htmlFor="image_url">Image link: </label>
           <input
             name="image_url"
             onChange={changeHandler}
             value={formData.image_url}
           ></input>
-          <label htmlFor="location">Location: </label>
-          <input
-            name="location"
-            onChange={changeHandler}
-            value={formData.location}
-          ></input>
-        </p>
-        <p>
-          <button onClick={submitHandler}>Save new post</button>
-        </p>
+        </div>
       </form>
+      <Location />
+      <div>
+        <button onClick={submitHandler}>Save new post</button>
+      </div>
     </>
   )
 }
