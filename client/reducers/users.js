@@ -4,7 +4,7 @@ import {
 } from '../actions/loggedInUser'
 
 const initialState = {
-  auth0id: '',
+  auth0_id: '',
   username: '',
 }
 

@@ -1,5 +1,6 @@
 import React from 'react'
-import Comments from './Comments'
+import Comments from './AllComments'
+import CreateComment from './CreateComment'
 
 export default function Post(props) {
   console.log(props.image)
@@ -18,6 +19,7 @@ export default function Post(props) {
         {props.category} by {props.uploader} in {props.location} on {props.date}
       </h2>
       <Comments comments={props.comments} />
+      <CreateComment postId = {props.id}/>
     </>
   )
 }

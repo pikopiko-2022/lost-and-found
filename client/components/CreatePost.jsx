@@ -9,7 +9,6 @@ export default function CreatePost() {
   const initialState = {
     category: '',
     title: '',
-    date: '',
     description: '',
     image_url: '',
     location: '',
