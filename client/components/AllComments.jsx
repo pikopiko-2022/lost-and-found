@@ -3,15 +3,16 @@ import React from 'react'
 import Comment from './Comment'
 
 function AllComments(props) {
+  console.log(props)
   return (
     <>
       {props.comments.map((comment) => (
         <Comment
           key={comment.id}
-          commenter={comment.commenter_id}
-          commentDate={comment.dateCommented}
+          commenter={comment.username}
+          commentDate={comment.date_commented}
           comment={comment.comment}
-          postId={comment.postId}
+          postId={comment.post_id}
         />
       ))}
     </>
