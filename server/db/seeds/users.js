@@ -6,6 +6,7 @@ exports.seed = function (knex) {
       // Inserts seed entries
       return knex('users').insert([
         {
+          id: 1,
           auth0_id: '1',
           name: 'Sally',
           username: 'SillySally',
@@ -13,6 +14,7 @@ exports.seed = function (knex) {
           location: 'Christchurch',
         },
         {
+          id: 2,
           auth0_id: '2',
           name: 'Fred',
           username: 'FreakyFred',
@@ -20,6 +22,7 @@ exports.seed = function (knex) {
           location: 'Tauranga',
         },
         {
+          id: 3,
           auth0_id: '3',
           name: 'Tim',
           username: 'TerrificTim',
