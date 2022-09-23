@@ -16,9 +16,10 @@ router.get('/', (req, res) => {
 
 //POST /api/v1/posts
 router.post('/', (req, res) => {
-  const { description, category, title, date, image_url, location } = req.body
+  const { description, category, title, image_url, location } = req.body
   //todo: replace with req.user?.sub
   const uploader_id = '3'
+  const date = new Date().toDateString()
   const post = {
     description,
     uploader_id,

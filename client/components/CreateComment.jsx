@@ -17,7 +17,7 @@ export default function CreateComment(props) {
   function changeHandler(e) {
     const { name, value } = e.target
     const post_id = props.postId
-    const date_commented = new Date(Date.now())
+    const date_commented = new Date().toDateString()
     setFormData({
       post_id: post_id,
       date_commented: date_commented,

@@ -4,7 +4,7 @@ exports.up = function (knex) {
     table.string('uploader_id').references('users.auth0_id')
     table.string('category')
     table.string('title')
-    table.string('date')
+    table.date('date')
     table.string('description')
     table.string('image_url')
     table.string('location')

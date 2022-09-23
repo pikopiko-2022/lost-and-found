@@ -3,7 +3,6 @@ import React from 'react'
 import Comment from './Comment'
 
 function AllComments(props) {
-  console.log(props)
   return (
     <>
       {props.comments.map((comment) => (

@@ -10,7 +10,7 @@ exports.seed = function (knex) {
           uploader_id: '2',
           category: 'Found',
           title: 'Pink beanie found on Sumner Beach',
-          date: '05/09/2022',
+          date: new Date().toDateString(),
           description:
             'Please comment if you think it might be yours - tell me the brand on the tag inside',
           image_url:
@@ -22,7 +22,7 @@ exports.seed = function (knex) {
           uploader_id: '3',
           category: 'Lost',
           title: 'School hat',
-          date: '10/09/2022',
+          date: new Date().toDateString(),
           description: 'It is red and looks like the picture',
           image_url:
             'https://www.thewarehouse.co.nz/dw/image/v2/BDMG_PRD/on/demandware.static/-/Sites-twl-master-catalog/default/dw343e4d2e/images/hi-res/55/E2/R1814457_20.jpg?sw=765&sh=765',
