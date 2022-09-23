@@ -92,6 +92,7 @@ describe('GET /api/v1/users/userprofile', () => {
     return request(server)
       .get('/api/v1/users/userprofile')
       .then((res) => {
+        console.log(res.body)
         expect(res.status).toBe(200)
         expect(res.body[0].name).toBe('Sam')
       })
@@ -102,6 +103,7 @@ describe('GET /api/v1/users/userprofile', () => {
     return request(server)
       .get('/api/v1/users/userprofile')
       .then((res) => {
+        console.log(res.body)
         expect(res.status).toBe(500)
         expect(res.text).toBe('you lose')
       })

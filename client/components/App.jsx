@@ -9,22 +9,17 @@ import UserHomePage from './UserHomePage'
 import EditProfile from './EditProfile'
 import CreatePost from './CreatePost'
 import Nav from './Nav'
+import SignIn from './SignIn'
 
 function App() {
-  // const dispatch = useDispatch()
-  useEffect(() => {
-    // dispatch(fetchFruits())
-  }, [])
-
   return (
     <>
       <div className="app">
-        <h1>Fullstack Boilerplate - with Fruits!</h1>
+        <h1>Lost and found</h1>
       </div>
-      <LandingPage />
       <Nav />
       <Routes>
-        <Route path="/" element={<UserHomePage />} />
+        <Route path="/" element={<SignIn />} />
         <Route path="/createProfile" element={<CreateProfile />} />
         <Route path="/profile/editProfile" element={<EditProfile />} />
         <Route path="/profile" element={<Profile />} />

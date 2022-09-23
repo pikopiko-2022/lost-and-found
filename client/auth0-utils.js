@@ -6,15 +6,13 @@ import { updateLoggedInUser } from './actions/loggedInUser'
 
 export function useCacheUser() {
   const dispatch = useDispatch()
-  const tokenInRedux = useSelector((state) =>
-    Boolean(state.loggedInUser?.token)
-  )
+  const tokenInRedux = useSelector((state) => state.usersReducer?.token)
 
-  const { isAuthenticated, getAcessTokenSilently, user } = useAuth0()
-
+  const { isAuthenticated, getAccessTokenSilently, user } = useAuth0()
+  console.log(tokenInRedux)
   if (isAuthenticated && !tokenInRedux) {
     try {
-      getAcessTokenSilently()
+      getAccessTokenSilently()
         .then((token) => {
           console.log(token)
           const userToSave = {
@@ -22,6 +20,7 @@ export function useCacheUser() {
             email: user?.email,
             token: token,
           }
+          console.log('user0' + userToSave)
           dispatch(updateLoggedInUser(userToSave))
         })
         .catch((err) => console.error(err.message))

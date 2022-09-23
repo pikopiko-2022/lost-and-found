@@ -4,7 +4,7 @@ const url = '/api/v1'
 
 export function createUser(user, token) {
   return request
-    .post(`${url}/users/`)
+    .post(`${url}/users/createprofile`)
     .set('Authorization', `Bearer ${token}`)
     .send(user)
     .then((res) => {
@@ -14,7 +14,16 @@ export function createUser(user, token) {
 
 export function getUser(token) {
   return request
-    .get(`${url}/users/userprofile`)
+    .get(`${url}/users/profile`)
+    .set('Authorization', `Bearer ${token}`)
+    .then((res) => {
+      return res.body
+    })
+}
+
+export function getAllusers(token) {
+  return request
+    .get(`${url}/users/profile`)
     .set('Authorization', `Bearer ${token}`)
     .then((res) => {
       return res.body
@@ -23,7 +32,7 @@ export function getUser(token) {
 
 export function updateUser(token) {
   return request
-    .patch(`${url}/users/userprofile`)
+    .patch(`${url}/users/profile/editProfile`)
     .set('Authorization', `Bearer ${token}`)
     .then((res) => {
       return res.body

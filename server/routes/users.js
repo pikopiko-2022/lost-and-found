@@ -4,7 +4,7 @@ const db = require('../db/users')
 const router = express.Router()
 
 // GET api/v1/users
-router.get('/singleuser', checkJwt, (req, res) => {
+router.get('/profile', checkJwt, (req, res) => {
   const auth0_id = req.user?.sub
   console.log(req.user)
   if (!auth0_id) {
@@ -30,7 +30,8 @@ router.get('/', (req, res) => {
 })
 
 // POST createUser
-router.post('/', checkJwt, (req, res) => {
+router.post('/createprofile', checkJwt, (req, res) => {
+  console.log('inside post')
   const auth0_id = req.user?.sub
   const { name, username, email, location } = req.body
   const userDetails = {
@@ -63,7 +64,7 @@ router.post('/', checkJwt, (req, res) => {
     })
 })
 
-router.patch('/', checkJwt, (req, res) => {
+router.patch('/profile/editProfile', checkJwt, (req, res) => {
   const auth0_id = req.user?.sub
   const { username, email, location } = req.body
   const userDetails = {
