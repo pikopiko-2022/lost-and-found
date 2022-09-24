@@ -44,7 +44,7 @@ export default function CreatePost() {
 
   return (
     <>
-      <p>CreatePost</p>
+      <h3>Create Post</h3>
       <form encType="multipart/form-data">
         <div>
           <label htmlFor="title">Title of post: </label>
@@ -102,11 +102,12 @@ export default function CreatePost() {
           )}
         </div>
         <div>
-          <label htmlFor="profile">Upload your photo</label>
+          <label htmlFor="photo">Upload your photo</label>
           <input
+            data-testid="uploadImage"
             type="file"
-            name="profile"
-            id="profile"
+            name="photo"
+            id="photo"
             onChange={handleImageChange}
           />
         </div>

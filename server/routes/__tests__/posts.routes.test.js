@@ -4,14 +4,14 @@ const server = require('../../server')
 const upload = require('../../multer')
 
 const { getAllPostsWithComments, addPost } = require('../../db/posts')
-jest.mock('../db/posts')
+jest.mock('../../db/posts')
 
 const fakeMulter = (req, res, next) => {
   req.file = { filename: 'image' }
   next()
 }
 
-jest.mock('../multer', () => {
+jest.mock('../../multer', () => {
   return { single: jest.fn().mockReturnValue(fakeMulter) }
 })
 
