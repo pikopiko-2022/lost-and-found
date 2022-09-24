@@ -16,10 +16,14 @@ describe('<Post />', () => {
     AllComments.mockReturnValue(<>All Comments</>)
     render(
       <Provider store={store}>
-        <Post title="missing a key" />
+        <Post title="missing a key" image="./images/postImages/image1.jpg" />
       </Provider>
     )
     // screen.debug()
     expect(screen.getByText(/missing/i)).toBeInTheDocument()
+    expect(screen.getByRole('img')).toHaveAttribute(
+      'src',
+      './images/postImages/image1.jpg'
+    )
   })
 })
