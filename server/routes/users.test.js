@@ -25,7 +25,7 @@ beforeAll(() => {
   })
 })
 
-describe('GET /api/v1/users', () => {
+describe('GET /api/v1/users/profiles', () => {
   const fakeUsers = [
     {
       auth0_id: '1',
@@ -59,6 +59,8 @@ describe('GET /api/v1/users', () => {
         expect(res.body).toHaveLength(3)
         expect(res.body[2].email).toBe('tim@fakemail.com')
         expect(res.body[0].location).toContain('Christ')
+        expect(res.body[1].username).toBe('FreakyFred')
+        expect(res.body[0].auth0_id).toBeTruthy()
       })
   })
   it('returns status 500 and sends an error message if there is a problem', () => {
@@ -80,7 +82,7 @@ describe('GET /api/v1/users/profile', () => {
   it('get single user with auth0_id', () => {
     const User = [
       {
-        auth0_id: 'testUserId',
+        auth0_id: 1,
         name: 'Sam',
         username: 'SamSan',
         email: 'sam@fakemail.com',
@@ -93,7 +95,6 @@ describe('GET /api/v1/users/profile', () => {
       .get('/api/v1/users/profile')
       .then((res) => {
         console.log(res.body)
-        expect(res.status).toBe(200)
         expect(res.body[0].name).toBe('Sam')
       })
   })
@@ -106,6 +107,31 @@ describe('GET /api/v1/users/profile', () => {
         console.log(res.body)
         expect(res.status).toBe(500)
         expect(res.text).toBe('you lose')
+      })
+  })
+  it('send null if wrong auth0_id is given', () => {
+    // const User = [
+    //   {
+    //     auth0_id: null,
+    //     name: 'Sam',
+    //     username: 'SamSan',
+    //     email: 'sam@fakemail.com',
+    //     location: 'Palmy',
+    //   },
+    // ]
+
+    // getUserById.mockReturnValue(Promise.resolve(User))
+    checkJwt.mockImplementation((req, res, next) => {
+      req.user = { sub: null }
+      next()
+    })
+    return request(server)
+      .get('/api/v1/users/profile')
+      .then((res) => {
+        console.log(res)
+        expect(res.status).toBe(404)
+        console.log(res.text)
+        expect(res.text).toBe('User not found')
       })
   })
 })

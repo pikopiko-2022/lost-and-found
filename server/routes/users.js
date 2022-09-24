@@ -7,8 +7,10 @@ const router = express.Router()
 
 router.get('/profile', checkJwt, (req, res) => {
   const auth0_id = req.user?.sub
+  console.log('here1')
   if (!auth0_id) {
-    res.send(null)
+    console.log('here1')
+    return res.status(404).send('User not found')
   } else {
     db.getUserById(auth0_id)
       .then((user) => {
