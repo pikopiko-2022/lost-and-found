@@ -11,7 +11,7 @@ export default function AllPosts() {
   useEffect(() => {
     dispatch(fetchPosts())
   }, [])
-
+  console.log(posts)
   return (
     <>
       <Link to="/createPost">Create a post</Link>
