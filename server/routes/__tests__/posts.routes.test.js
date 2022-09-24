@@ -1,8 +1,20 @@
 const request = require('supertest')
 const server = require('../../server')
 
+const upload = require('../../multer')
+
 const { getAllPostsWithComments, addPost } = require('../../db/posts')
 jest.mock('../../db/posts')
+
+const fakeMulter = (req, res, next) => {
+  req.file = { filename: 'image' }
+  next()
+}
+
+jest.mock('../../multer', () => {
+  return { single: jest.fn().mockReturnValue(fakeMulter) }
+})
+
 jest.spyOn(console, 'error')
 
 afterEach(() => {
@@ -83,7 +95,7 @@ describe('POST /api/v1/projects', () => {
     addPost.mockReturnValue(Promise.resolve(fakePosts))
 
     return request(server)
-      .post('/api/v1/posts')
+      .post('/api/v1/posts', upload.single('image'))
       .then((res) => {
         expect(res.body[1].title).toBe('Wallet')
       })

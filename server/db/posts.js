@@ -20,7 +20,9 @@ function getAllPosts(db = connection) {
 
 async function getAllPostsWithComments(db = connection) {
   const posts = await getAllPosts(db)
+  console.log(posts)
   const postIds = posts.map((post) => post.id)
+  console.log(postIds)
   const comments = await db('comments')
     .whereIn('post_id', postIds)
     .join('users', 'users.auth0_id', 'comments.commenter_id')
