@@ -6,7 +6,6 @@ import { updateUser } from '../apis/users'
 
 export default function EditProfile() {
   const user = useSelector((state) => state.usersReducer)
-  console.log(user)
   const [form, setForm] = useState({
     name: user.name,
     username: user.username,
@@ -23,9 +22,8 @@ export default function EditProfile() {
   }
 
   const handleSubmit = (evt) => {
-    console.log('user token', user.token)
     evt.preventDefault()
-    updateUser(user.token, form)
+    updateUser(form, user.token )
       .then(() => dispatch(updateLoggedInUser(form)))
       .then(navigate('/profile'))
       .catch((err) => console.error(err.message))

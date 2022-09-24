@@ -7,7 +7,6 @@ const router = express.Router()
 
 router.get('/profile', checkJwt, (req, res) => {
   const auth0_id = req.user?.sub
-  console.log(req.user)
   if (!auth0_id) {
     res.send(null)
   } else {
@@ -19,7 +18,7 @@ router.get('/profile', checkJwt, (req, res) => {
   }
 })
 
-router.get('/', (req, res) => {
+router.get('/profiles', (req, res) => {
   db.getUsers()
     .then((user) => {
       res.json(user)
@@ -32,7 +31,6 @@ router.get('/', (req, res) => {
 
 // POST createUser
 router.post('/createprofile', checkJwt, (req, res) => {
-  console.log('inside post')
   const auth0_id = req.user?.sub
   const { name, username, email, location } = req.body
   const userDetails = {
@@ -73,7 +71,6 @@ router.patch('/profile/editProfile', checkJwt, (req, res) => {
     location,
     username,
   }
-  console.log('test to server route')
   db.updateUser(auth0_id, userDetails)
     .then(() => res.json(userDetails))
     .catch((err) => res.status(500).send(err.message))

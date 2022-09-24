@@ -23,14 +23,14 @@ export function getUser(token) {
 
 export function getAllusers(token) {
   return request
-    .get(`${url}/users/profile`)
+    .get(`${url}/users/profiles`)
     .set('Authorization', `Bearer ${token}`)
     .then((res) => {
       return res.body
     })
 }
 
-export function updateUser(token, updatedUser) {
+export function updateUser(updatedUser, token ) {
   return request
     .patch(`${url}/users/profile/editProfile`)
     .set('Authorization', `Bearer ${token}`)
