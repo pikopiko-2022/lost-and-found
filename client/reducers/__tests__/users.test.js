@@ -1,5 +1,8 @@
 import usersReducer from '../users'
-import { clearLoggedInUser, updateLoggedInUser } from '../../actions/loggedInUser'
+import {
+  clearLoggedInUser,
+  updateLoggedInUser,
+} from '../../actions/loggedInUser'
 
 describe('usersReducer test', () => {
   test('updates the location state', () => {
@@ -21,18 +24,25 @@ describe('usersReducer test', () => {
   test('clears the logged in user', () => {
     const action = clearLoggedInUser()
     const expectedState = {
-        auth0_id: '',
-        username: '',
-      }
-    const outputState = usersReducer({
-      id: 1,
-      name: 'David',
-      username: 'Davidislost',
-      location: 'Davidislostwonderland',
-      email: 'Davidislost@gmail.com',
-    }, action)
-
+      auth0_id: '',
+      username: '',
+    }
+    const outputState = usersReducer(
+      {
+        id: 1,
+        name: 'David',
+        username: 'Davidislost',
+        location: 'Davidislostwonderland',
+        email: 'Davidislost@gmail.com',
+      },
+      action
+    )
 
     expect(outputState).toEqual(expectedState)
+  })
+  test('returns default when no action', () => {
+    const action = 'default'
+    const newState = usersReducer('defaultstate', action)
+    expect(newState).toBe('defaultstate')
   })
 })
