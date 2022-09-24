@@ -1,5 +1,5 @@
 import nock from 'nock'
-import { getAllPostsAndComments, addPost } from './posts'
+import { getAllPostsAndComments, addPost } from '../posts'
 
 const fakePosts = [
   {

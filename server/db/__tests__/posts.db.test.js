@@ -30,6 +30,7 @@ describe('getAllPostsWithComments', () => {
     return getAllPostsWithComments(testDb).then((posts) => {
       expect(posts[0].comments).toHaveLength(2)
       expect(posts[0].comments[0].comment).toContain('Gorman')
+      expect(posts[0].comments[0].username).toBe('SillySally')
     })
   })
 })

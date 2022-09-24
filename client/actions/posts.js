@@ -2,7 +2,6 @@ import { getAllPostsAndComments, addPost } from '../apis/posts'
 export const SET_POSTS_SUCCESS = 'SET_POSTS_SUCCESS'
 
 export function fetchPosts() {
-  // ;('whatever i want')
   return (dispatch) => {
     return getAllPostsAndComments()
       .then((posts) => {

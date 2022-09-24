@@ -14,7 +14,9 @@ export default function AllPosts() {
   console.log(posts)
   return (
     <>
-      <Link to="/createPost">Create a post</Link>
+      <Link to="/createPost">
+        <button>Create a post</button>
+      </Link>
       {posts.reverse().map((post) => {
         return (
           <Post

@@ -4,7 +4,7 @@ export default function Comment(props) {
   return (
     <>
       <li>
-        {props.commenter}: {props.comment}
+        {props.commenter}: {props.comment} {props.commentDate}
       </li>
     </>
   )
