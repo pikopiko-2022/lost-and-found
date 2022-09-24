@@ -31,6 +31,7 @@ export default function CreateProfile() {
       auth0_Id: user.auth0_Id,
       ...form,
     }
+    
     createUser(userInfo, user.token)
       .then(() => dispatch(updateLoggedInUser(userInfo)))
       .catch((err) => console.error(err.message))
@@ -46,6 +47,7 @@ export default function CreateProfile() {
             <input
               className="createprofile-input"
               type="text"
+              id='name'
               name="name"
               placeholder="Full name"
               onChange={(evt) => handleChange(evt)}
@@ -55,6 +57,7 @@ export default function CreateProfile() {
             <input
               className="createprofile-input"
               type="text"
+              id='username'
               name="username"
               placeholder="Username you will be using"
               onChange={(evt) => handleChange(evt)}
@@ -64,15 +67,17 @@ export default function CreateProfile() {
             <input
               className="createprofile-input"
               type="text"
+              id='email'
               name="email"
               placeholder="your email"
               onChange={(evt) => handleChange(evt)}
               value={form.email}
             />
-            <label htmlFor="Location">Location:</label>
+            <label htmlFor="location">Location:</label>
             <input
               className="createprofile-input"
               type="text"
+              id='location'
               name="location"
               placeholder="location"
               onChange={(evt) => handleChange(evt)}
