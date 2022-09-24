@@ -54,7 +54,7 @@ describe('GET /api/v1/users', () => {
     getUsers.mockReturnValue(Promise.resolve(fakeUsers))
 
     return request(server)
-      .get('/api/v1/users')
+      .get('/api/v1/users/profiles')
       .then((res) => {
         expect(res.body).toHaveLength(3)
         expect(res.body[2].email).toBe('tim@fakemail.com')
@@ -67,7 +67,7 @@ describe('GET /api/v1/users', () => {
     )
 
     return request(server)
-      .get('/api/v1/users')
+      .get('/api/v1/users/profiles')
       .then((res) => {
         expect(res.status).toBe(500)
         expect(res.text).toContain('get it right')

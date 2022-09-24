@@ -7,7 +7,7 @@ function getAllPosts(db = connection) {
     .select(
       'name as uploaderName',
       'users.location as userLocation',
-      'id',
+      'posts.id',
       'uploader_id as uploaderId',
       'category',
       'title',

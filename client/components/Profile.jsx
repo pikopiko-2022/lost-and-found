@@ -6,7 +6,6 @@ export default function Profile() {
   // const { isAuthenticated, getAccessTokenSilently } = useAuth0()
   const user = useSelector((state) => state.usersReducer)
 
-  console.log(user)
 
   return (
     <>

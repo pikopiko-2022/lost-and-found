@@ -14,7 +14,6 @@ export default function CreateProfile() {
     email: '',
     location: '',
   })
-  console.log(user)
   useEffect(() => {
     if (user?.username) navigate('/')
   }, [user])
