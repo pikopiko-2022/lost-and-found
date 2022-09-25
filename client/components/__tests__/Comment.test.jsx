@@ -20,7 +20,8 @@ describe('<Comment />', () => {
     expect(comment[0].textContent).toContain('Aaron123')
     expect(comment[0].textContent).toContain('basketball')
     expect(comment[0].textContent).toContain('24 September')
-
+  })
+})
 
 describe('<Comments />', () => {
   test('renders the mocked data on the server', () => {
