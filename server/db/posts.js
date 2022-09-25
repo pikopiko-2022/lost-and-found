@@ -6,6 +6,7 @@ function getAllPosts(db = connection) {
     .join('users', 'posts.uploader_id', 'users.auth0_id')
     .select(
       'name as uploaderName',
+      'username',
       'users.location as userLocation',
       'posts.id',
       'uploader_id as uploaderId',
