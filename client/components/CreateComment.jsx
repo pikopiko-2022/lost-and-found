@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { fetchPosts } from '../actions/posts'
 import { addComment } from '../apis/comments.api'
 
 export default function CreateComment(props) {
+  const user = useSelector((state) => state.usersReducer)
   const initialState = {
     comment: '',
   }
@@ -14,6 +15,7 @@ export default function CreateComment(props) {
     const { name, value } = e.target
     setFormData({
       post_id: props.postId,
+      commenter_id: user.id,
       date_commented: new Date().toDateString(),
       [name]: value,
     })
