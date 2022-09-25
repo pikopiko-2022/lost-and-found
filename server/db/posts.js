@@ -39,4 +39,11 @@ function addPost(post, db = connection) {
     .then(() => getAllPostsWithComments(db))
 }
 
-module.exports = { getAllPosts, addPost, getAllPostsWithComments }
+function deletePost(id, db = connection) {
+  return db('posts')
+    .delete()
+    .where('id', id)
+    .then(() => getAllPostsWithComments(db))
+}
+
+module.exports = { getAllPosts, addPost, getAllPostsWithComments, deletePost }
