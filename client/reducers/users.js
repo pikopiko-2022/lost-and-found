@@ -5,7 +5,7 @@ import {
 
 const initialState = {
   auth0_id: '',
-  username: '',
+  username: null,
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -13,7 +13,10 @@ const usersReducer = (state = initialState, action) => {
 
   switch (type) {
     case UPDATE_LOGGED_IN_USER:
-      return { ...state, ...payload }
+      if(payload === null) {
+        return { ...state, username: '' }
+      } return { ...state, ...payload }
+      
 
     case CLEAR_LOGGED_IN_USER:
       return initialState

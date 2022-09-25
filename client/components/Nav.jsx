@@ -32,9 +32,11 @@ export default function Nav() {
             Log off
           </Link>
           <div>
-            <p>
-              Logged in as <Link to="/profile">{' ' + user?.username}</Link>
-            </p>
+            {user?.username && (
+              <p>
+                Logged in as <Link to="/profile">{' ' + user?.username}</Link>
+              </p>
+            )}
           </div>
         </IfAuthenticated>
         <IfNotAuthenticated>

@@ -86,6 +86,7 @@ export default function CreatePost() {
           {selectedImage && (
             <div>
               <img
+                data-testid="testImage"
                 alt="not found"
                 width={'250px'}
                 src={URL.createObjectURL(selectedImage)}

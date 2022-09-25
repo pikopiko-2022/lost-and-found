@@ -1,6 +1,6 @@
 import React from 'react'
-import { render, screen } from '@testing-library/react'
-// import userEvent from '@testing-library/user-event'
+import { render, screen, waitFor } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -39,16 +39,18 @@ describe('<CreatePost />', () => {
     expect.assertions(1)
   })
 
-  // to be checked with facilitator
-  // it('click upload image renders image on page', async () => {
-  //   const mockImage = 'dogPic.jpg'
-  //   render(
-  //     <Router>
-  //       <CreatePost />
-  //     </Router>
-  //   )
-  //   await userEvent.click(screen.getByTestId('uploadImage'))
-  //   screen.debug()
-
-  // })
+  it('click upload image renders image on page', async () => {
+    const file = new File(['random'], 'values.png', {
+      type: 'image/png',
+    })
+    global.URL.createObjectURL = () => 'random'
+    render(
+      <Router>
+        <CreatePost />
+      </Router>
+    )
+    const imageInput = screen.getByTestId('uploadImage')
+    userEvent.upload(imageInput, file)
+    await waitFor(() => expect(screen.queryByTestId('testImage')).toBeTruthy())
+  })
 })

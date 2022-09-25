@@ -3,7 +3,7 @@ import UserHomePage from './UserHomePage'
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 import { useSelector } from 'react-redux'
 import { useCacheUser } from '../auth0-utils'
-import CreateProfile from './CreateProfileForm'
+import CreateProfileForm from './CreateProfileForm'
 
 import LandingPage from './LandingPage'
 
@@ -13,10 +13,13 @@ function SignIn() {
 
   return (
     <>
-      <IfAuthenticated>
-        {user?.username ? <UserHomePage /> : <CreateProfile />}
-      </IfAuthenticated>
-
+      {user?.username !== null && (
+        <>
+          <IfAuthenticated>
+            {user?.username ? <UserHomePage /> : <CreateProfileForm />}
+          </IfAuthenticated>
+        </>
+      )}
       <IfNotAuthenticated>
         <LandingPage />
       </IfNotAuthenticated>
