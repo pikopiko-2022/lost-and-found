@@ -1,39 +1,40 @@
 const connection = require('./connection')
 
 function createUser(user, db = connection) {
-  return db('users').insert(user)
+  return db('users')
+    .insert(user)
+    .then(() => getUserById(user.auth0_id, db))
 }
 
-function getUser(db=connection) {
+function getUserById(auth0_id, db = connection) {
+  return db('users').where('auth0_id', auth0_id).first()
+}
+
+function getUsers(db = connection) {
   return db('users').select()
 }
 
-function updateUser(newUser, db=connection) {
-  return db('users').where('id', newUser).update(newUser)
+function updateUser(auth0_id, newUserProfile, db = connection) {
+  return db('users').where('auth0_id', auth0_id).first().update(newUserProfile)
 }
 
-function userExist(username, db=connection) {
-  return db('users').where('username', username)
-  .then((usersfound) => usersfound.length > 0 )
-}
-
-function userCanEdit(id, auth0Id, db = connection) {
+function userExists(username, db = connection) {
   return db('users')
-  .where(id, auth0Id)
-  .first()
-  .then((user) => {
-    if (user.added_by_user !== auth0Id) {
-      throw new Error('Unauthorized')
-    }
-  })
+    .where('username', username)
+    .then((usersfound) => usersfound.length > 0)
+}
+
+function userAuth0IdExist(auth0_id, db = connection) {
+  return db('users')
+    .where('auth0_id', auth0_id)
+    .then((idfound) => idfound.length > 0)
 }
 
 module.exports = {
   createUser,
-  getUser,
+  getUsers,
   updateUser,
-  userCanEdit,
-  userExist
-
+  userExists,
+  userAuth0IdExist,
+  getUserById,
 }
-
