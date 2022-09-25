@@ -16,3 +16,9 @@ export function addPost(post) {
       return res.body
     })
 }
+
+export function deletePost(postId) {
+  return request.delete(`${rootUrl}/posts/delete/${postId}`).then((res) => {
+    return res.body
+  })
+}

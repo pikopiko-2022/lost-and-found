@@ -1,5 +1,5 @@
 const express = require('express')
-const { addPost, getAllPostsWithComments } = require('../db/posts')
+const { addPost, getAllPostsWithComments, deletePost } = require('../db/posts')
 const router = express.Router()
 const upload = require('../multer')
 
@@ -42,6 +42,13 @@ router.post('/', upload.single('image'), (req, res) => {
       .then((posts) => res.json(posts))
       .catch(() => res.status(500).send(errorMessage))
   }
+})
+
+router.delete('/delete/:postId', (req, res) => {
+  const postId = req.params.postId
+  deletePost(postId)
+    .then((posts) => res.json(posts))
+    .catch(() => res.status(500).send(errorMessage))
 })
 
 module.exports = router
