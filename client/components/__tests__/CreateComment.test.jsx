@@ -10,13 +10,15 @@ import { fetchPosts } from '../../actions/posts'
 jest.mock('../../actions/posts')
 jest.mock('react-redux')
 
-const fakeComment = {
+const fakeFormData = {
+  post_id: 1,
+  date_commented: new Date().toDateString(),
   comment: 'I found your scarf',
 }
 
 const fakeDispatch = jest.fn()
 useDispatch.mockReturnValue(fakeDispatch)
-// addComment.mockReturnValue('Comment added')
+// addComment().mockReturnValue(Promise.resolve('Comment added'))
 
 describe('<CreateComment />', () => {
   it('renders a form', () => {
