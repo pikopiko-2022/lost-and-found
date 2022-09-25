@@ -18,6 +18,7 @@ function getAllPosts(db = connection) {
       'image_url as imageUrl',
       'posts.location as itemLocation'
     )
+    .where('date_posted', '>', Date.now() - 1000 * 60 * 60 * 24 * 30)
 }
 
 async function getAllPostsWithComments(db = connection) {

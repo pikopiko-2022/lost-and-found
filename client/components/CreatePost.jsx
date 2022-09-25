@@ -19,7 +19,7 @@ export default function CreatePost() {
   const dispatch = useDispatch()
   const [formData, setFormData] = useState(initialState)
   const [selectedImage, setSelectedImage] = useState(null)
-  const datePosted = new Date().toDateString()
+  const datePosted = Date.now()
 
   function changeHandler(event) {
     const { name, value } = event.target
