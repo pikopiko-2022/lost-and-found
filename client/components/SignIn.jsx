@@ -9,12 +9,12 @@ import LandingPage from './LandingPage'
 
 function SignIn() {  
   useCacheUser()
-  const userInData = useSelector((state) => state.usersReducer)
+  const user = useSelector((state) => state.usersReducer)
   
   return (
     <>
       <IfAuthenticated>
-        {userInData?.username ? <UserHomePage /> : <CreateProfile />}
+        {user?.username ? <UserHomePage /> : <CreateProfile />}
       </IfAuthenticated>
 
       <IfNotAuthenticated>

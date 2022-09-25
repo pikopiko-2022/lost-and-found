@@ -4,12 +4,12 @@ import { screen, render } from '@testing-library/react'
 import { useSelector, useDispatch } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
 import userEvent from '@testing-library/user-event'
-import CreateProfile from './CreateProfile'
-import { createUser } from '../apis/users'
+import CreateProfile from '../CreateProfile'
+import { createUser } from '../../apis/users'
 
 
 jest.mock('react-redux')
-jest.mock('../apis/users')
+jest.mock('../../apis/users')
 
 
 describe('CreateProfile', () => {

@@ -17,12 +17,6 @@ useSelector.mockReturnValue('518 Colo')
 updateLocation.mockReturnValue('Hello')
 
 describe('<Location />', () => {
-  it('render title', () => {
-    render(<Location />)
-    const title = screen.getByRole('heading')
-    expect(title).toContainHTML('Location')
-    expect.assertions(1)
-  })
 
   it('click the button and location rendered on page', async () => {
     const mockLocation = [{ formatted_address: '518 Colombo Street' }]

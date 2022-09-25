@@ -33,7 +33,7 @@ export default function EditProfile() {
     <>
       <p>EditProfile</p>
       <div>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="username">Username:</label>
             <input
@@ -62,7 +62,7 @@ export default function EditProfile() {
               onChange={handleChange}
               value={form.location}
             />
-            <input type="submit" onClick={handleSubmit} />
+            <button>Save</button>
           </div>
         </form>
       </div>

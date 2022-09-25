@@ -9,11 +9,10 @@ import {
   Routes,
 } from 'react-router-dom'
 import userEvent from '@testing-library/user-event'
-import Profile from './Profile'
-import EditProfile from './EditProfile'
+import Profile from '../Profile'
+import EditProfile from '../EditProfile'
 
 jest.mock('react-redux')
-jest.mock('../apis/users')
 
 describe('<Profile />', () => {
   test('renders heading on profile page', () => {

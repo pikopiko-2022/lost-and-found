@@ -41,7 +41,7 @@ export default function CreateProfile() {
     <>
       <h1>Create Profile</h1>
       <div>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="name">Name:</label>
             <input
@@ -83,7 +83,8 @@ export default function CreateProfile() {
               onChange={(evt) => handleChange(evt)}
               value={form.location}
             />
-            <input type="submit" onClick={handleSubmit} />
+            <button>
+          Save</button>
           </div>
         </form>
       </div>

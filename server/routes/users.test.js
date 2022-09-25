@@ -75,8 +75,20 @@ describe('GET /api/v1/users', () => {
   })
 })
 
-// come back to test for !auth0_id, res.send(null)
 describe('GET /api/v1/users/profile', () => {
+  it('send null if wrong auth0_id is given', () => {
+    checkJwt.mockImplementation((req, res, next) => {
+      req.user = { sub: null }
+      next()
+    })
+    return request(server)
+      .get('/api/v1/users/profile')
+      .then((res) => {
+        expect(res.status).toBe(404)
+        console.log(res.text)
+        expect(res.text).toBe('User not found')
+      })
+  })
   it('get single user with auth0_id', () => {
     const User = [
       {
