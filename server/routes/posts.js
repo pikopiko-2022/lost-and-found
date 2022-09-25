@@ -12,7 +12,6 @@ router.get('/', (req, res) => {
       return res.json(posts)
     })
     .catch(() => {
-      // console.error(err.message)
       res.status(500).send(errorMessage)
     })
 })
@@ -20,7 +19,7 @@ router.get('/', (req, res) => {
 //POST /api/v1/posts
 router.post('/', upload.single('image'), (req, res) => {
   if (!req.file) {
-    console.log('No file upload')
+    return null
   } else {
     const { description, category, title, date, location, uploader_id } =
       req.body

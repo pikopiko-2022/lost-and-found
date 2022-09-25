@@ -30,7 +30,7 @@ export default function CreateComment(props) {
 
   return (
     <>
-      <form onSubmit={submitHandler}>
+      <form aria-label="commentForm" onSubmit={submitHandler}>
         <p>
           <label htmlFor="comment">Comment:</label>
           <input

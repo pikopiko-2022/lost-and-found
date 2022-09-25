@@ -15,12 +15,6 @@ jest.mock('../../multer', () => {
   return { single: jest.fn().mockReturnValue(fakeMulter) }
 })
 
-jest.spyOn(console, 'error')
-
-afterEach(() => {
-  console.error.mockReset()
-})
-
 const fakePosts = [
   {
     id: 1,
@@ -63,7 +57,7 @@ const fakePosts = [
   },
 ]
 
-describe('GET /api/v1/projects', () => {
+describe('GET /api/v1/posts', () => {
   it('returns all posts in the database', () => {
     getAllPostsWithComments.mockReturnValue(Promise.resolve(fakePosts))
 
@@ -85,12 +79,11 @@ describe('GET /api/v1/projects', () => {
       .then((res) => {
         expect(res.status).toBe(500)
         expect(res.text).toContain('try again')
-        expect(console.error).toHaveBeenCalledWith('problem')
       })
   })
 })
 
-describe('POST /api/v1/projects', () => {
+describe('POST /api/v1/posts', () => {
   it('adds a post to the database and returns all posts in the database', () => {
     addPost.mockReturnValue(Promise.resolve(fakePosts))
 
@@ -109,7 +102,6 @@ describe('POST /api/v1/projects', () => {
       .then((res) => {
         expect(res.status).toBe(500)
         expect(res.text).toContain('try again')
-        expect(console.error).toHaveBeenCalledWith('problem')
       })
   })
 })

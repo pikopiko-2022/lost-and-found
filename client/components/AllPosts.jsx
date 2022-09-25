@@ -7,11 +7,10 @@ import Post from './Post'
 export default function AllPosts() {
   const posts = useSelector((state) => state.postsReducer)
   const dispatch = useDispatch()
-
   useEffect(() => {
     dispatch(fetchPosts())
   }, [])
-  console.log(posts)
+
   return (
     <>
       <Link to="/createPost">
@@ -23,7 +22,7 @@ export default function AllPosts() {
             key={post.id}
             id={post.id}
             title={post.title}
-            uploader={post.uploaderName}
+            uploader={post.username}
             category={post.category}
             date={post.date}
             description={post.description}
