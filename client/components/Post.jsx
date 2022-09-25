@@ -3,6 +3,7 @@ import Comments from './AllComments'
 import CreateComment from './CreateComment'
 
 export default function Post(props) {
+  console.log(props)
   return (
     <>
       <h3>
@@ -15,8 +16,10 @@ export default function Post(props) {
       ></img>
       <p>{props.description}</p>
       <p>
-        {props.category} by {props.uploader} in {props.location} on {props.date}
+        {props.category} by {props.uploader} in {props.location} on{' '}
+        {props.dateLostOrFound}
       </p>
+      <p>Posted on: {props.datePosted}</p>
       <Comments comments={props.comments} />
       <CreateComment postId={props.id} />
     </>

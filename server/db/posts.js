@@ -12,7 +12,8 @@ function getAllPosts(db = connection) {
       'uploader_id as uploaderId',
       'category',
       'title',
-      'date',
+      'date_lostOrFound',
+      'date_posted as datePosted',
       'description',
       'image_url as imageUrl',
       'posts.location as itemLocation'
