@@ -5,7 +5,7 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { useSelector } from 'react-redux'
 
 export default function Nav() {
-  const user = useSelector((state) => state.loggedInUser)
+  const user = useSelector((state) => state.usersReducer)
   const { logout, loginWithRedirect } = useAuth0()
   const handleLogOff = (e) => {
     e.preventDefault()
@@ -31,11 +31,9 @@ export default function Nav() {
           <Link to="/" onClick={handleLogOff}>
             Log off
           </Link>
+
+          <Link to="/profile">{' ' + user?.username}</Link>
         </IfAuthenticated>
-        {/* <Link to="/singleProfile">
-            {' ' + user.firstName}
-          </Link>
-        </IfAuthenticated> */}{' '}
         <IfNotAuthenticated>
           <Link to="/" onClick={handleSignIn}>
             Sign In
