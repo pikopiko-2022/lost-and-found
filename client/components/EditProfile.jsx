@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateLoggedInUser } from '../actions/loggedInUser'
 import { updateUser } from '../apis/users'
+import { useAuth0 } from '@auth0/auth0-react'
 
 export default function EditProfile() {
   const user = useSelector((state) => state.usersReducer)
@@ -14,6 +15,13 @@ export default function EditProfile() {
   })
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
+  const { isAuthenticated } = useAuth0()
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate('/')
+    }
+  }, [])
   const handleChange = (evt) => {
     setForm({
       ...form,
@@ -23,7 +31,7 @@ export default function EditProfile() {
 
   const handleSubmit = (evt) => {
     evt.preventDefault()
-    updateUser(form, user.token )
+    updateUser(form, user.token)
       .then(() => dispatch(updateLoggedInUser(form)))
       .then(navigate('/profile'))
       .catch((err) => console.error(err.message))

@@ -19,14 +19,22 @@ router.post('/', upload.single('image'), (req, res) => {
   if (!req.file) {
     return null
   } else {
-    const { description, category, title, date, location, uploader_id } =
-      req.body
+    const {
+      description,
+      category,
+      title,
+      date_lostOrFound,
+      location,
+      uploader_id,
+      date_posted,
+    } = req.body
     const post = {
       description,
       uploader_id,
       category,
       title,
-      date,
+      date_lostOrFound,
+      date_posted,
       image_url: './images/postimages/' + req.file.filename,
       location,
     }

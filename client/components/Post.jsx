@@ -20,7 +20,8 @@ export default function Post(props) {
       ></img>
       <p>{props.description}</p>
       <p>
-        {props.category} by {props.uploader} in {props.location} on {props.date}
+        {props.category} by {props.uploader} in {props.location} on{' '}
+        {new Date(props.dateLostOrFound).toDateString()}
       </p>
       {user.id == props.uploaderId && (
         <div>
@@ -29,6 +30,7 @@ export default function Post(props) {
           </button>
         </div>
       )}
+      <p>Posted on: {new Date(props.datePosted).toDateString()}</p>
       <Comments comments={props.comments} />
       <CreateComment postId={props.id} />
     </>

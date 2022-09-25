@@ -19,6 +19,7 @@ export default function CreatePost() {
   const dispatch = useDispatch()
   const [formData, setFormData] = useState(initialState)
   const [selectedImage, setSelectedImage] = useState(null)
+  const datePosted = Date.now()
 
   function changeHandler(event) {
     const { name, value } = event.target
@@ -33,7 +34,8 @@ export default function CreatePost() {
     const allFormData = new FormData()
     allFormData.append('title', formData.title)
     allFormData.append('category', formData.category)
-    allFormData.append('date', formData.date)
+    allFormData.append('date_lostOrFound', formData.date_lostOrFound)
+    allFormData.append('date_posted', datePosted)
     allFormData.append('description', formData.description)
     allFormData.append('image', selectedImage)
     allFormData.append('location', currentLocation)
@@ -67,9 +69,9 @@ export default function CreatePost() {
           <label htmlFor="date">Date lost or found: </label>
           <input
             type="date"
-            name="date"
+            name="date_lostOrFound"
             onChange={changeHandler}
-            value={formData.date}
+            value={formData.date_lostOrFound}
           />
         </div>
         <div>
@@ -122,7 +124,7 @@ export default function CreatePost() {
             !(
               formData.title &&
               formData.category &&
-              formData.date &&
+              formData.date_lostOrFound &&
               formData.description &&
               currentLocation &&
               selectedImage
