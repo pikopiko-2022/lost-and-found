@@ -6,6 +6,7 @@ import Location from './Location'
 
 export default function CreatePost() {
   const currentLocation = useSelector((state) => state.locationReducer)
+  const user = useSelector((state) => state.usersReducer)
   const initialState = {
     category: '',
     title: '',
@@ -36,7 +37,7 @@ export default function CreatePost() {
     allFormData.append('description', formData.description)
     allFormData.append('image', selectedImage)
     allFormData.append('location', currentLocation)
-    // const newData = { ...formData, location: currentLocation }
+    allFormData.append('uploader_id', user.id)
     dispatch(addNewPost(allFormData))
     setFormData(initialState)
     navigate('/')
@@ -115,7 +116,21 @@ export default function CreatePost() {
       <Location />
 
       <div>
-        <button onClick={submitHandler}>Save new post</button>
+        <button
+          disabled={
+            !(
+              formData.title &&
+              formData.category &&
+              formData.date &&
+              formData.description &&
+              currentLocation &&
+              selectedImage
+            )
+          }
+          onClick={submitHandler}
+        >
+          Save new post
+        </button>
       </div>
     </>
   )

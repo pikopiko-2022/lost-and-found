@@ -3,9 +3,7 @@ const router = express.Router()
 const { addComment } = require('../db/comments')
 
 router.post('/', (req, res) => {
-  const { comment, date_commented, post_id } = req.body
-  //todo: replace with req.user?.sub
-  const commenter_id = '3'
+  const { comment, date_commented, post_id, commenter_id } = req.body
   const newComment = {
     commenter_id,
     comment,

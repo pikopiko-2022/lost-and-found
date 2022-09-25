@@ -14,13 +14,12 @@ export function useCacheUser() {
     try {
       getAccessTokenSilently()
         .then((token) => {
-          console.log(token)
+
           const userToSave = {
             auth0_id: user?.sub,
             email: user?.email,
             token: token,
           }
-          console.log('user0' + userToSave)
           dispatch(updateLoggedInUser(userToSave))
         })
         .catch((err) => console.error(err.message))

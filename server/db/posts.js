@@ -3,7 +3,7 @@ const connection = require('knex')(config)
 
 function getAllPosts(db = connection) {
   return db('posts')
-    .join('users', 'posts.uploader_id', 'users.auth0_id')
+    .join('users', 'posts.uploader_id', 'users.id')
     .select(
       'name as uploaderName',
       'username',
@@ -26,7 +26,7 @@ async function getAllPostsWithComments(db = connection) {
   console.log(postIds)
   const comments = await db('comments')
     .whereIn('post_id', postIds)
-    .join('users', 'users.auth0_id', 'comments.commenter_id')
+    .join('users', 'users.id', 'comments.commenter_id')
   posts.forEach((post) => {
     post.comments = comments.filter((comment) => comment.post_id === post.id)
   })

@@ -22,9 +22,8 @@ router.post('/', upload.single('image'), (req, res) => {
   if (!req.file) {
     console.log('No file upload')
   } else {
-    const { description, category, title, date, location } = req.body
-    //todo: replace with req.user?.sub
-    const uploader_id = '3'
+    const { description, category, title, date, location, uploader_id } =
+      req.body
     const post = {
       description,
       uploader_id,
