@@ -31,8 +31,11 @@ export default function Nav() {
           <Link to="/" onClick={handleLogOff}>
             Log off
           </Link>
-
-          <Link to="/profile">{' ' + user?.username}</Link>
+          <div>
+            <p>
+              Logged in as <Link to="/profile">{' ' + user?.username}</Link>
+            </p>
+          </div>
         </IfAuthenticated>
         <IfNotAuthenticated>
           <Link to="/" onClick={handleSignIn}>

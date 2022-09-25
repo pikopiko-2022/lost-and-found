@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import CreateProfile from './CreateProfile'
+import CreateProfile from './CreateProfileForm'
 import Profile from './Profile'
 import { useDispatch } from 'react-redux'
 import { useAuth0 } from '@auth0/auth0-react'
@@ -33,7 +33,7 @@ function App() {
       <div className="app">
         <h1>Lost and found</h1>
       </div>
-      <Nav />
+      {isAuthenticated && <Nav />}
       <Routes>
         <Route path="/" element={<SignIn />} />
         <Route path="/createProfile" element={<CreateProfile />} />

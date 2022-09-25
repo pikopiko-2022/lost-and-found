@@ -1,16 +1,16 @@
 import React from 'react'
 import UserHomePage from './UserHomePage'
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
-import {  useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useCacheUser } from '../auth0-utils'
-import CreateProfile from './CreateProfile'
+import CreateProfile from './CreateProfileForm'
 
 import LandingPage from './LandingPage'
 
-function SignIn() {  
+function SignIn() {
   useCacheUser()
   const user = useSelector((state) => state.usersReducer)
-  
+
   return (
     <>
       <IfAuthenticated>
