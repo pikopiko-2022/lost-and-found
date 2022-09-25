@@ -11,10 +11,15 @@ import {
 import userEvent from '@testing-library/user-event'
 import Profile from '../Profile'
 import EditProfile from '../EditProfile'
+import { useAuth0 } from '@auth0/auth0-react'
 
+jest.mock('@auth0/auth0-react')
 jest.mock('react-redux')
 
 describe('<Profile />', () => {
+  useAuth0.mockReturnValue({
+    isAuthenticated: true,
+  })
   test('renders heading on profile page', () => {
     useSelector.mockReturnValue({
       username: 'SamSam',

@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { updateLoggedInUser } from '../actions/loggedInUser'
 import { createUser } from '../apis/users'
+import { useAuth0 } from '@auth0/auth0-react'
 
 export default function CreateProfileForm() {
   const user = useSelector((state) => state.usersReducer)
+  const { isAuthenticated } = useAuth0()
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [form, setForm] = useState({
@@ -15,8 +17,10 @@ export default function CreateProfileForm() {
     location: '',
   })
   useEffect(() => {
-    if (user?.username) navigate('/')
-  }, [user])
+    if (!isAuthenticated) {
+      navigate('/')
+    }
+  }, [])
 
   const handleChange = (evt) => {
     setForm({

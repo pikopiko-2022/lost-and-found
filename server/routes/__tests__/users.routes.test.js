@@ -110,6 +110,7 @@ describe('GET /api/v1/users/profile', () => {
       req.user = { sub: null }
       next()
     })
+
     return request(server)
       .get('/api/v1/users/profile')
       .then((res) => {
