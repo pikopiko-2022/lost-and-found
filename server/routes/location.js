@@ -4,8 +4,6 @@ require('dotenv').config()
 
 const router = express.Router()
 
-//GET /v1/location
-
 router.get('/', (req, res) => {
   const text = req.query.text
 

@@ -1,7 +1,6 @@
 const express = require('express')
 const path = require('path')
 
-
 const userRoutes = require('./routes/users')
 
 const postRoutes = require('./routes/posts')
@@ -26,4 +25,3 @@ server.get('*', (req, res) => {
 })
 
 module.exports = server
-

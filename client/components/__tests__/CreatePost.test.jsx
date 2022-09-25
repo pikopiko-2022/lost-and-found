@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+// import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -38,6 +38,8 @@ describe('<CreatePost />', () => {
     expect(title).toContainHTML('Create Post')
     expect.assertions(1)
   })
+
+  // to be checked with facilitator
   // it('click upload image renders image on page', async () => {
   //   const mockImage = 'dogPic.jpg'
   //   render(

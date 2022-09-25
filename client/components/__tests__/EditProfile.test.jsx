@@ -49,6 +49,9 @@ describe('EditProfile', () => {
       })
     })
   })
+
+  // to be checked with a facilitor
+
   //   it('redirects back to profile page once form submitted', async () => {
   //     useSelector.mockReturnValue({
   //         username: 'SamSamS',

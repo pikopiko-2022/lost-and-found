@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchPosts } from '../actions/posts'
-import { addComment } from '../apis/comments.api'
+import { addComment } from '../apis/comments'
 
 export default function CreateComment(props) {
   const user = useSelector((state) => state.usersReducer)

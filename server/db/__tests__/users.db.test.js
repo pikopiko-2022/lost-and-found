@@ -1,7 +1,6 @@
 const knex = require('knex')
-const testConfig = require('./knexfile').test
+const testConfig = require('../knexfile').test
 const testDb = knex(testConfig)
-// const testDb = knex(config.test)
 
 const {
   getUsers,
@@ -10,7 +9,7 @@ const {
   userExists,
   userAuth0IdExist,
   getUserById,
-} = require('./users')
+} = require('../users')
 
 beforeAll(() => {
   return testDb.migrate.latest()
@@ -59,7 +58,6 @@ describe('create new user user db', () => {
   }
 
   it('creates a new user', () => {
-    // expect.assertions(5)
     return createUser(fakeNewUser, testDb)
       .then(() => {
         return getUserById(30, testDb)

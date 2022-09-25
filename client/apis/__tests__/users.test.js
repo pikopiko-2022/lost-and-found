@@ -1,5 +1,5 @@
 import nock from 'nock'
-import { createUser, getUser, getAllusers, updateUser } from './users'
+import { createUser, getUser, getAllusers, updateUser } from '../users'
 
 const fakeUsers = [
   {
@@ -53,19 +53,8 @@ describe('createUser', () => {
       expect(result[0].username).toBe('Davidislost')
       expect(result[0].location).toBe('Davidislostwonderland')
       expect(result[0].email).toBe('Davidislost@gmail.com')
-
     })
   })
-  // it('returns error message createUser fails', () => {
-  //   const scope = nock('http://localhost')
-  //     .post('/api/v1/users/crateprofile')
-  //     .replyWithError(new Error('failed'))
-
-  //   return createUser(fakeUsers).then(() => {
-  //     expect(scope.isDone()).toBe(true)
-  //     expect(console.error).toBe('failed')
-  //   })
-  // })
 })
 
 describe('get all users', () => {

@@ -1,5 +1,5 @@
 import nock from 'nock'
-import { addComment } from '../comments.api'
+import { addComment } from '../comments'
 
 const fakeComment = {
   post_id: 2,

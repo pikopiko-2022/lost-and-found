@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useAuth0 } from '@auth0/auth0-react'
 
-// import action from ./actions/
 import { updateLoggedInUser } from './actions/loggedInUser'
 
 export function useCacheUser() {
@@ -14,7 +13,6 @@ export function useCacheUser() {
     try {
       getAccessTokenSilently()
         .then((token) => {
-
           const userToSave = {
             auth0_id: user?.sub,
             email: user?.email,

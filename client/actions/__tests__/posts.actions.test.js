@@ -1,11 +1,6 @@
-import {
-  fetchPosts,
-  SET_POSTS_SUCCESS,
-  addNewPost,
-  setPostsSuccess,
-} from '../posts'
+import { fetchPosts, SET_POSTS_SUCCESS } from '../posts'
 
-import { getAllPostsAndComments, addPost } from '../../apis/posts'
+import { getAllPostsAndComments } from '../../apis/posts'
 
 jest.spyOn(console, 'error')
 
@@ -35,8 +30,7 @@ describe('fetchPosts', () => {
       Promise.reject(new Error('mock no worky action'))
     )
     console.error.mockImplementation(() => {})
-    return fetchPosts()(fakeDispatch).then((res) => {
-      console.log(res)
+    return fetchPosts()(fakeDispatch).then(() => {
       expect(console.error).toHaveBeenCalledWith('mock no worky action')
     })
   })

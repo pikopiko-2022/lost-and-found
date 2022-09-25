@@ -11,9 +11,6 @@ export default function Location() {
   const [isSearched, setIsSearched] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
   const dispatch = useDispatch()
-  // useEffect(() => {
-  //   dispatch(updateLocation(currentLocation))
-  // }, [currentLocation])
 
   const handleChange = (e) => {
     setForm(e.target.value)
@@ -31,8 +28,6 @@ export default function Location() {
       .catch(() => {
         setErrorMsg('Please enter real address')
       })
-
-    // add error handling for now results
   }
 
   const handleAddLocation = () => {

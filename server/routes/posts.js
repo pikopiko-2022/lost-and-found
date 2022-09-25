@@ -5,7 +5,6 @@ const upload = require('../multer')
 
 const errorMessage = 'There was a problem. Please try again.'
 
-//GET /api/v1/posts
 router.get('/', (req, res) => {
   getAllPostsWithComments()
     .then((posts) => {
@@ -16,7 +15,6 @@ router.get('/', (req, res) => {
     })
 })
 
-//POST /api/v1/posts
 router.post('/', upload.single('image'), (req, res) => {
   if (!req.file) {
     return null
