@@ -48,6 +48,7 @@ describe('<Profile />', () => {
   })
 
   test('link button to edit profile works', async () => {
+    expect.assertions(1)
     useSelector.mockReturnValue({
       username: 'SamSamS',
     })

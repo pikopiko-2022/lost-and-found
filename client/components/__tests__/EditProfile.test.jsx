@@ -13,8 +13,10 @@ jest.mock('react-redux')
 jest.mock('../../apis/users')
 jest.mock('@auth0/auth0-react')
 const navigate = jest.fn()
+
 beforeEach(() => {
   jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
+  jest.clearAllMocks()
 })
 
 const fakeUpdatedUser = {
@@ -92,7 +94,6 @@ describe('EditProfile', () => {
       isAuthenticated: false,
     })
 
-    updateUser.mockImplementation(() => Promise.resolve())
     useDispatch.mockReturnValue(fakeDispatch)
     render(
       <Router>
