@@ -25,6 +25,6 @@ describe('<CreateComment />', () => {
     render(<CreateComment postId={1} />)
     const button = screen.getByRole('button')
     fireEvent.click(button)
-    expect(fakeDispatch).toHaveBeenCalledWith('Posts not fetched')
+    expect(fakeDispatch).toHaveBeenCalledWith('Posts fetched')
   })
 })

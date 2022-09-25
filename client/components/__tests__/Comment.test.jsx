@@ -17,5 +17,6 @@ describe('<Comment />', () => {
     expect(comment).toHaveLength(1)
     expect(comment[0].textContent).toContain('Aaron123')
     expect(comment[0].textContent).toContain('basketball')
+    expect(comment[0].textContent).toContain('24 September')
   })
 })
