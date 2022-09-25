@@ -17,7 +17,6 @@ useSelector.mockReturnValue('518 Colo')
 updateLocation.mockReturnValue('Hello')
 
 describe('<Location />', () => {
-
   it('click the button and location rendered on page', async () => {
     const mockLocation = [{ formatted_address: '518 Colombo Street' }]
     addLocation.mockImplementation(() => Promise.resolve(mockLocation))
@@ -50,7 +49,7 @@ describe('<Location />', () => {
     render(<Location />)
     await userEvent.type(screen.getByLabelText(/location/i), '!')
     await userEvent.click(screen.getByRole('button', { name: /search/i }))
-    screen.debug()
+
     expect(screen.getByText(/real address/i)).toBeInTheDocument()
   })
 })

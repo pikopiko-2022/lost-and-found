@@ -1,6 +1,6 @@
 const request = require('supertest')
-const server = require('../server')
-const checkJwt = require('../auth0')
+const server = require('../../server')
+const checkJwt = require('../../auth0')
 const {
   createUser,
   getUsers,
@@ -8,10 +8,10 @@ const {
   getUserById,
   userExists,
   userAuth0IdExist,
-} = require('../db/users')
+} = require('../../db/users')
 
-jest.mock('../auth0')
-jest.mock('../db/users')
+jest.mock('../../auth0')
+jest.mock('../../db/users')
 jest.spyOn(console, 'error')
 
 afterEach(() => {
@@ -91,7 +91,6 @@ describe('GET /api/v1/users/profile', () => {
     return request(server)
       .get('/api/v1/users/profile')
       .then((res) => {
-        console.log(res.body)
         expect(res.status).toBe(200)
         expect(res.body[0].name).toBe('Sam')
       })
@@ -102,7 +101,6 @@ describe('GET /api/v1/users/profile', () => {
     return request(server)
       .get('/api/v1/users/profile')
       .then((res) => {
-        console.log(res.body)
         expect(res.status).toBe(500)
         expect(res.text).toBe('you lose')
       })
@@ -116,7 +114,7 @@ describe('GET /api/v1/users/profile', () => {
       .get('/api/v1/users/profile')
       .then((res) => {
         expect(res.status).toBe(404)
-        console.log(res.text)
+
         expect(res.text).toBe('User not found')
       })
   })

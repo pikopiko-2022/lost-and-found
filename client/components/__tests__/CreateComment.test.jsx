@@ -3,12 +3,12 @@ import { fireEvent, render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { useDispatch } from 'react-redux'
 import CreateComment from '../CreateComment'
-import { addComment } from '../../apis/comments.api'
+import { addComment } from '../../apis/comments'
 import { fetchPosts } from '../../actions/posts'
 
 jest.mock('../../actions/posts')
 jest.mock('react-redux')
-jest.mock('../../apis/comments.api')
+jest.mock('../../apis/comments')
 
 const fakeDispatch = jest.fn()
 useDispatch.mockReturnValue(fakeDispatch)

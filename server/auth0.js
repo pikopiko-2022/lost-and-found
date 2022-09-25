@@ -1,7 +1,6 @@
 const jwt = require('express-jwt')
 const jwks = require('jwks-rsa')
 
-// TODO: set the domain and audience (API Identifier)
 const domain = 'https://pikopiko-2022-david.au.auth0.com'
 const audience = 'https://lost-and-found/api'
 
@@ -18,8 +17,3 @@ const checkJwt = jwt({
 })
 
 module.exports = checkJwt
-
-
-// identifier:  https://lost-and-found/api
-// Domain:  pikopiko-2022-david.au.auth0.com
-// Client ID:  KJ9CSWBpNRIwuzrEOUWQB6DGniH6RMg2

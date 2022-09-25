@@ -3,9 +3,7 @@ import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 export default function Profile() {
-  // const { isAuthenticated, getAccessTokenSilently } = useAuth0()
   const user = useSelector((state) => state.usersReducer)
-
 
   return (
     <>
