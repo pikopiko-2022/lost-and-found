@@ -22,7 +22,7 @@ describe('usersReducer test', () => {
     const action = clearLoggedInUser()
     const expectedState = {
         auth0_id: '',
-        username: '',
+        username: null,
       }
     const outputState = usersReducer({
       id: 1,

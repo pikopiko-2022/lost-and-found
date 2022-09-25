@@ -7,20 +7,19 @@ import UserHomePage from '../UserHomePage'
 import LandingPage from '../LandingPage'
 import { useSelector } from 'react-redux'
 
-import CreateProfile from '../CreateProfile'
+import CreateProfileForm from '../CreateProfileForm'
 
 jest.mock('@auth0/auth0-react')
 jest.mock('react-redux')
-jest.mock('../CreateProfile')
+jest.mock('../CreateProfileForm')
 jest.mock('../UserHomePage')
-
 
 describe('Authentication', () => {
   it('if authenticated it renders children, if user?.username get UserHomePage', async () => {
     const user = {
       username: 'luna',
     }
-    
+
     UserHomePage.mockReturnValue(<>UserHomePage</>)
     useSelector.mockReturnValue(user)
     useAuth0.mockReturnValue({
@@ -28,7 +27,7 @@ describe('Authentication', () => {
     })
     render(
       <IfAuthenticated>
-        {user?.username ? <UserHomePage /> : <CreateProfile />}
+        {user?.username ? <UserHomePage /> : <CreateProfileForm />}
       </IfAuthenticated>
     )
     await expect(screen.getByText(/UserHomePage/i)).toBeInTheDocument()
@@ -37,14 +36,14 @@ describe('Authentication', () => {
     const emptyUser = {
       username: '',
     }
-    CreateProfile.mockReturnValue(<>Create Profile</>)
+    CreateProfileForm.mockReturnValue(<>Create Profile</>)
     useSelector.mockReturnValue(emptyUser)
     useAuth0.mockReturnValue({
       isAuthenticated: true,
     })
     render(
       <IfAuthenticated>
-        {emptyUser?.username ? <UserHomePage /> : <CreateProfile />}
+        {emptyUser?.username ? <UserHomePage /> : <CreateProfileForm />}
       </IfAuthenticated>
     )
     await expect(screen.getByText(/Create Profile/i)).toBeInTheDocument()
