@@ -3,8 +3,6 @@ const checkJwt = require('../auth0')
 const db = require('../db/users')
 const router = express.Router()
 
-// GET api/v1/users
-
 router.get('/profile', checkJwt, (req, res) => {
   const auth0_id = req.user?.sub
   console.log('here1')
@@ -31,7 +29,6 @@ router.get('/profiles', (req, res) => {
     })
 })
 
-// POST createUser
 router.post('/createprofile', checkJwt, (req, res) => {
   const auth0_id = req.user?.sub
   const { name, username, email, location } = req.body

@@ -94,7 +94,6 @@ describe('GET /api/v1/users/profile', () => {
     return request(server)
       .get('/api/v1/users/profile')
       .then((res) => {
-        console.log(res.body)
         expect(res.body[0].name).toBe('Sam')
       })
   })
@@ -104,15 +103,14 @@ describe('GET /api/v1/users/profile', () => {
     return request(server)
       .get('/api/v1/users/profile')
       .then((res) => {
-        console.log(res.body)
         expect(res.status).toBe(500)
         expect(res.text).toBe('you lose')
       })
   })
-  it('send null if wrong auth0_id is given', () => {
+  it.only('send null if wrong auth0_id is given', () => {
     // const User = [
     //   {
-    //     auth0_id: null,
+    //     auth0_id: 'wrongid',
     //     name: 'Sam',
     //     username: 'SamSan',
     //     email: 'sam@fakemail.com',
@@ -128,7 +126,6 @@ describe('GET /api/v1/users/profile', () => {
     return request(server)
       .get('/api/v1/users/profile')
       .then((res) => {
-        console.log(res)
         expect(res.status).toBe(404)
         console.log(res.text)
         expect(res.text).toBe('User not found')
