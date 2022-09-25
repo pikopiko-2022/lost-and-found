@@ -1,8 +1,8 @@
 # Lost and Found
 
-Lost and found is an app where users can come to look for an make a post about items they have lost or found. Users can then comment on a post to make a connection and get back their item.
+Lost and found is an app where users can come to look for and make a post about items they have lost or found. Users can then comment on a post to make a connection and get back their item.
 
-User Stories
+User Stories:
 
 - User can login and create a profile
 - User can make a post if they found or lost an item
@@ -10,7 +10,7 @@ User Stories
 - User can add a location using google api
 
 - User can see all posts of items that have been found or lost(only if logged in)
-- User can  comment on a post if they think the item is theirs
+- User can comment on a post if they think the item is theirs
 
 - Posts should expire if not found within a certain time frame
 - A user can delete a post that they have created
