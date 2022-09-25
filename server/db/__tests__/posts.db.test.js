@@ -1,8 +1,8 @@
 const knex = require('knex')
-const testConfig = require('./knexfile').test
+const testConfig = require('../knexfile').test
 const testDb = knex(testConfig)
 
-const { getAllPosts, addPost, getAllPostsWithComments } = require('./posts')
+const { getAllPosts, addPost, getAllPostsWithComments } = require('../posts')
 
 beforeAll(() => {
   return testDb.migrate.latest()
@@ -30,6 +30,7 @@ describe('getAllPostsWithComments', () => {
     return getAllPostsWithComments(testDb).then((posts) => {
       expect(posts[0].comments).toHaveLength(2)
       expect(posts[0].comments[0].comment).toContain('Gorman')
+      expect(posts[0].comments[0].username).toBe('SillySally')
     })
   })
 })

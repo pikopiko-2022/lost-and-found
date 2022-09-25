@@ -17,30 +17,38 @@ export default function CreatePost() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [formData, setFormData] = useState(initialState)
+  const [selectedImage, setSelectedImage] = useState(null)
 
   function changeHandler(event) {
     const { name, value } = event.target
     setFormData({ ...formData, [name]: value })
   }
 
+  function handleImageChange(e) {
+    setSelectedImage(e.target.files[0])
+  }
   function submitHandler(event) {
     event.preventDefault()
-    const newData = { ...formData, location: currentLocation }
-    dispatch(addNewPost(newData))
+    const allFormData = new FormData()
+    allFormData.append('title', formData.title)
+    allFormData.append('category', formData.category)
+    allFormData.append('date', formData.date)
+    allFormData.append('description', formData.description)
+    allFormData.append('image', selectedImage)
+    allFormData.append('location', currentLocation)
+    // const newData = { ...formData, location: currentLocation }
+    dispatch(addNewPost(allFormData))
     setFormData(initialState)
     navigate('/')
   }
+
   return (
     <>
-      <p>CreatePost</p>
-      <form>
+      <h3>Create Post</h3>
+      <form encType="multipart/form-data">
         <div>
           <label htmlFor="title">Title of post: </label>
-          <input
-            name="title"
-            onChange={changeHandler}
-            value={formData.title}
-          ></input>
+          <input name="title" onChange={changeHandler} value={formData.title} />
         </div>
         <div>
           <label htmlFor="category">Lost or Found: </label>
@@ -55,23 +63,57 @@ export default function CreatePost() {
           </select>
         </div>
         <div>
-          <label htmlFor="description">Description: </label>
+          <label htmlFor="date">Date lost or found: </label>
           <input
+            type="date"
+            name="date"
+            onChange={changeHandler}
+            value={formData.date}
+          />
+        </div>
+        <div>
+          <label htmlFor="description">Description: </label>
+          <textarea
+            type="text-area"
             name="description"
             onChange={changeHandler}
             value={formData.description}
-          ></input>
+          />
+        </div>
+
+        <div>
+          {selectedImage && (
+            <div>
+              <img
+                alt="not found"
+                width={'250px'}
+                src={URL.createObjectURL(selectedImage)}
+              />
+              <br />
+              <button
+                onClick={(e) => {
+                  e.preventDefault()
+                  setSelectedImage(null)
+                }}
+              >
+                Remove
+              </button>
+            </div>
+          )}
         </div>
         <div>
-          <label htmlFor="image_url">Image link: </label>
+          <label htmlFor="photo">Upload your photo</label>
           <input
-            name="image_url"
-            onChange={changeHandler}
-            value={formData.image_url}
-          ></input>
+            data-testid="uploadImage"
+            type="file"
+            name="photo"
+            id="photo"
+            onChange={handleImageChange}
+          />
         </div>
       </form>
       <Location />
+
       <div>
         <button onClick={submitHandler}>Save new post</button>
       </div>

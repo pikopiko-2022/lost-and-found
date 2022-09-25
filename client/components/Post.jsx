@@ -5,20 +5,20 @@ import CreateComment from './CreateComment'
 export default function Post(props) {
   return (
     <>
-      <h1>
+      <h3>
         {props.category}: {props.title}
-      </h1>
+      </h3>
       <img
         style={{ height: '400px' }}
         src={props.image}
         alt={props.title}
       ></img>
-      <h3>{props.description}</h3>
-      <h2>
+      <p>{props.description}</p>
+      <p>
         {props.category} by {props.uploader} in {props.location} on {props.date}
-      </h2>
+      </p>
       <Comments comments={props.comments} />
-      <CreateComment postId = {props.id}/>
+      <CreateComment postId={props.id} />
     </>
   )
 }
