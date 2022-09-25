@@ -27,7 +27,8 @@ export default function AllPosts() {
               title={post.title}
               uploader={post.username}
               category={post.category}
-              date={post.date}
+              dateLostOrFound={post.date_lostOrFound}
+              datePosted={post.datePosted}
               description={post.description}
               image={post.imageUrl}
               location={post.itemLocation}
@@ -35,7 +36,6 @@ export default function AllPosts() {
             />
           )
         })}
-
     </>
   )
 }
