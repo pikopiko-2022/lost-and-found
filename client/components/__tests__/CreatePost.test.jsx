@@ -57,6 +57,20 @@ describe('<CreatePost />', () => {
     expect(screen.queryByTestId('testImage')).toBeTruthy()
   })
 
+  it('click remove image button', async () => {
+    render(
+      <Router>
+        <CreatePost />
+      </Router>
+    )
+    const imageInput = screen.getByTestId('uploadImage')
+
+    await userEvent.upload(imageInput, file)
+    const button = screen.getByRole('button', { name: /remove/i })
+    await userEvent.click(button)
+    expect(screen.queryByTestId('testImage')).toBeFalsy()
+  })
+
   it('click Save new post button', async () => {
     Location.mockReturnValue(<>Location</>)
     render(
@@ -87,6 +101,5 @@ describe('<CreatePost />', () => {
 
     await userEvent.click(screen.getByRole('button', { name: /save/i }))
     expect(fakeDispatch).toHaveBeenCalled()
-    expect(0).toBe(0)
   })
 })
