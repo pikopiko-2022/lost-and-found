@@ -10,9 +10,23 @@ function LandingPage() {
   return (
     <>
       <section>
-        <div>
-          <button onClick={handleSignIn}>Sign Up</button>
-          <button onClick={handleSignIn}>Log In</button>
+        <div className="flex justify-center items-center">
+          <div>
+            <button
+              className="bg-[#E9896A] inline-flex items-center justify-center rounded-md border border-transparent px-5 py-3 text-base font-medium text-white hover:bg-indigo-700"
+              onClick={handleSignIn}
+            >
+              Sign Up
+            </button>
+          </div>
+          <div>
+            <button
+              className="inline-flex items-center justify-center rounded-md border border-transparent bg-white px-5 py-3 text-base font-medium text-indigo-600 hover:bg-indigo-50"
+              onClick={handleSignIn}
+            >
+              Log In
+            </button>
+          </div>
         </div>
       </section>
     </>
