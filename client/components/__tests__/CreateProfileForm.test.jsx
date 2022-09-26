@@ -37,4 +37,20 @@ describe('CreateProfile', () => {
       },
     })
   })
+  it('dispatches correct action when form submitted1', async () => {
+    jest.spyOn(console, 'error')
+    useSelector.mockReturnValue({ username: 'RandomUser' })
+    const err = jest.fn()
+    createUser.mockImplementation(() => Promise.reject(new Error('you failed')))
+    console.error.mockImplementation(err)
+    render(
+      <Router>
+        <CreateProfileForm />
+      </Router>
+    )
+
+    await userEvent.click(screen.getByRole('button'))
+    expect(err).toHaveBeenCalled()
+    expect(err).toHaveBeenCalledWith('you failed')
+  })
 })
