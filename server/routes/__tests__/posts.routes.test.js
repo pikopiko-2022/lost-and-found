@@ -21,7 +21,8 @@ const fakePosts = [
     uploaderId: '3',
     category: 'Found',
     title: 'Keys',
-    date: new Date().toDateString(),
+    date_lostOrFound: '10/07/2022',
+    datePosted: '11/07/2022',
     description: 'These have a distinct key chain, let me know what it is!',
     imageUrl: '/fakeURL',
     location: 'Hokitika',
@@ -40,7 +41,8 @@ const fakePosts = [
     uploaderId: '5',
     category: 'Lost',
     title: 'Wallet',
-    date: new Date().toDateString(),
+    date_lostOrFound: '05/04/2022',
+    datePosted: '10/05/2022',
     description:
       "I lost my wallet, it's brown leather and should have my id in it",
     imageUrl: '/fakeURL',
@@ -85,12 +87,10 @@ describe('GET /api/v1/posts', () => {
 
 describe('POST /api/v1/posts', () => {
   it('adds a post to the database and returns all posts in the database', () => {
-    addPost.mockReturnValue(Promise.resolve(fakePosts))
-
+    addPost.mockImplementation(() => Promise.resolve(fakePosts))
     return request(server)
       .post('/api/v1/posts', upload.single('image'))
       .then((res) => {
-        console.log(res.body)
         expect(res.body[0].title).toBe('Wallet')
       })
   })
