@@ -29,6 +29,15 @@ async function getAllPostsWithComments(db = connection) {
   const comments = await db('comments')
     .whereIn('post_id', postIds)
     .join('users', 'users.id', 'comments.commenter_id')
+    .select(
+      'comments.id as commentId',
+      'commenter_id',
+      'date_commented',
+      'comment',
+      'post_id',
+      'username',
+      'users.id as userId'
+    )
   posts.forEach((post) => {
     post.comments = comments.filter((comment) => comment.post_id === post.id)
   })
