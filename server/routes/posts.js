@@ -39,8 +39,12 @@ router.post('/', upload.single('image'), (req, res) => {
       image_url: './images/postimages/' + req.file.filename,
       location,
     }
+
     addPost(post)
-      .then(() => getAllPostsWithComments())
+      .then((posts) => {
+        const newPosts = posts.slice(0).reverse()
+        return res.json(newPosts)
+      })
       .catch(() => res.status(500).send(errorMessage))
   }
 })
