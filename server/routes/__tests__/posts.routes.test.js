@@ -3,7 +3,12 @@ const server = require('../../server')
 
 const upload = require('../../multer')
 
-const { getAllPostsWithComments, addPost } = require('../../db/posts')
+const {
+  getAllPostsWithComments,
+  addPost,
+  deletePost,
+  editPost,
+} = require('../../db/posts')
 jest.mock('../../db/posts')
 
 const fakeMulter = (req, res, next) => {
@@ -100,6 +105,52 @@ describe('POST /api/v1/posts', () => {
 
     return request(server)
       .post('/api/v1/posts')
+      .then((res) => {
+        expect(res.status).toBe(500)
+        expect(res.text).toContain('try again')
+      })
+  })
+})
+
+describe('DELETE /api/v1/posts/delete/:postId', () => {
+  it('deletes a post from the database', () => {
+    deletePost.mockImplementation(() => Promise.resolve(fakePosts))
+    return request(server)
+      .delete('/api/v1/posts/delete/1')
+      .then((res) => {
+        expect(res.body[0].title).toBe('Wallet')
+      })
+  })
+  it('returns status 500 and sends and error message if there is a problem', () => {
+    deletePost.mockImplementation(() =>
+      Promise.reject(new Error('Something random'))
+    )
+
+    return request(server)
+      .delete('/api/v1/posts/delete/1')
+      .then((res) => {
+        expect(res.status).toBe(500)
+        expect(res.text).toContain('try again')
+      })
+  })
+})
+
+describe('PATCH /api/v1/posts/edit/:postId', () => {
+  it('patch a post from the database', () => {
+    editPost.mockImplementation(() => Promise.resolve(fakePosts))
+    return request(server)
+      .patch('/api/v1/posts/edit/1')
+      .then((res) => {
+        expect(res.body[0].title).toBe('Wallet')
+      })
+  })
+  it('returns status 500 and sends and error message if there is a problem', () => {
+    editPost.mockImplementation(() =>
+      Promise.reject(new Error('Something random'))
+    )
+
+    return request(server)
+      .patch('/api/v1/posts/edit/1')
       .then((res) => {
         expect(res.status).toBe(500)
         expect(res.text).toContain('try again')

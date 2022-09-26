@@ -2,7 +2,13 @@ const knex = require('knex')
 const testConfig = require('../knexfile').test
 const testDb = knex(testConfig)
 
-const { getAllPosts, addPost, getAllPostsWithComments } = require('../posts')
+const {
+  getAllPosts,
+  addPost,
+  getAllPostsWithComments,
+  deletePost,
+  editPost,
+} = require('../posts')
 
 beforeAll(() => {
   return testDb.migrate.latest()
@@ -50,6 +56,27 @@ describe('addPost', () => {
 
     return addPost(fakePost, testDb).then((res) => {
       expect(res[3].title).toContain('cat')
+    })
+  })
+})
+
+describe('deletePost', () => {
+  it('delete a post from the posts table in the database then returns all the posts', () => {
+    return deletePost(4, testDb).then((res) => {
+      expect(res[3]).toBeUndefined()
+    })
+  })
+})
+
+describe('editPost', () => {
+  it('edit a post from the posts table in the database then returns all the posts', () => {
+    const fakePost = {
+      id: '3',
+      title: 'Missing a lake',
+    }
+
+    return editPost(fakePost, testDb).then((res) => {
+      expect(res[2].title).toBe('Missing a lake')
     })
   })
 })
