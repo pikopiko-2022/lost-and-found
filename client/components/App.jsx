@@ -10,7 +10,7 @@ import { clearLoggedInUser, updateLoggedInUser } from '../actions/loggedInUser'
 import EditProfile from './EditProfile'
 import CreatePost from './CreatePost'
 import Nav from './Nav'
-import SignIn from './SignIn'
+import CheckAuthenticated from './CheckAuthenticated'
 
 function App() {
   useCacheUser()
@@ -35,7 +35,7 @@ function App() {
       </div>
       {isAuthenticated && <Nav />}
       <Routes>
-        <Route path="/" element={<SignIn />} />
+        <Route path="/" element={<CheckAuthenticated />} />
         <Route path="/createProfile" element={<CreateProfile />} />
         <Route path="/profile/editProfile" element={<EditProfile />} />
         <Route path="/profile" element={<Profile />} />

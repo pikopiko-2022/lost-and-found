@@ -14,7 +14,7 @@ jest.mock('react-redux')
 jest.mock('../CreateProfileForm')
 jest.mock('../UserHomePage')
 
-describe('Authentication', () => {
+describe('Check Authenticated', () => {
   it('if authenticated it renders children, if user?.username get UserHomePage', async () => {
     const user = {
       username: 'luna',
