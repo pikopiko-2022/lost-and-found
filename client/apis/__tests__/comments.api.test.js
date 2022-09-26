@@ -1,5 +1,5 @@
 import nock from 'nock'
-import { addComment } from '../comments'
+import { addComment, deleteComment } from '../comments'
 
 const fakeComment = {
   post_id: 2,
@@ -16,6 +16,20 @@ describe('addComment', () => {
     return addComment(fakeComment).then((result) => {
       expect(scope.isDone()).toBe(true)
       expect(result.text).toBe('Comment added')
+    })
+  })
+})
+
+describe('deleteComment', () => {
+  it('deletes a comment from the database and sends a response', () => {
+    const commentId = 1
+    const scope = nock('http://localhost')
+      .delete(`/api/v1/comments/delete/${commentId}`)
+      .reply(200, { text: 'Comment deleted' })
+
+    return deleteComment(commentId).then((result) => {
+      expect(scope.isDone()).toBe(true)
+      expect(result.text).toBe('Comment deleted')
     })
   })
 })
