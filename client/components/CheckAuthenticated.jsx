@@ -7,7 +7,7 @@ import CreateProfileForm from './CreateProfileForm'
 
 import LandingPage from './LandingPage'
 
-function SignIn() {
+function CheckAuthenticated() {
   useCacheUser()
   const user = useSelector((state) => state.usersReducer)
 
@@ -27,4 +27,4 @@ function SignIn() {
   )
 }
 
-export default SignIn
+export default CheckAuthenticated

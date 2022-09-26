@@ -8,7 +8,8 @@ const errorMessage = 'There was a problem. Please try again.'
 router.get('/', (req, res) => {
   getAllPostsWithComments()
     .then((posts) => {
-      return res.json(posts)
+      const newPosts = posts.slice(0).reverse()
+      return res.json(newPosts)
     })
     .catch(() => {
       res.status(500).send(errorMessage)
@@ -39,7 +40,7 @@ router.post('/', upload.single('image'), (req, res) => {
       location,
     }
     addPost(post)
-      .then((posts) => res.json(posts))
+      .then(() => getAllPostsWithComments())
       .catch(() => res.status(500).send(errorMessage))
   }
 })
@@ -47,7 +48,10 @@ router.post('/', upload.single('image'), (req, res) => {
 router.delete('/delete/:postId', (req, res) => {
   const postId = req.params.postId
   deletePost(postId)
-    .then((posts) => res.json(posts))
+    .then((posts) => {
+      const newPosts = posts.slice(0).reverse()
+      return res.json(newPosts)
+    })
     .catch(() => res.status(500).send(errorMessage))
 })
 

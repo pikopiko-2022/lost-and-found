@@ -16,27 +16,24 @@ export default function AllPosts() {
       <Link to="/createPost">
         <button>Create a post</button>
       </Link>
-      {posts
-        .slice(0)
-        .reverse()
-        .map((post) => {
-          return (
-            <Post
-              key={post.id}
-              id={post.id}
-              uploaderId={post.uploaderId}
-              title={post.title}
-              uploader={post.username}
-              category={post.category}
-              dateLostOrFound={post.date_lostOrFound}
-              datePosted={post.datePosted}
-              description={post.description}
-              image={post.imageUrl}
-              location={post.itemLocation}
-              comments={post.comments}
-            />
-          )
-        })}
+      {posts.map((post) => {
+        return (
+          <Post
+            key={post.id}
+            id={post.id}
+            uploaderId={post.uploaderId}
+            title={post.title}
+            uploader={post.username}
+            category={post.category}
+            dateLostOrFound={post.date_lostOrFound}
+            datePosted={post.datePosted}
+            description={post.description}
+            image={post.imageUrl}
+            location={post.itemLocation}
+            comments={post.comments}
+          />
+        )
+      })}
     </>
   )
 }

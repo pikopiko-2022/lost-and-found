@@ -81,7 +81,6 @@ describe('EditProfile', () => {
       name: /save/i,
     })
     await userEvent.click(link)
-    screen.debug()
 
     expect(navigate).toHaveBeenCalledWith('/profile')
   })
