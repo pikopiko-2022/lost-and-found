@@ -16,7 +16,7 @@ export default function CreateComment(props) {
     setFormData({
       post_id: props.postId,
       commenter_id: user.id,
-      date_commented: new Date().toDateString(),
+      date_commented: Date.now(),
       [name]: value,
     })
   }
