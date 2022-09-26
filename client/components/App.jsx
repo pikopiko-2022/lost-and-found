@@ -9,6 +9,7 @@ import { getUser } from '../apis/users'
 import { clearLoggedInUser, updateLoggedInUser } from '../actions/loggedInUser'
 import EditProfile from './EditProfile'
 import CreatePost from './CreatePost'
+import EditPost from './EditPost'
 import Nav from './Nav'
 import CheckAuthenticated from './CheckAuthenticated'
 
@@ -40,6 +41,7 @@ function App() {
         <Route path="/profile/editProfile" element={<EditProfile />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/createPost" element={<CreatePost />} />
+        <Route path="/posts/edit/:postId" element={<EditPost />} />
       </Routes>
     </>
   )

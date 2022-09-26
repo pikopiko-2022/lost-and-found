@@ -22,3 +22,12 @@ export function deletePost(postId) {
     return res.body
   })
 }
+
+export function editPost(editedPost, postId) {
+  return request
+    .patch(`${rootUrl}/posts/edit/${postId}`)
+    .send(editedPost)
+    .then((res) => {
+      return res.body
+    })
+}
