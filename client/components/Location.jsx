@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addLocation } from '../apis/location'
 import { updateLocation } from '../actions/location'
 
+//painful for a dev without a google api key - but otherwise very nice!
 export default function Location() {
   const [form, setForm] = useState('')
   const [currentLocation, setCurrentLocation] = useState('')

@@ -17,6 +17,7 @@ export default function AllPosts() {
         <button>Create a post</button>
       </Link>
       {posts.reverse().map((post) => {
+      {/** I would be tempted to put the reverse logic into the route */}
         return (
           <Post
             key={post.id}

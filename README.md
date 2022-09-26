@@ -1,3 +1,8 @@
+# JV Review
+- 2 linter warnings, not too bad.
+- wow, that is a lot of tests. the location tests will fail if a user doesn't have a .env file with GOOGLE_API_KEY which would be good to mention in the readme
+- component coverage needs a bit of work, but this is a very good start.
+- 
 # Lost and Found
 
 Lost and found is an app where users can come to look for and make a post about items they have lost or found. Users can then comment on a post to make a connection and get back their item.

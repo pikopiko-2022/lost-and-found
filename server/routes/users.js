@@ -38,6 +38,7 @@ router.post('/createprofile', checkJwt, (req, res) => {
     name,
   }
 
+  //very thorough
   db.userExists(name)
     .then((usernameTaken) => {
       if (usernameTaken) throw new Error('Username taken')

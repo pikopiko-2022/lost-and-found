@@ -11,7 +11,7 @@ router.post('/', (req, res) => {
     post_id,
   }
   addComment(newComment)
-    .then(() => res.send('Comment added'))
+    .then(() => res.send('Comment added')) //would be good to put a 201 on the status
     .catch((err) => {
       console.error(err.message)
       res.status(500).send('post no worky')

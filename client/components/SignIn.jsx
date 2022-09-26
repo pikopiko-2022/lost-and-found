@@ -7,6 +7,8 @@ import CreateProfile from './CreateProfileForm'
 
 import LandingPage from './LandingPage'
 
+//this component name is misleading to me - I was expecting to see a sign in button 
+//maybe Home would be a better name?
 function SignIn() {
   useCacheUser()
   const user = useSelector((state) => state.usersReducer)
