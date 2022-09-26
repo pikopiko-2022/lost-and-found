@@ -1,4 +1,9 @@
-import { getAllPostsAndComments, addPost, deletePost } from '../apis/posts'
+import {
+  getAllPostsAndComments,
+  addPost,
+  deletePost,
+  editPost,
+} from '../apis/posts'
 export const SET_POSTS_SUCCESS = 'SET_POSTS_SUCCESS'
 
 export function fetchPosts() {
@@ -31,6 +36,16 @@ export function setPostsSuccess(posts) {
 export function deletePostByPostId(postId) {
   return (dispatch) => {
     return deletePost(postId)
+      .then((posts) => {
+        dispatch(setPostsSuccess(posts))
+      })
+      .catch((err) => console.error(err.message))
+  }
+}
+
+export function editPostByPostId(editedPost, postId) {
+  return (dispatch) => {
+    return editPost(editedPost, postId)
       .then((posts) => {
         dispatch(setPostsSuccess(posts))
       })
