@@ -4,6 +4,7 @@ import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { Provider } from 'react-redux'
 import store from '../../store'
+import { BrowserRouter as Router } from 'react-router-dom'
 
 import Comment from '../Comment'
 import AllComments from '../AllComments'
@@ -16,7 +17,9 @@ describe('<Post />', () => {
     AllComments.mockReturnValue(<>All Comments</>)
     render(
       <Provider store={store}>
-        <Post title="missing a key" image="./images/postImages/image1.jpg" />
+        <Router>
+          <Post title="missing a key" image="./images/postImages/image1.jpg" />
+        </Router>
       </Provider>
     )
 
