@@ -9,3 +9,11 @@ export function addComment(comment) {
       return res.body
     })
 }
+
+export function deleteComment(commentId) {
+  return request
+    .delete(`${rootUrl}/comments/delete/${commentId}`)
+    .then((res) => {
+      return res.body
+    })
+}

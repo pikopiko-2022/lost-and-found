@@ -8,9 +8,11 @@ function AllComments(props) {
       <p>{props.comments.length} comments</p>
       {props.comments.map((comment) => (
         <Comment
-          key={comment.comment}
+          key={comment.commentId}
+          commentId={comment.commentId}
           commenter={comment.username}
-          commentDate={comment.date_commented}
+          userId={comment.userId}
+          commentDate={comment.dateCommented}
           comment={comment.comment}
           postId={comment.post_id}
         />
