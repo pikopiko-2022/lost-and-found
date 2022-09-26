@@ -31,7 +31,7 @@ function App() {
   return (
     <>
       <div className="app">
-        <h1 className="flex justify-center items-center text-gray-800">
+        <h1 className="flex justify-center items-center text-gray-800 text-3xl ">
           <i>Lost</i> and <b>found</b>
         </h1>
       </div>
