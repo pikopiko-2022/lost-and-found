@@ -48,4 +48,17 @@ function deletePost(id, db = connection) {
     .then(() => getAllPostsWithComments(db))
 }
 
-module.exports = { getAllPosts, addPost, getAllPostsWithComments, deletePost }
+function editPost(editedPost, db = connection) {
+  return db('posts')
+    .update(editedPost)
+    .where('id', editedPost.id)
+    .then(() => getAllPostsWithComments(db))
+}
+
+module.exports = {
+  getAllPosts,
+  addPost,
+  getAllPostsWithComments,
+  deletePost,
+  editPost,
+}

@@ -1,10 +1,17 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { useAuth0 } from '@auth0/auth0-react'
 
 export default function Profile() {
+  const { isAuthenticated } = useAuth0()
+  const navigate = useNavigate()
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate('/')
+    }
+  }, [])
   const user = useSelector((state) => state.usersReducer)
-
   return (
     <>
       <h1>User Profile</h1>

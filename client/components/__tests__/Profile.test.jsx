@@ -1,7 +1,7 @@
 import React from 'react'
 import '@testing-library/jest-dom'
-import { screen, render, waitFor } from '@testing-library/react'
-import { useSelector } from 'react-redux'
+import { screen, render } from '@testing-library/react'
+import { useSelector, useDispatch } from 'react-redux'
 import {
   BrowserRouter as Router,
   MemoryRouter,
@@ -11,13 +11,24 @@ import {
 import userEvent from '@testing-library/user-event'
 import Profile from '../Profile'
 import EditProfile from '../EditProfile'
+import { useAuth0 } from '@auth0/auth0-react'
+import * as router from 'react-router'
 
 jest.mock('react-redux')
+jest.mock('@auth0/auth0-react')
+const navigate = jest.fn()
+
+beforeEach(() => {
+  jest.clearAllMocks()
+})
 
 describe('<Profile />', () => {
   test('renders heading on profile page', () => {
     useSelector.mockReturnValue({
       username: 'SamSam',
+    })
+    useAuth0.mockReturnValue({
+      isAuthenticated: true,
     })
     render(
       <Router>
@@ -34,7 +45,9 @@ describe('<Profile />', () => {
       name: 'Sam',
       location: 'Palmmmy',
     })
-
+    useAuth0.mockReturnValue({
+      isAuthenticated: true,
+    })
     render(
       <Router>
         <Profile />
@@ -48,9 +61,11 @@ describe('<Profile />', () => {
   })
 
   test('link button to edit profile works', async () => {
-    expect.assertions(1)
     useSelector.mockReturnValue({
       username: 'SamSamS',
+    })
+    useAuth0.mockReturnValue({
+      isAuthenticated: true,
     })
     render(
       <MemoryRouter initialEntries={['/profile']}>
@@ -61,13 +76,27 @@ describe('<Profile />', () => {
       </MemoryRouter>
     )
 
-    const link = screen.getByRole('link', {
-      name: /edit profile/i,
+    const link = screen.getByRole('link', { name: /edit profile/i })
+    await userEvent.click(link)
+    expect(screen.getByText(/EditProfile/i)).toBeInTheDocument()
+  })
+  it(`check if useEffect navigate to '/' if !isAuthenticated`, () => {
+    jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
+    useSelector.mockReturnValue({
+      username: 'SamSamS',
     })
-    userEvent.click(link)
+    const fakeDispatch = jest.fn()
+    useAuth0.mockReturnValue({
+      isAuthenticated: false,
+    })
 
-    await waitFor(() => {
-      expect(screen.getByText(/EditProfile/i)).toBeInTheDocument()
-    })
+    useDispatch.mockReturnValue(fakeDispatch)
+    render(
+      <Router>
+        <Profile />
+      </Router>
+    )
+
+    expect(navigate).toHaveBeenCalledWith('/')
   })
 })

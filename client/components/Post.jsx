@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import Comments from './AllComments'
 import CreateComment from './CreateComment'
 import { deletePostByPostId } from '../actions/posts'
@@ -7,6 +8,7 @@ import { deletePostByPostId } from '../actions/posts'
 export default function Post(props) {
   const user = useSelector((state) => state.usersReducer)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   return (
     <>
@@ -25,6 +27,9 @@ export default function Post(props) {
       </p>
       {user.id == props.uploaderId && (
         <div>
+          <button onClick={() => navigate(`/posts/edit/${props.id}`)}>
+            Edit post
+          </button>
           <button onClick={() => dispatch(deletePostByPostId(props.id))}>
             Delete Post
           </button>
