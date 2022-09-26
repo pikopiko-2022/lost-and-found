@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 import { BrowserRouter as Router } from 'react-router-dom'
@@ -81,17 +81,7 @@ describe('<CreatePost />', () => {
     await userEvent.type(screen.getByLabelText(/title/i), 'Lost a lock')
     await userEvent.selectOptions(screen.getByTestId('testCategory'), 'Lost')
     const dateInput = screen.getByLabelText(/date/i)
-
-    //
-    // await fireEvent.mouseDown(dateInput)
-    // await fireEvent.change(dateInput, { target: { value: '22/09/2022' } })
-    // await fireEvent.click(document.querySelector(''))
-    await userEvent.click(dateInput)
-    await userEvent.clear(dateInput)
-    await userEvent.type(dateInput, '22/09/2022')
-    await userEvent.tab()
-
-    //
+    await userEvent.type(dateInput, '2022-09-22')
     const imageInput = screen.getByTestId('uploadImage')
     await userEvent.upload(imageInput, file)
     await userEvent.type(

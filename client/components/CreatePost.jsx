@@ -13,6 +13,7 @@ export default function CreatePost() {
     description: '',
     image_url: '',
     location: '',
+    date_lostOrFound: '',
   }
 
   const navigate = useNavigate()
@@ -40,7 +41,7 @@ export default function CreatePost() {
     allFormData.append('image', selectedImage)
     allFormData.append('location', currentLocation)
     allFormData.append('uploader_id', user.id)
-    console.log(formData.date_lostOrFound)
+
     dispatch(addNewPost(allFormData))
     setFormData(initialState)
     navigate('/')
@@ -134,7 +135,7 @@ export default function CreatePost() {
             !(
               formData.title &&
               formData.category &&
-              // formData.date_lostOrFound &&
+              formData.date_lostOrFound &&
               formData.description &&
               currentLocation &&
               selectedImage
