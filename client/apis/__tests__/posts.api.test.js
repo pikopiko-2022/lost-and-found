@@ -64,3 +64,17 @@ describe('deletePost', () => {
     })
   })
 })
+
+describe('editPost', () => {
+  it('edit a post from the database, returns all posts in the database from local api', () => {
+    const fakePost = fakePosts[1]
+    const scope = nock('http://localhost')
+      .patch('/api/v1/posts/edit/1')
+      .reply(200, fakePosts)
+
+    return editPost(fakePost, 1).then((result) => {
+      expect(scope.isDone()).toBe(true)
+      expect(result[0].title).toBe('Keys')
+    })
+  })
+})

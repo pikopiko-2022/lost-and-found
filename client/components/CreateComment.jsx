@@ -34,6 +34,8 @@ export default function CreateComment(props) {
         <p>
           <label htmlFor="comment">Comment:</label>
           <input
+            data-testid="testComment"
+            id="comment"
             name="comment"
             onChange={changeHandler}
             value={formData.comment}
