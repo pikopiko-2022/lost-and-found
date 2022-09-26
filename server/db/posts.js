@@ -31,8 +31,7 @@ async function getAllPostsWithComments(db = connection) {
     .join('users', 'users.id', 'comments.commenter_id')
     .select(
       'comments.id as commentId',
-      'commenter_id',
-      'date_commented',
+      'date_commented as dateCommented',
       'comment',
       'post_id',
       'username',
