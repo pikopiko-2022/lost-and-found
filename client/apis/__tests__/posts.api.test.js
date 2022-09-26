@@ -1,5 +1,5 @@
 import nock from 'nock'
-import { getAllPostsAndComments, addPost } from '../posts'
+import { getAllPostsAndComments, addPost, deletePost, editPost } from '../posts'
 
 const fakePosts = [
   {
@@ -46,6 +46,33 @@ describe('addPost', () => {
       .reply(200, fakePosts)
 
     return addPost(fakePost).then((result) => {
+      expect(scope.isDone()).toBe(true)
+      expect(result[0].title).toBe('Keys')
+    })
+  })
+})
+
+describe('deletePost', () => {
+  it('deletes a post from the database, returns all posts in the database from local api', () => {
+    const scope = nock('http://localhost')
+      .delete('/api/v1/posts/delete/1')
+      .reply(200, fakePosts)
+
+    return deletePost(1).then((result) => {
+      expect(scope.isDone()).toBe(true)
+      expect(result[0].title).toBe('Keys')
+    })
+  })
+})
+
+describe('editPost', () => {
+  it('edit a post from the database, returns all posts in the database from local api', () => {
+    const fakePost = fakePosts[1]
+    const scope = nock('http://localhost')
+      .patch('/api/v1/posts/edit/1')
+      .reply(200, fakePosts)
+
+    return editPost(fakePost, 1).then((result) => {
       expect(scope.isDone()).toBe(true)
       expect(result[0].title).toBe('Keys')
     })

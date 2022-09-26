@@ -13,6 +13,7 @@ export default function CreatePost() {
     description: '',
     image_url: '',
     location: '',
+    date_lostOrFound: '',
   }
 
   const navigate = useNavigate()
@@ -40,6 +41,7 @@ export default function CreatePost() {
     allFormData.append('image', selectedImage)
     allFormData.append('location', currentLocation)
     allFormData.append('uploader_id', user.id)
+
     dispatch(addNewPost(allFormData))
     setFormData(initialState)
     navigate('/')
@@ -51,11 +53,18 @@ export default function CreatePost() {
       <form encType="multipart/form-data">
         <div>
           <label htmlFor="title">Title of post: </label>
-          <input name="title" onChange={changeHandler} value={formData.title} />
+          <input
+            id="title"
+            name="title"
+            onChange={changeHandler}
+            value={formData.title}
+          />
         </div>
         <div>
           <label htmlFor="category">Lost or Found: </label>
           <select
+            data-testid="testCategory"
+            id="category"
             name="category"
             onChange={changeHandler}
             value={formData.category}
@@ -68,6 +77,7 @@ export default function CreatePost() {
         <div>
           <label htmlFor="date">Date lost or found: </label>
           <input
+            id="date"
             type="date"
             name="date_lostOrFound"
             onChange={changeHandler}
@@ -77,6 +87,7 @@ export default function CreatePost() {
         <div>
           <label htmlFor="description">Description: </label>
           <textarea
+            id="description"
             type="text-area"
             name="description"
             onChange={changeHandler}
