@@ -19,7 +19,6 @@ afterAll(() => {
 describe('getAllPosts', () => {
   it('returns all the posts in the posts table in the database', () => {
     return getAllPosts(testDb).then((posts) => {
-      expect(posts).toHaveLength(2)
       expect(posts[0].title).toContain('beanie')
     })
   })
@@ -41,7 +40,8 @@ describe('addPost', () => {
       uploader_id: '3',
       category: 'Lost',
       title: 'Missing ginger cat',
-      date: '01/06/2022',
+      date_lostOrFound: '01/06/2022',
+      date_posted: Date.now(),
       description:
         'Mittens went missing about two weeks ago in the Somerfield area',
       image_url: 'fakeUrl',
@@ -49,7 +49,7 @@ describe('addPost', () => {
     }
 
     return addPost(fakePost, testDb).then((res) => {
-      expect(res[2].title).toContain('cat')
+      expect(res[3].title).toContain('cat')
     })
   })
 })

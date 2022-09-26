@@ -65,8 +65,8 @@ describe('GET /api/v1/posts', () => {
       .get('/api/v1/posts')
       .then((res) => {
         expect(res.body).toHaveLength(2)
-        expect(res.body[0].category).toBe('Found')
-        expect(res.body[0].comments[0].comment).toContain('fluffy')
+        expect(res.body[1].category).toBe('Found')
+        expect(res.body[1].comments[0].comment).toContain('fluffy')
       })
   })
   it('returns status 500 and sends and error message if there is a problem', () => {
@@ -90,7 +90,8 @@ describe('POST /api/v1/posts', () => {
     return request(server)
       .post('/api/v1/posts', upload.single('image'))
       .then((res) => {
-        expect(res.body[1].title).toBe('Wallet')
+        console.log(res.body)
+        expect(res.body[0].title).toBe('Wallet')
       })
   })
 
