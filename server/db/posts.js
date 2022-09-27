@@ -4,21 +4,21 @@ function getAllPosts(db = connection) {
   console.log(db)
   return db('posts')
     .join('users', 'posts.uploader_id', 'users.id')
-    .select
-    // 'name as uploaderName',
-    // 'username',
-    // 'users.location as userLocation',
-    // 'posts.id',
-    // 'uploader_id as uploaderId',
-    // 'category',
-    // 'title',
-    // 'date_lostOrFound',
-    // 'date_posted as datePosted',
-    // 'description',
-    // 'image_url as imageUrl',
-    // 'posts.location as itemLocation'
-    ()
-  // .where('date_posted', '>', Date.now() - 1000 * 60 * 60 * 24 * 30)
+    .select(
+      'name as uploaderName',
+      'username',
+      'users.location as userLocation',
+      'posts.id',
+      'uploader_id as uploaderId',
+      'category',
+      'title',
+      'date_lostOrFound',
+      'date_posted as datePosted',
+      'description',
+      'image_url as imageUrl',
+      'posts.location as itemLocation'
+    )
+    .where('date_posted', '>', Date.now() - 1000 * 60 * 60 * 24 * 30)
 }
 
 async function getAllPostsWithComments(db = connection) {
