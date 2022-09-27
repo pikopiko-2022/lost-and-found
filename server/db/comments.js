@@ -1,5 +1,4 @@
-const config = require('./knexfile').development
-const connection = require('knex')(config)
+const connection = require('./connection')
 
 function addComment(comment, db = connection) {
   return db('comments').insert(comment, 'id')

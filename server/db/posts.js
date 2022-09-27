@@ -1,7 +1,7 @@
-const config = require('./knexfile').development
-const connection = require('knex')(config)
+const connection = require('./connection')
 
 function getAllPosts(db = connection) {
+  console.log(db)
   return db('posts')
     .join('users', 'posts.uploader_id', 'users.id')
     .select
@@ -22,6 +22,7 @@ function getAllPosts(db = connection) {
 }
 
 async function getAllPostsWithComments(db = connection) {
+  console.log(db)
   const posts = await getAllPosts(db)
 
   const postIds = posts.map((post) => post.id)
