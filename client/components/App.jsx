@@ -12,6 +12,7 @@ import CreatePost from './CreatePost'
 import EditPost from './EditPost'
 import Nav from './Nav'
 import CheckAuthenticated from './CheckAuthenticated'
+import Footer from './Footer'
 
 function App() {
   useCacheUser()
@@ -31,21 +32,35 @@ function App() {
   }, [isAuthenticated])
   return (
     <>
-      <div className="app flex justify-center items-center m-10">
-        <h1 className="text-5xl">
-          <i>Lost</i> and <b>Found</b>
-        </h1>
-      </div>
-      <div className="flex flex-row justify-between">
-        {isAuthenticated && <Nav />}
-        <Routes>
-          <Route path="/" element={<CheckAuthenticated />} />
-          <Route path="/createProfile" element={<CreateProfile />} />
-          <Route path="/profile/editProfile" element={<EditProfile />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/createPost" element={<CreatePost />} />
-          <Route path="/posts/edit/:postId" element={<EditPost />} />
-        </Routes>
+      <div className="flex flex-col  justify-between min-h-screen">
+        <div>
+          <div className="app flex justify-center items-center m-10">
+            <h1 className="text-5xl">
+              <i>Lost</i> and <b>Found</b>
+            </h1>
+          </div>
+          <div className="flex flex-row justify-between">
+            {isAuthenticated && (
+              <>
+                <Nav />
+              </>
+            )}
+            <Routes>
+              <Route path="/" element={<CheckAuthenticated />} />
+              <Route path="/createProfile" element={<CreateProfile />} />
+              <Route path="/profile/editProfile" element={<EditProfile />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/createPost" element={<CreatePost />} />
+              <Route path="/posts/edit/:postId" element={<EditPost />} />
+            </Routes>
+          </div>
+        </div>
+
+        {isAuthenticated && (
+          <>
+            <Footer />
+          </>
+        )}
       </div>
     </>
   )

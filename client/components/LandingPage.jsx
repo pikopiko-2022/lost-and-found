@@ -32,8 +32,8 @@ function LandingPage() {
           </div>
           <div className="m-5 font-secondary text-2xl">
             <p>
-              Lost and Found is here to help return possesions to their rightful
-              owner.
+              Lost and Found is here to help return possessions to their
+              rightful owner.
             </p>
           </div>
         </div>

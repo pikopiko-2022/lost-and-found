@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import Comments from './AllComments'
+import AllComments from './AllComments'
 import CreateComment from './CreateComment'
 import { deletePostByPostId } from '../actions/posts'
 
@@ -27,26 +27,31 @@ export default function Post(props) {
         </figure>
         <div className="card-body">
           <p>{props.description}</p>
-          <div className="card-actions justify-end">
-            {user.id == props.uploaderId && (
-              <>
-                <button
-                  className="badge badge-outline"
-                  onClick={() => navigate(`/posts/edit/${props.id}`)}
-                >
-                  Edit post
-                </button>
-                <button
-                  className="badge badge-outline"
-                  onClick={() => dispatch(deletePostByPostId(props.id))}
-                >
-                  Delete Post
-                </button>
-              </>
-            )}
+          <div>
+            <div className="card-actions">
+              {user.id == props.uploaderId && (
+                <>
+                  <button
+                    className="badge badge-outline"
+                    onClick={() => navigate(`/posts/edit/${props.id}`)}
+                  >
+                    Edit post
+                  </button>
+                  <button
+                    className="badge badge-outline"
+                    onClick={() => dispatch(deletePostByPostId(props.id))}
+                  >
+                    Delete Post
+                  </button>
+                </>
+              )}
+            </div>
+
             <p>Posted on: {new Date(props.datePosted).toDateString()}</p>
-            <Comments comments={props.comments} />
-            <CreateComment postId={props.id} />
+            <div>
+              <AllComments comments={props.comments} />
+              <CreateComment postId={props.id} />
+            </div>
           </div>
         </div>
       </div>

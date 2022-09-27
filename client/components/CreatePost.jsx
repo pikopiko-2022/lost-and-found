@@ -58,7 +58,7 @@ export default function CreatePost() {
   return (
     <>
       <div className="flex flex-col w-full justify-center mr-48">
-        <h3 className="mb-5 text-2xl flex justify-center">Create Post:</h3>
+        <h3 className="mb-5 text-2xl flex justify-center">Create Post</h3>
         <form
           className="px-4 my-10 max-w-3x mx-auto space-y-6"
           encType="multipart/form-data"
