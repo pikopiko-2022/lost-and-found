@@ -5,7 +5,7 @@ exports.up = function (knex) {
     table.string('category')
     table.string('title')
     table.string('date_lostOrFound')
-    table.bigint('date_posted')
+    table.timestamp('date_posted')
     table.string('description')
     table.string('image_url')
     table.string('location')
