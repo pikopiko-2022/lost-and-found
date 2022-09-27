@@ -51,7 +51,10 @@ router.post('/', upload.single('image'), (req, res) => {
         const newPosts = posts.slice(0).reverse()
         return res.json(newPosts)
       })
-      .catch(() => res.status(500).send(errorMessage))
+      .catch((err) => {
+        console.error(err.message)
+        res.status(500).send(errorMessage)
+      })
   }
 })
 
