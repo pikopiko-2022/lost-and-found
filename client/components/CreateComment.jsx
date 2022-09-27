@@ -24,11 +24,12 @@ export default function CreateComment(props) {
   function submitHandler(e) {
     e.preventDefault()
     addComment(formData)
-      .then(() => dispatch(fetchPosts()))
-      .catch((err) => console.error(err.message))
-    setFormData(initialState)
-  }
 
+    setFormData(initialState)
+    dispatch(fetchPosts())
+  }
+  console.log(formData)
+  console.log(user.id)
   return (
     <>
       <form aria-label="commentForm" onSubmit={submitHandler}>
