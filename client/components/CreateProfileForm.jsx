@@ -33,7 +33,7 @@ export default function CreateProfileForm() {
     }
 
     createUser(userInfo, user.token)
-      .then(() => dispatch(updateLoggedInUser(userInfo)))
+      .then((userAllInfo) => dispatch(updateLoggedInUser(userAllInfo)))
       .catch((err) => console.error(err.message))
   }
 

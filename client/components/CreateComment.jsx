@@ -28,8 +28,7 @@ export default function CreateComment(props) {
     setFormData(initialState)
     dispatch(fetchPosts())
   }
-  console.log(formData)
-  console.log(user.id)
+
   return (
     <>
       <form aria-label="commentForm" onSubmit={submitHandler}>
