@@ -1,8 +1,8 @@
 exports.up = function (knex) {
   return knex.schema.createTable('comments', (table) => {
-    table.increments('id')
+    table.increments('id').primary()
     table.integer('post_id').references('posts.id')
-    table.string('commenter_id').references('users.auth0_id')
+    table.integer('commenter_id').references('users.id')
     table.date('date_commented')
     table.string('comment')
   })

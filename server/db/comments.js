@@ -2,7 +2,7 @@ const config = require('./knexfile').development
 const connection = require('knex')(config)
 
 function addComment(comment, db = connection) {
-  return db('comments').insert(comment)
+  return db('comments').insert(comment, 'id')
 }
 
 function deleteComment(id, db = connection) {

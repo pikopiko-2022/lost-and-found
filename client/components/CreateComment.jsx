@@ -24,8 +24,9 @@ export default function CreateComment(props) {
   function submitHandler(e) {
     e.preventDefault()
     addComment(formData)
+      .then(() => dispatch(fetchPosts()))
+      .catch((err) => console.error(err.message))
     setFormData(initialState)
-    dispatch(fetchPosts())
   }
 
   return (
