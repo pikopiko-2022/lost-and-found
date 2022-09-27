@@ -4,6 +4,7 @@ import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 import { useSelector } from 'react-redux'
 import { useCacheUser } from '../auth0-utils'
 import CreateProfileForm from './CreateProfileForm'
+import DelayComponent from './DelayComponent'
 
 import LandingPage from './LandingPage'
 
@@ -21,7 +22,9 @@ function CheckAuthenticated() {
         </>
       )}
       <IfNotAuthenticated>
-        <LandingPage />
+        <DelayComponent>
+          <LandingPage />
+        </DelayComponent>
       </IfNotAuthenticated>
     </>
   )

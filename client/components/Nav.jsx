@@ -34,9 +34,9 @@ export default function Nav() {
         <Link
           to="/"
           onClick={handleLogOff}
-          className="flex items-center p-2 text-2xl font-normal rounded-lg dark hover hover:scale-105 pb-2.5 ml-2 hover:underline"
+          className="flex items-center p-2 text-2xl font-normal rounded-lg dark hover hover:scale-105 pb-2.5 ml-2 hover:underline "
         >
-          <b>LOG OFF</b>
+          <b>LOG&nbsp;OFF</b>
         </Link>
       </IfAuthenticated>
       <IfNotAuthenticated>

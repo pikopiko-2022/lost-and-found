@@ -13,6 +13,7 @@ import EditPost from './EditPost'
 import Nav from './Nav'
 import CheckAuthenticated from './CheckAuthenticated'
 import Footer from './Footer'
+import DelayComponent from './DelayComponent'
 
 function App() {
   useCacheUser()
@@ -58,7 +59,9 @@ function App() {
 
         {isAuthenticated && (
           <>
-            <Footer />
+            <DelayComponent>
+              <Footer />
+            </DelayComponent>
           </>
         )}
       </div>
