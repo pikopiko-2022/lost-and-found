@@ -3,7 +3,7 @@ exports.up = function (knex) {
     table.increments('id').primary()
     table.integer('post_id').references('posts.id')
     table.integer('commenter_id').references('users.id')
-    table.timestamp('date_commented')
+    table.bigint('date_commented')
     table.string('comment')
   })
 }
