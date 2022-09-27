@@ -16,7 +16,8 @@ router.get('/', (req, res) => {
       const newPosts = posts.slice(0).reverse()
       return res.json(newPosts)
     })
-    .catch(() => {
+    .catch((err) => {
+      console.err(err.message)
       res.status(500).send(errorMessage)
     })
 })
