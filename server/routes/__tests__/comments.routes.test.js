@@ -1,6 +1,6 @@
 const request = require('supertest')
 const server = require('../../server')
-const { addComment } = require('../../db/comments')
+const { addComment, deleteComment } = require('../../db/comments')
 
 jest.mock('../../db/comments')
 
@@ -17,6 +17,7 @@ describe('POST /comments', () => {
       .post('/api/v1/comments/')
       .then((res) => {
         expect(res.text).toBe('Comment added')
+        expect(res.status).toBe(201)
       })
   })
 
@@ -28,6 +29,32 @@ describe('POST /comments', () => {
       .then((res) => {
         expect(res.status).toBe(500)
         expect(console.error).toHaveBeenCalledWith('we woow')
+      })
+  })
+})
+
+describe('DELETE /comments/delete/:commentId', () => {
+  test('it calls deleteComment db function and returns a response if successful', () => {
+    deleteComment.mockReturnValue(Promise.resolve('Comment deleted'))
+    const commentId = 1
+    return request(server)
+      .delete(`/api/v1/comments/delete/${commentId}`)
+      .then((res) => {
+        expect(res.status).toBe(201)
+        expect(res.text).toBe('Comment deleted')
+      })
+  })
+  test('it returns status 500 and console error if there is a problem', () => {
+    deleteComment.mockImplementation(() =>
+      Promise.reject(new Error('Error deleting comment'))
+    )
+    console.error.mockImplementation(() => {})
+    const commentId = 1
+    return request(server)
+      .delete(`/api/v1/comments/delete/${commentId}`)
+      .then((res) => {
+        expect(res.status).toBe(500)
+        expect(console.error).toHaveBeenCalledWith('Error deleting comment')
       })
   })
 })

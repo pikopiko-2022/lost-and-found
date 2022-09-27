@@ -11,6 +11,7 @@ function AllComments(props) {
 
   return (
     <>
+<<<<<<< HEAD
       {props.comments.length > 0 && (
         <p>
           {props.comments.length} Comment
@@ -37,6 +38,20 @@ function AllComments(props) {
           ))}
         </>
       )}
+=======
+      <p>{props.comments.length} comments</p>
+      {props.comments.map((comment) => (
+        <Comment
+          key={comment.commentId}
+          commentId={comment.commentId}
+          commenter={comment.username}
+          userId={comment.userId}
+          commentDate={comment.dateCommented}
+          comment={comment.comment}
+          postId={comment.post_id}
+        />
+      ))}
+>>>>>>> a2c2cbf71cfdad9ae4e65644652be8b1139cbdb7
     </>
   )
 }

@@ -1,7 +1,7 @@
 const knex = require('knex')
 const config = require('../knexfile').test
 const testDb = knex(config)
-const { addComment } = require('../comments')
+const { addComment, deleteComment } = require('../comments')
 
 beforeAll(() => {
   return testDb.migrate.latest()
@@ -16,7 +16,7 @@ describe('addComment', () => {
     id: 3,
     commenter_id: '2',
     post_id: 2,
-    date_commented: new Date().toDateString(),
+    date_commented: '22/05/2022',
     comment: 'I think my kid brought this home by mistake.',
   }
   test('it inserts a comment into the comments table in the database', () => {
@@ -25,6 +25,16 @@ describe('addComment', () => {
       .then((comments) => {
         expect(comments).toHaveLength(3)
         expect(comments[2].comment).toContain('by mistake')
+      })
+  })
+})
+
+describe('deleteComment', () => {
+  test('it deletes a comment from the database', () => {
+    return deleteComment(1, testDb)
+      .then(() => testDb('comments').select())
+      .then((comments) => {
+        expect(comments).toHaveLength(1)
       })
   })
 })

@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 import { BrowserRouter as Router } from 'react-router-dom'
@@ -13,7 +13,8 @@ jest.mock('../Location')
 jest.mock('../../actions/posts')
 jest.mock('react-redux')
 
-const fakePost = {
+const fakeUser = {
+  id: 1,
   category: 'Found',
   title: 'Cat',
   description: 'Black',
@@ -23,8 +24,13 @@ const fakePost = {
 
 const fakeDispatch = jest.fn()
 useDispatch.mockReturnValue(fakeDispatch)
-useSelector.mockReturnValue(fakePost)
+useSelector.mockReturnValue(fakeUser)
 addNewPost.mockReturnValue('Hello')
+
+const file = new File(['random'], 'values.png', {
+  type: 'image/png',
+})
+global.URL.createObjectURL = () => 'random'
 
 describe('<CreatePost />', () => {
   Location.mockReturnValue(<>Location</>)
@@ -40,17 +46,50 @@ describe('<CreatePost />', () => {
   })
 
   it('click upload image renders image on page', async () => {
-    const file = new File(['random'], 'values.png', {
-      type: 'image/png',
-    })
-    global.URL.createObjectURL = () => 'random'
     render(
       <Router>
         <CreatePost />
       </Router>
     )
     const imageInput = screen.getByTestId('uploadImage')
-    userEvent.upload(imageInput, file)
-    await waitFor(() => expect(screen.queryByTestId('testImage')).toBeTruthy())
+
+    await userEvent.upload(imageInput, file)
+    expect(screen.queryByTestId('testImage')).toBeTruthy()
+  })
+
+  it('click remove image button', async () => {
+    render(
+      <Router>
+        <CreatePost />
+      </Router>
+    )
+    const imageInput = screen.getByTestId('uploadImage')
+
+    await userEvent.upload(imageInput, file)
+    const button = screen.getByRole('button', { name: /remove/i })
+    await userEvent.click(button)
+    expect(screen.queryByTestId('testImage')).toBeFalsy()
+  })
+
+  it('click Save new post button', async () => {
+    Location.mockReturnValue(<>Location</>)
+    render(
+      <Router>
+        <CreatePost />
+      </Router>
+    )
+    await userEvent.type(screen.getByLabelText(/title/i), 'Lost a lock')
+    await userEvent.selectOptions(screen.getByTestId('testCategory'), 'Lost')
+    const dateInput = screen.getByLabelText(/date/i)
+    await userEvent.type(dateInput, '2022-09-22')
+    const imageInput = screen.getByTestId('uploadImage')
+    await userEvent.upload(imageInput, file)
+    await userEvent.type(
+      screen.getByLabelText(/description/i),
+      'Lost it at Nelson'
+    )
+
+    await userEvent.click(screen.getByRole('button', { name: /save/i }))
+    expect(fakeDispatch).toHaveBeenCalled()
   })
 })

@@ -17,7 +17,7 @@ exports.seed = function (knex) {
           commenter_id: '1',
           post_id: 1,
           date_commented: new Date().toDateString(),
-          comment: 'Second comment hello',
+          comment: 'Never mind, I found mine!',
         },
       ])
     })
