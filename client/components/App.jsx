@@ -31,20 +31,22 @@ function App() {
   }, [isAuthenticated])
   return (
     <>
-      <div className="app">
-        <h1 className="flex justify-center items-center text-gray-800 text-3xl ">
-          <i>Lost</i> and <b>found</b>
+      <div className="app flex justify-center items-center m-10">
+        <h1 className="text-5xl">
+          <i>Lost</i> and <b>Found</b>
         </h1>
       </div>
-      {isAuthenticated && <Nav />}
-      <Routes>
-        <Route path="/" element={<CheckAuthenticated />} />
-        <Route path="/createProfile" element={<CreateProfile />} />
-        <Route path="/profile/editProfile" element={<EditProfile />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/createPost" element={<CreatePost />} />
-        <Route path="/posts/edit/:postId" element={<EditPost />} />
-      </Routes>
+      <div className="flex flex-row justify-between">
+        {isAuthenticated && <Nav />}
+        <Routes>
+          <Route path="/" element={<CheckAuthenticated />} />
+          <Route path="/createProfile" element={<CreateProfile />} />
+          <Route path="/profile/editProfile" element={<EditProfile />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/createPost" element={<CreatePost />} />
+          <Route path="/posts/edit/:postId" element={<EditPost />} />
+        </Routes>
+      </div>
     </>
   )
 }

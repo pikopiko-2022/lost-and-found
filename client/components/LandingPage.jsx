@@ -9,26 +9,35 @@ function LandingPage() {
   }
   return (
     <>
-      <section>
-        <div className="flex justify-center items-center">
-          <div>
-            <button
-              className="bg-[#E9896A] inline-flex items-center justify-center rounded-md border border-transparent px-5 py-3 text-base font-medium text-white hover:bg-indigo-700"
-              onClick={handleSignIn}
-            >
-              Sign Up
-            </button>
+      <div className="flex flex-col w-full mt-20 justify-center items-center ">
+        <div className="m-3">
+          <button
+            className="w-80 btn rounded btn-primary hover:opacity-80"
+            onClick={handleSignIn}
+          >
+            Sign Up
+          </button>
+        </div>
+        <div className="m-3">
+          <button
+            className="w-80 btn rounded btn-secondary hover:opacity-80"
+            onClick={handleSignIn}
+          >
+            Log In
+          </button>
+        </div>
+        <div className="flex flex-col justify-center items-center m-20">
+          <div className="m-5 text-4xl font-light">
+            <p>Lost something? Found something?</p>
           </div>
-          <div>
-            <button
-              className="inline-flex items-center justify-center rounded-md border border-transparent bg-white px-5 py-3 text-base font-medium text-indigo-600 hover:bg-indigo-50"
-              onClick={handleSignIn}
-            >
-              Log In
-            </button>
+          <div className="m-5 font-secondary text-2xl">
+            <p>
+              Lost and Found is here to help return possesions to their rightful
+              owner.
+            </p>
           </div>
         </div>
-      </section>
+      </div>
     </>
   )
 }

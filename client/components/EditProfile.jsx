@@ -39,40 +39,58 @@ export default function EditProfile() {
 
   return (
     <>
-      <p>EditProfile</p>
-      <div>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="username">Username:</label>
-            <input
-              className="createprofile-input"
-              type="text"
-              name="username"
-              placeholder="Username you will be using"
-              onChange={handleChange}
-              value={form.username}
-            />
-            <label htmlFor="email">E-mail:</label>
-            <input
-              className="createprofile-input"
-              type="text"
-              name="email"
-              placeholder="your email"
-              onChange={handleChange}
-              value={form.email}
-            />
-            <label htmlFor="Location">Location:</label>
-            <input
-              className="createprofile-input"
-              type="text"
-              name="location"
-              placeholder="location"
-              onChange={handleChange}
-              value={form.location}
-            />
-            <button>Save</button>
-          </div>
-        </form>
+      <div className="w-full mt-1 ml-10 flex flex-col">
+        <h2 className="mb-5 text-2xl">EditProfile</h2>
+        <div className="card w-96 p-5 bg-info shadow-xl">
+          <form onSubmit={handleSubmit}>
+            <div className="w-80 flex flex-col text-xl space-y-1">
+              <div>
+                <div className="flex flex-row mb-1">
+                  <label className="mr-2 font-secondary" htmlFor="username">
+                    Username:
+                  </label>
+                  <input
+                    className="createprofile-input rounded pl-1"
+                    type="text"
+                    name="username"
+                    placeholder="Username you will be using"
+                    onChange={handleChange}
+                    value={form.username}
+                  />
+                </div>
+                <div className="flex flex-row mb-1">
+                  <label className="mr-2 font-secondary" htmlFor="email">
+                    E-mail:
+                  </label>
+                  <input
+                    className="createprofile-input rounded pl-1"
+                    type="text"
+                    name="email"
+                    placeholder="your email"
+                    onChange={handleChange}
+                    value={form.email}
+                  />
+                </div>
+                <div className="flex flex-row mb-1">
+                  <label className="mr-2 font-secondary" htmlFor="Location">
+                    Location:
+                  </label>
+                  <input
+                    className="createprofile-input rounded pl-1"
+                    type="text"
+                    name="location"
+                    placeholder="location"
+                    onChange={handleChange}
+                    value={form.location}
+                  />
+                </div>
+                <div className="mt-5">
+                  <button className="btn">Save</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
     </>
   )

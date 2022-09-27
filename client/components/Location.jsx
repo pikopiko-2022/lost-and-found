@@ -36,13 +36,13 @@ export default function Location() {
     setIsAdded(true)
     setIsSearched(false)
   }
-
   return (
     <>
       {errorMsg && <div style={{ color: 'red' }}>{errorMsg}</div>}
       <form action="" onSubmit={handleSearch}>
         <label htmlFor="location">Enter location</label>
         <input
+          className="h-10 px-3 mb-2 text-base text-gray-700 placeholder-gray-600 border rounded-lg focus:shadow-outline"
           type="text"
           name="location"
           id="location"
@@ -50,12 +50,16 @@ export default function Location() {
           value={form}
           data-testid="testBox"
         />
-        <button>Search</button>
+        <button className="btn btn-sm">Search</button>
       </form>
       {isSearched && (
         <>
           <div data-testid="testLocation">{currentLocation}</div>
-          <button data-testid="testButton" onClick={handleAddLocation}>
+          <button
+            data-testid="testButton"
+            onClick={handleAddLocation}
+            className="btn btn-sm pl-1"
+          >
             Add Location
           </button>
         </>

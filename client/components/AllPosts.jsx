@@ -13,27 +13,34 @@ export default function AllPosts() {
 
   return (
     <>
-      <Link to="/createPost">
-        <button>Create a post</button>
-      </Link>
-      {posts.map((post) => {
-        return (
-          <Post
-            key={post.id}
-            id={post.id}
-            uploaderId={post.uploaderId}
-            title={post.title}
-            uploader={post.username}
-            category={post.category}
-            dateLostOrFound={post.date_lostOrFound}
-            datePosted={post.datePosted}
-            description={post.description}
-            image={post.imageUrl}
-            location={post.itemLocation}
-            comments={post.comments}
-          />
-        )
-      })}
+      <div className="flex flex-wrap justify-center">
+        {posts.map((post) => {
+          return (
+            <Post
+              key={post.id}
+              id={post.id}
+              uploaderId={post.uploaderId}
+              title={post.title}
+              uploader={post.username}
+              category={post.category}
+              dateLostOrFound={post.date_lostOrFound}
+              datePosted={post.datePosted}
+              description={post.description}
+              image={post.imageUrl}
+              location={post.itemLocation}
+              comments={post.comments}
+            />
+          )
+        })}
+      </div>
+      <div>
+        <div className="flex justify-center items-center"></div>
+        <Link to="/createPost">
+          <button className="btn sticky top-20 rounded btn-primary">
+            Create a post
+          </button>
+        </Link>
+      </div>
     </>
   )
 }
