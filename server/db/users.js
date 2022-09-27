@@ -2,7 +2,7 @@ const connection = require('./connection')
 
 function createUser(user, db = connection) {
   return db('users')
-    .insert(user)
+    .insert(user, 'id')
     .then(() => getUserById(user.auth0_id, db))
 }
 
