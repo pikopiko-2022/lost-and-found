@@ -20,6 +20,7 @@ export default function CreatePost() {
   const dispatch = useDispatch()
   const [formData, setFormData] = useState(initialState)
   const [selectedImage, setSelectedImage] = useState(null)
+  const datePosted = Date.now()
 
   function changeHandler(event) {
     const { name, value } = event.target
@@ -34,7 +35,8 @@ export default function CreatePost() {
     const allFormData = new FormData()
     allFormData.append('title', formData.title)
     allFormData.append('category', formData.category)
-    allFormData.append('date', formData.date)
+    allFormData.append('date_lostOrFound', formData.date_lostOrFound)
+    allFormData.append('date_posted', datePosted)
     allFormData.append('description', formData.description)
     allFormData.append('image', selectedImage)
     allFormData.append('location', currentLocation)
@@ -67,6 +69,7 @@ export default function CreatePost() {
             <label htmlFor="title">Title of post: </label>
             <input
               className="w-full h-10 px-3 mb-2 text-base text-gray-700 placeholder-gray-600 border rounded-lg focus:shadow-outline"
+              id="title"
               name="title"
               onChange={changeHandler}
               value={formData.title}
@@ -76,6 +79,8 @@ export default function CreatePost() {
             <label htmlFor="category">Lost or Found: </label>
             <select
               className="w-full h-10 pl-3 pr-6 text-base placeholder-gray-600 border rounded-lg appearance-none focus:shadow-outline"
+              data-testid="testCategory"
+              id="category"
               name="category"
               onChange={changeHandler}
               value={formData.category}
@@ -88,10 +93,11 @@ export default function CreatePost() {
           <div>
             <label htmlFor="date">Date lost or found: </label>
             <input
+              id="date"
               type="date"
-              name="date"
+              name="date_lostOrFound"
               onChange={changeHandler}
-              value={formData.date}
+              value={formData.date_lostOrFound}
               max={restrictDate()}
             />
           </div>
@@ -99,6 +105,7 @@ export default function CreatePost() {
             <label htmlFor="description">Description: </label>
             <textarea
               className="w-full h-16 px-3 py-2 text-base text-gray-700 placeholder-gray-600 border rounded-lg focus:shadow-outline"
+              id="description"
               type="text-area"
               name="description"
               onChange={changeHandler}
@@ -148,7 +155,7 @@ export default function CreatePost() {
               !(
                 formData.title &&
                 formData.category &&
-                formData.date &&
+                formData.date_lostOrFound &&
                 formData.description &&
                 currentLocation &&
                 selectedImage
