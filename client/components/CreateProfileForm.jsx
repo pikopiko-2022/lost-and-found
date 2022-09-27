@@ -84,7 +84,7 @@ export default function CreateProfileForm() {
                 onChange={(evt) => handleChange(evt)}
                 value={form.location}
               />
-              <button className="flex flex-col justify-center w-30 mt-2">
+              <button className="flex flex-col justify-center w-32 mt-2 btn">
                 Save
               </button>
             </div>

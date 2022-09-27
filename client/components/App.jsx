@@ -42,9 +42,9 @@ function App() {
           </div>
           <div className="flex flex-row justify-between">
             {isAuthenticated && (
-              <>
+              <div className="">
                 <Nav />
-              </>
+              </div>
             )}
             <Routes>
               <Route path="/" element={<CheckAuthenticated />} />
