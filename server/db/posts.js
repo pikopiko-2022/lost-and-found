@@ -45,7 +45,7 @@ async function getAllPostsWithComments(db = connection) {
 
 function addPost(post, db = connection) {
   return db('posts')
-    .insert(post)
+    .insert(post, 'id')
     .then(() => getAllPostsWithComments(db))
 }
 
