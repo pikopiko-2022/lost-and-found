@@ -16,8 +16,6 @@ export default function EditPost() {
     image: targetPost ? targetPost.imageUrl : '',
   }
 
-  // const newImageUrl = targetPost?.substring(1)
-
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [formData, setFormData] = useState(initialState)
@@ -33,7 +31,6 @@ export default function EditPost() {
     setFormData(initialState)
     navigate('/')
   }
-  // console.log(newImageUrl)
   return (
     <>
       <div className="w-full mt-1 ml-10 flex flex-col m-6">

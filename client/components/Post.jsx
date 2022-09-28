@@ -9,7 +9,6 @@ export default function Post(props) {
   const user = useSelector((state) => state.usersReducer)
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  console.log('posts', props.image)
 
   return (
     <>
@@ -37,10 +36,19 @@ export default function Post(props) {
           ></img>
         </figure>
         <div className="card-body">
-          <p>{props.description}</p>
+          <div className="text-lg">
+            <p>Location: {props.location}</p>
+          </div>
+
           <p>
-            {props.category} on: {props.dateLostOrFound}
+            {props.category} by <i>{props.uploader}</i> on:{' '}
+            {new Date(props.dateLostOrFound).toDateString()}
           </p>
+          <hr />
+          <div className="text-base">
+            <p>{props.description}</p>
+          </div>
+
           <div>
             <div className="card-actions mt-3">
               {user.id == props.uploaderId && (

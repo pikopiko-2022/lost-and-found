@@ -6,7 +6,7 @@ import '@testing-library/jest-dom'
 
 jest.mock('../Comment')
 
-Comment.mockReturnValue(<button>Single Comment</button>)
+Comment.mockReturnValue(<button>View Comments</button>)
 
 const mockComments = [
   { id: 1, commentId: 1, comment: 'found' },
@@ -17,6 +17,6 @@ describe('<AllComments />', () => {
   test('it renders a list of comments that were passed as props by a post', () => {
     render(<AllComments comments={mockComments} />)
     const comment = screen.getAllByRole('button')
-    expect(comment[0]).toHaveTextContent('Single Comment')
+    expect(comment[0]).toHaveTextContent('View Comments')
   })
 })

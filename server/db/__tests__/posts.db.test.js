@@ -25,7 +25,7 @@ afterAll(() => {
 describe('getAllPosts', () => {
   it('returns all the posts in the posts table in the database', () => {
     return getAllPosts(testDb).then((posts) => {
-      expect(posts[0].title).toContain('beanie')
+      expect(posts[0].title).toContain('My Dog!!!')
     })
   })
 })
@@ -33,9 +33,9 @@ describe('getAllPosts', () => {
 describe('getAllPostsWithComments', () => {
   it('gets all the posts from the post tables and comments associated with each post', () => {
     return getAllPostsWithComments(testDb).then((posts) => {
-      expect(posts[0].comments).toHaveLength(2)
-      expect(posts[0].comments[0].comment).toContain('Gorman')
-      expect(posts[0].comments[0].username).toBe('SillySally')
+      expect(posts[1].comments).toHaveLength(2)
+      expect(posts[1].comments[0].comment).toContain('Gorman')
+      expect(posts[1].comments[0].username).toBe('SillySally')
     })
   })
 })
@@ -55,7 +55,7 @@ describe('addPost', () => {
     }
 
     return addPost(fakePost, testDb).then((res) => {
-      expect(res[3].title).toContain('cat')
+      expect(res[3].title).toContain('Water bottle')
     })
   })
 })
