@@ -29,10 +29,9 @@ export default function AllPosts() {
           )
         })}
       </div>
-      <div>
-        <div className="flex justify-center items-center"></div>
+      <div className="flex justify-end ml-24">
         <Link to="/createPost">
-          <button className="btn sticky top-20 rounded btn-primary">
+          <button className="btn mr-3 sticky top-20  w-40 rounded btn-primary">
             Create a post
           </button>
         </Link>

@@ -25,7 +25,6 @@ function App() {
       dispatch(clearLoggedInUser())
     } else {
       dispatch(fetchPosts())
-
       getAccessTokenSilently()
         .then((token) => getUser(token))
         .then((userInDb) => {
@@ -45,9 +44,9 @@ function App() {
           </div>
           <div className="flex flex-row justify-between">
             {isAuthenticated && (
-              <>
+              <div className="">
                 <Nav />
-              </>
+              </div>
             )}
             <Routes>
               <Route path="/" element={<CheckAuthenticated />} />

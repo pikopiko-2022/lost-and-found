@@ -9,14 +9,25 @@ export default function Post(props) {
   const user = useSelector((state) => state.usersReducer)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  console.log('posts', props.image)
 
   return (
     <>
       <div className="card card-compact w-96 bg-info shadow-xl  m-6 ">
-        <h2 className="card-title py-4 px-8">
-          {props.title}
-          <div className="badge badge-secondary"> {props.category}</div>
-        </h2>
+        <div className="flex flex-row justify-between items-center">
+          <h2 className="card-title py-4 px-8">{props.title}</h2>
+          {props.category == 'Lost' && (
+            <div className="bg-secondary rounded-full p-2 mr-3 w-20 text-center">
+              {props.category}
+            </div>
+          )}
+          {props.category == 'Found' && (
+            <div className="bg-primary rounded-full p-2 mr-3 w-20 text-center">
+              {props.category}
+            </div>
+          )}
+        </div>
+
         <figure>
           <img
             className="object-cover h-48 w-96 "
@@ -27,18 +38,21 @@ export default function Post(props) {
         </figure>
         <div className="card-body">
           <p>{props.description}</p>
+          <p>
+            {props.category} on: {props.dateLostOrFound}
+          </p>
           <div>
-            <div className="card-actions">
+            <div className="card-actions mt-3">
               {user.id == props.uploaderId && (
                 <>
                   <button
-                    className="badge badge-outline"
+                    className="hover:underline"
                     onClick={() => navigate(`/posts/edit/${props.id}`)}
                   >
                     Edit post
                   </button>
                   <button
-                    className="badge badge-outline"
+                    className="hover:underline"
                     onClick={() => dispatch(deletePostByPostId(props.id))}
                   >
                     Delete Post
@@ -47,7 +61,6 @@ export default function Post(props) {
               )}
             </div>
 
-            <p>Posted on: {new Date(props.datePosted).toDateString()}</p>
             <div>
               <AllComments comments={props.comments} />
               <CreateComment postId={props.id} />
@@ -57,33 +70,4 @@ export default function Post(props) {
       </div>
     </>
   )
-}
-
-{
-  /* <h3>
-        {props.category}: {props.title}
-      </h3>
-      <img
-        style={{ height: '400px' }}
-        src={props.image}
-        alt={props.title}
-      ></img>
-      <p>{props.description}</p>
-      <p>
-        {props.category} by {props.uploader} in {props.location} on{' '}
-        {new Date(props.dateLostOrFound).toDateString()}
-      </p>
-      {user.id == props.uploaderId && (
-        <div>
-          <button onClick={() => navigate(`/posts/edit/${props.id}`)}>
-            Edit post
-          </button>
-          <button onClick={() => dispatch(deletePostByPostId(props.id))}>
-            Delete Post
-          </button>
-        </div>
-      )}
-      <p>Posted on: {new Date(props.datePosted).toDateString()}</p>
-      <Comments comments={props.comments} />
-      <CreateComment postId={props.id} /> */
 }
