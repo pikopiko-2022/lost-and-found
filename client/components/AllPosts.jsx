@@ -1,15 +1,11 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import { fetchPosts } from '../actions/posts'
+import { useSelector } from 'react-redux'
+
 import Post from './Post'
 
 export default function AllPosts() {
   const posts = useSelector((state) => state.postsReducer)
-  const dispatch = useDispatch()
-  useEffect(() => {
-    dispatch(fetchPosts())
-  }, [])
 
   return (
     <>
@@ -33,10 +29,9 @@ export default function AllPosts() {
           )
         })}
       </div>
-      <div>
-        <div className="flex justify-center items-center"></div>
+      <div className="flex justify-end ml-24">
         <Link to="/createPost">
-          <button className="btn sticky top-20 rounded btn-primary">
+          <button className="btn mr-3 sticky top-20  w-40 rounded btn-primary">
             Create a post
           </button>
         </Link>

@@ -17,7 +17,7 @@ export default function Nav() {
   }
 
   return (
-    <nav className="w-64" aria-label="Sidebar">
+    <nav className="w-64 sticky top-20" aria-label="Sidebar">
       <Link
         to="/"
         className="flex items-center p-2 text-2xl font-normal rounded-lg dark hover:scale-105 ml-2 hover:underline"
