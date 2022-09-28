@@ -14,13 +14,31 @@ export default function Profile() {
   const user = useSelector((state) => state.usersReducer)
   return (
     <>
-      <h1>User Profile</h1>
-      <p>Name: {user.name}</p>
-      <p>Username: {user.username}</p>
-      <p>E-mail: {user.email}</p>
-      <p>Location: {user.location}</p>
+      <div className="w-full mt-1 ml-10 flex flex-col">
+        <h2 className="mb-5 text-2xl">User Profile</h2>
+        <div className="card w-96 p-5 bg-info shadow-xl">
+          <div className="text-xl space-y-1">
+            <p className="font-secondary">
+              Name: <span>{user.name}</span>
+            </p>
+            <p className="font-secondary">
+              Username: <span>{user.username}</span>
+            </p>
+            <p className="font-secondary">
+              E-mail: <span>{user.email}</span>
+            </p>
+            <p className="font-secondary">
+              Location: <span>{user.location}</span>
+            </p>
+          </div>
 
-      <Link to={'/profile/editProfile'}>Edit Profile</Link>
+          <div className="mt-5">
+            <button className="btn">
+              <Link to={'/profile/editProfile'}> Edit Profile</Link>
+            </button>
+          </div>
+        </div>
+      </div>
     </>
   )
 }

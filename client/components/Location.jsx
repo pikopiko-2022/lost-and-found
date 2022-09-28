@@ -36,31 +36,39 @@ export default function Location() {
     setIsAdded(true)
     setIsSearched(false)
   }
-
   return (
     <>
-      {errorMsg && <div style={{ color: 'red' }}>{errorMsg}</div>}
-      <form action="" onSubmit={handleSearch}>
-        <label htmlFor="location">Enter location</label>
-        <input
-          type="text"
-          name="location"
-          id="location"
-          onChange={handleChange}
-          value={form}
-          data-testid="testBox"
-        />
-        <button>Search</button>
-      </form>
-      {isSearched && (
-        <>
-          <div data-testid="testLocation">{currentLocation}</div>
-          <button data-testid="testButton" onClick={handleAddLocation}>
-            Add Location
-          </button>
-        </>
-      )}
-      {isAdded && <div>Location: {newLocation}</div>}
+      <div className="flex flex-col">
+        {errorMsg && <div style={{ color: 'red' }}>{errorMsg}</div>}
+        <form className="flex justify-evenly" action="" onSubmit={handleSearch}>
+          <label className="mr-8" htmlFor="location">
+            Enter location
+          </label>
+          <input
+            className="h-10 px-3 mb-2 mr-8 text-base text-gray-700 placeholder-gray-600 border rounded-lg focus:shadow-outline"
+            type="text"
+            name="location"
+            id="location"
+            onChange={handleChange}
+            value={form}
+            data-testid="testBox"
+          />
+          <button className="btn btn-sm">Search</button>
+        </form>
+        {isSearched && (
+          <>
+            <div data-testid="testLocation">{currentLocation}</div>
+            <button
+              data-testid="testButton"
+              onClick={handleAddLocation}
+              className="btn btn-sm pl-1 my-5"
+            >
+              Add Location
+            </button>
+          </>
+        )}
+        {isAdded && <div className="my-5">Location: {newLocation}</div>}
+      </div>
     </>
   )
 }

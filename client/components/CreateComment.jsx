@@ -42,7 +42,9 @@ export default function CreateComment(props) {
           ></input>
         </p>
         <p>
-          <button type="submit">Add Comment</button>
+          <button type="submit" className="btn btn-xs pl-1 my-5 bg-primary">
+            Add Comment
+          </button>
         </p>
       </form>
     </>
