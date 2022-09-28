@@ -13,6 +13,7 @@ export default function CreateComment(props) {
 
   function changeHandler(e) {
     const { name, value } = e.target
+
     setFormData({
       post_id: props.postId,
       commenter_id: user.id,
@@ -30,20 +31,33 @@ export default function CreateComment(props) {
 
   return (
     <>
-      <form aria-label="commentForm" onSubmit={submitHandler}>
-        <p>
-          <label htmlFor="comment">Comment:</label>
+      <form
+        className="flex flex-row justify-between items-center"
+        aria-label="commentForm"
+        onSubmit={submitHandler}
+      >
+        <div className="w-full">
           <input
+            className="rounded w-full p-1"
             data-testid="testComment"
             id="comment"
             name="comment"
             onChange={changeHandler}
             value={formData.comment}
+            placeholder="Write a comment..."
           ></input>
-        </p>
-        <p>
-          <button type="submit">Add Comment</button>
-        </p>
+        </div>
+        <div className="flex justify-end">
+          {formData.comment != '' && (
+            <button
+              disabled={formData.comment == ''}
+              type="submit"
+              className="btn btn-xs ml-2 bg-primary"
+            >
+              Send
+            </button>
+          )}
+        </div>
       </form>
     </>
   )

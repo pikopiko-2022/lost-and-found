@@ -12,6 +12,9 @@ import CreatePost from './CreatePost'
 import EditPost from './EditPost'
 import Nav from './Nav'
 import CheckAuthenticated from './CheckAuthenticated'
+import Footer from './Footer'
+import DelayComponent from './DelayComponent'
+import { fetchPosts } from '../actions/posts'
 
 function App() {
   useCacheUser()
@@ -21,6 +24,7 @@ function App() {
     if (!isAuthenticated) {
       dispatch(clearLoggedInUser())
     } else {
+      dispatch(fetchPosts())
       getAccessTokenSilently()
         .then((token) => getUser(token))
         .then((userInDb) => {
@@ -31,18 +35,38 @@ function App() {
   }, [isAuthenticated])
   return (
     <>
-      <div className="app">
-        <h1>Lost and found</h1>
+      <div className="flex flex-col  justify-between min-h-screen">
+        <div>
+          <div className="app flex justify-center items-center m-10">
+            <h1 className="text-5xl">
+              <i>Lost</i> and <b>Found</b>
+            </h1>
+          </div>
+          <div className="flex flex-row justify-between">
+            {isAuthenticated && (
+              <div className="">
+                <Nav />
+              </div>
+            )}
+            <Routes>
+              <Route path="/" element={<CheckAuthenticated />} />
+              <Route path="/createProfile" element={<CreateProfile />} />
+              <Route path="/profile/editProfile" element={<EditProfile />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/createPost" element={<CreatePost />} />
+              <Route path="/posts/edit/:postId" element={<EditPost />} />
+            </Routes>
+          </div>
+        </div>
+
+        {isAuthenticated && (
+          <>
+            <DelayComponent>
+              <Footer />
+            </DelayComponent>
+          </>
+        )}
       </div>
-      {isAuthenticated && <Nav />}
-      <Routes>
-        <Route path="/" element={<CheckAuthenticated />} />
-        <Route path="/createProfile" element={<CreateProfile />} />
-        <Route path="/profile/editProfile" element={<EditProfile />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/createPost" element={<CreatePost />} />
-        <Route path="/posts/edit/:postId" element={<EditPost />} />
-      </Routes>
     </>
   )
 }

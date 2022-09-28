@@ -28,13 +28,7 @@ describe('CreateProfile', () => {
     expect(fakeDispatch).toHaveBeenCalled()
     expect(fakeDispatch).toHaveBeenCalledWith({
       type: 'UPDATE_LOGGED_IN_USER',
-      payload: {
-        auth0_Id: undefined,
-        email: '',
-        location: '',
-        name: '',
-        username: 'DavidLostAgain',
-      },
+      payload: '',
     })
   })
   it('dispatches correct action when form submitted1', async () => {

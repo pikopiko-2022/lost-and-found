@@ -18,9 +18,21 @@ beforeEach(() => {
 })
 useNavigate.mockImplementation(() => navigate)
 const fakePosts = [
-  { id: 1, title: 'chelsea is panicking' },
-  { id: 2, title: 'david is still lost' },
-  { id: 3, title: 'Aaron lost his hat on his run' },
+  {
+    id: 1,
+    title: 'chelsea is panicking',
+    imageUrl: './images/postimages/image-1664331147998.png',
+  },
+  {
+    id: 2,
+    title: 'david is still lost',
+    imageUrl: './images/postimages/image-1664331147998.png',
+  },
+  {
+    id: 3,
+    title: 'Aaron lost his hat on his run',
+    imageUrl: './images/postimages/image-1664331147998.png',
+  },
 ]
 
 describe('EditPost', () => {

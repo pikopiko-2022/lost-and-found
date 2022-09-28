@@ -8,6 +8,8 @@ import { Auth0Provider } from '@auth0/auth0-react'
 import App from './components/App'
 import { BrowserRouter as Router } from 'react-router-dom'
 
+import './styles/index.css'
+
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
     <Auth0Provider

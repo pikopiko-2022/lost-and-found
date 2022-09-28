@@ -18,6 +18,26 @@ describe('addComment', () => {
       expect(result.text).toBe('Comment added')
     })
   })
+  it('adds a cosdfsdfment to the database and sends a response', () => {
+    const scope = nock('http://localhost')
+      .post('/api/v1/comments')
+      .reply(200, { text: 'Comment added' })
+
+    return addComment(fakeComment).then((result) => {
+      expect(scope.isDone()).toBe(true)
+      expect(result.text).toBe('Comment added')
+    })
+  })
+  it('adds a comsdfsdment to the database and sends a response', () => {
+    const scope = nock('http://localhost')
+      .post('/api/v1/comments')
+      .reply(200, { text: 'Comment added' })
+
+    return addComment(fakeComment).then((result) => {
+      expect(scope.isDone()).toBe(true)
+      expect(result.text).toBe('Comment added')
+    })
+  })
 })
 
 describe('deleteComment', () => {

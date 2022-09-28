@@ -47,104 +47,126 @@ export default function CreatePost() {
     navigate('/')
   }
 
+  function restrictDate() {
+    const date = new Date()
+    let day = date.getDate()
+    let month = date.getMonth() + 1
+    const newMonth = month < 10 ? `0${month}` : month
+    let year = date.getFullYear()
+    let currentDate = `${year}-${newMonth}-${day}`
+    return currentDate
+  }
+
   return (
     <>
-      <h3>Create Post</h3>
-      <form encType="multipart/form-data">
-        <div>
-          <label htmlFor="title">Title of post: </label>
-          <input
-            id="title"
-            name="title"
-            onChange={changeHandler}
-            value={formData.title}
-          />
-        </div>
-        <div>
-          <label htmlFor="category">Lost or Found: </label>
-          <select
-            data-testid="testCategory"
-            id="category"
-            name="category"
-            onChange={changeHandler}
-            value={formData.category}
-          >
-            <option value=""></option>
-            <option value="Lost">Lost</option>
-            <option value="Found">Found</option>
-          </select>
-        </div>
-        <div>
-          <label htmlFor="date">Date lost or found: </label>
-          <input
-            id="date"
-            type="date"
-            name="date_lostOrFound"
-            onChange={changeHandler}
-            value={formData.date_lostOrFound}
-          />
-        </div>
-        <div>
-          <label htmlFor="description">Description: </label>
-          <textarea
-            id="description"
-            type="text-area"
-            name="description"
-            onChange={changeHandler}
-            value={formData.description}
-          />
-        </div>
-
-        <div>
-          {selectedImage && (
-            <div>
-              <img
-                data-testid="testImage"
-                alt="not found"
-                width={'250px'}
-                src={URL.createObjectURL(selectedImage)}
-              />
-              <br />
-              <button
-                onClick={(e) => {
-                  e.preventDefault()
-                  setSelectedImage(null)
-                }}
-              >
-                Remove
-              </button>
-            </div>
-          )}
-        </div>
-        <div>
-          <label htmlFor="photo">Upload your photo</label>
-          <input
-            data-testid="uploadImage"
-            type="file"
-            name="photo"
-            id="photo"
-            onChange={handleImageChange}
-          />
-        </div>
-      </form>
-      <Location />
-
-      <div>
-        <button
-          disabled={
-            !(
-              formData.title &&
-              formData.category &&
-              formData.date_lostOrFound &&
-              formData.description &&
-              currentLocation &&
-              selectedImage
-            )
-          }
-          onClick={submitHandler}
+      <div className="flex flex-col w-full justify-center mr-48">
+        <h3 className="mb-5 text-2xl flex justify-center">Create Post</h3>
+        <form
+          className="px-4 my-10 max-w-3x mx-auto space-y-6"
+          encType="multipart/form-data"
         >
-          Save new post
-        </button>
+          <div>
+            <label htmlFor="title">Title of post: </label>
+            <input
+              className="w-full h-10 px-3 mb-2 text-base text-gray-700 placeholder-gray-600 border rounded-lg focus:shadow-outline"
+              id="title"
+              name="title"
+              onChange={changeHandler}
+              value={formData.title}
+            />
+          </div>
+          <div>
+            <label htmlFor="category">Lost or Found: </label>
+            <select
+              className="w-full h-10 pl-3 pr-6 text-base placeholder-gray-600 border rounded-lg appearance-none focus:shadow-outline"
+              data-testid="testCategory"
+              id="category"
+              name="category"
+              onChange={changeHandler}
+              value={formData.category}
+            >
+              <option value=""></option>
+              <option value="Lost">Lost</option>
+              <option value="Found">Found</option>
+            </select>
+          </div>
+          <div>
+            <label htmlFor="date">Date lost or found: </label>
+            <input
+              id="date"
+              type="date"
+              name="date_lostOrFound"
+              onChange={changeHandler}
+              value={formData.date_lostOrFound}
+              max={restrictDate()}
+            />
+          </div>
+          <div>
+            <label htmlFor="description">Description: </label>
+            <textarea
+              className="w-full h-16 px-3 py-2 text-base text-gray-700 placeholder-gray-600 border rounded-lg focus:shadow-outline"
+              id="description"
+              type="text-area"
+              name="description"
+              onChange={changeHandler}
+              value={formData.description}
+            />
+          </div>
+
+          <div>
+            {selectedImage && (
+              <div>
+                <img
+                  data-testid="testImage"
+                  alt="not found"
+                  width={'250px'}
+                  src={URL.createObjectURL(selectedImage)}
+                />
+                <br />
+                <button
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setSelectedImage(null)
+                  }}
+                >
+                  Remove
+                </button>
+              </div>
+            )}
+          </div>
+          <div>
+            <label htmlFor="photo">Upload your photo</label>
+            <input
+              data-testid="uploadImage"
+              type="file"
+              name="photo"
+              id="photo"
+              onChange={handleImageChange}
+            />
+          </div>
+        </form>
+        <div className="flex justify-center">
+          <Location />
+        </div>
+
+        <div className="flex justify-center mb-10">
+          <button
+            disabled={
+              !(
+                formData.title &&
+                formData.category &&
+                formData.date_lostOrFound &&
+                formData.description &&
+                currentLocation &&
+                selectedImage
+              )
+            }
+            onClick={submitHandler}
+            className="w-30 h-10 btn rounded btn-secondary"
+          >
+            Save new post
+          </button>
+        </div>
       </div>
     </>
   )

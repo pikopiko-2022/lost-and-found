@@ -33,59 +33,63 @@ export default function CreateProfileForm() {
     }
 
     createUser(userInfo, user.token)
-      .then(() => dispatch(updateLoggedInUser(userInfo)))
+      .then((allUserInfo) => dispatch(updateLoggedInUser(allUserInfo)))
       .catch((err) => console.error(err.message))
   }
 
   return (
     <>
-      <h1>Create Profile</h1>
-      <div>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="name">Name:</label>
-            <input
-              className="createprofile-input"
-              type="text"
-              id="name"
-              name="name"
-              placeholder="Full name"
-              onChange={(evt) => handleChange(evt)}
-              value={form.name}
-            />
-            <label htmlFor="username">Username:</label>
-            <input
-              className="createprofile-input"
-              type="text"
-              id="username"
-              name="username"
-              placeholder="Username you will be using"
-              onChange={(evt) => handleChange(evt)}
-              value={form.username}
-            />
-            <label htmlFor="email">E-mail:</label>
-            <input
-              className="createprofile-input"
-              type="text"
-              id="email"
-              name="email"
-              placeholder="your email"
-              onChange={(evt) => handleChange(evt)}
-              value={form.email}
-            />
-            <label htmlFor="location">Location:</label>
-            <input
-              className="createprofile-input"
-              type="text"
-              id="location"
-              name="location"
-              placeholder="location"
-              onChange={(evt) => handleChange(evt)}
-              value={form.location}
-            />
-            <button>Save</button>
-          </div>
-        </form>
+      <div className="flex flex-col w-full ml-96">
+        <h1 className="mb-5 text-2xl">Create Profile</h1>
+        <div>
+          <form onSubmit={handleSubmit}>
+            <div className="flex flex-col justify-center">
+              <label htmlFor="name">Name:</label>
+              <input
+                className="w-80 h-10 px-3 mb-2 text-base text-gray-700 placeholder-gray-600 border rounded-lg focus:shadow-outline"
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Full name"
+                onChange={(evt) => handleChange(evt)}
+                value={form.name}
+              />
+              <label htmlFor="username">Username:</label>
+              <input
+                className="w-80 h-10 px-3 mb-2 text-base text-gray-700 placeholder-gray-600 border rounded-lg focus:shadow-outline"
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Username you will be using"
+                onChange={(evt) => handleChange(evt)}
+                value={form.username}
+              />
+              <label htmlFor="email">E-mail:</label>
+              <input
+                className="w-80 h-10 px-3 mb-2 text-base text-gray-700 placeholder-gray-600 border rounded-lg focus:shadow-outline"
+                type="text"
+                id="email"
+                name="email"
+                placeholder="your email"
+                onChange={(evt) => handleChange(evt)}
+                value={form.email}
+              />
+              <label htmlFor="location">Location:</label>
+              <input
+                className="w-80 h-10 px-3 mb-2 text-base text-gray-700 placeholder-gray-600 border rounded-lg focus:shadow-outline"
+                type="text"
+                id="location"
+                name="location"
+                placeholder="location"
+                onChange={(evt) => handleChange(evt)}
+                value={form.location}
+              />
+              <button className="flex flex-col justify-center w-32 mt-2 btn">
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </>
   )

@@ -8,30 +8,42 @@ exports.seed = function (knex) {
         {
           id: 1,
           uploader_id: '2',
-          category: 'Found',
-          title: 'Pink beanie found on Sumner Beach',
+          category: 'Lost',
+          title: 'My Dog!!!',
           date_lostOrFound: new Date().toDateString(),
           date_posted: Date.now(),
           description:
-            'Please comment if you think it might be yours - tell me the brand on the tag inside',
+            'Please help me find my dog, he gets serious separation anxiety! Approach with caution...',
           image_url:
-            'https://static.zara.net/photos///2022/V/0/1/p/3739/002/620/2/w/1920/3739002620_6_1_1.jpg?ts=1638522328799',
-          location: 'Christchurch',
+            'https://www.liveabout.com/thmb/yKtMdkAChIsIUN_GKr2F8_pqzxA=/735x735/smart/filters:no_upscale()/lost-dog-58b8c9475f9b58af5c8c7aec.jpg',
+          location: 'Whangarei Quarry Gardens',
         },
         {
           id: 2,
-          uploader_id: '3',
+          uploader_id: '2',
           category: 'Lost',
+          title: 'Pink beanie',
+          date_lostOrFound: new Date().toDateString(),
+          date_posted: Date.now(),
+          description: "Please comment if you have seen it, it's my favourite",
+          image_url:
+            'https://static.zara.net/photos///2022/V/0/1/p/3739/002/620/2/w/1920/3739002620_6_1_1.jpg?ts=1638522328799',
+          location: 'Sumner Beach, Christchurch',
+        },
+        {
+          id: 3,
+          uploader_id: '3',
+          category: 'Found',
           title: 'School hat',
           date_lostOrFound: new Date().toDateString(),
           date_posted: Date.now(),
           description: 'It is red and looks like the picture',
           image_url:
             'https://www.thewarehouse.co.nz/dw/image/v2/BDMG_PRD/on/demandware.static/-/Sites-twl-master-catalog/default/dw343e4d2e/images/hi-res/55/E2/R1814457_20.jpg?sw=765&sh=765',
-          location: 'Brooksfield School',
+          location: 'Papamoa primary school',
         },
         {
-          id: 3,
+          id: 4,
           uploader_id: '3',
           category: 'Lost',
           title: 'Water bottle',
@@ -40,10 +52,10 @@ exports.seed = function (knex) {
           description: 'Have you seen my water bottle?',
           image_url:
             'https://www.bivouac.co.nz/media/catalog/product/c/a/cam_chute-mag-1l-vac-ins_1515402001_16_1.jpg?width=636&height=636&store=default&image-type=image',
-          location: 'Auckland',
+          location: 'City Fitness, Auckland CBD',
         },
         {
-          id: 4,
+          id: 5,
           uploader_id: '3',
           category: 'Lost',
           title: 'I lost my cat again. I think she hates me.',
