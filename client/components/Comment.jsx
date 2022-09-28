@@ -18,13 +18,13 @@ export default function Comment(props) {
         <div className="bg-base-100 pl-1 py-1 rounded">
           <b>{props.commenter}:</b> <span>{props.comment}</span>
         </div>
-        <div className="flex justify-end text-xs mb-3 ">
-          <i>27.09.2022</i>
-
-          {/* {new Date(props.commentDate).toDateString()}
+        <div className="flex justify-between pt-1 text-xs mb-3 ">
           {user.id == props.userId && (
-            <button onClick={onClickDeleteComment}>Delete comment</button>
-          )} */}
+            <button className="hover:underline" onClick={onClickDeleteComment}>
+              Delete
+            </button>
+          )}
+          <i>{new Date(props.commentDate).toDateString()}</i>
         </div>
       </li>
     </>
