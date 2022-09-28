@@ -1,15 +1,11 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import { fetchPosts } from '../actions/posts'
+import { useSelector } from 'react-redux'
+
 import Post from './Post'
 
 export default function AllPosts() {
   const posts = useSelector((state) => state.postsReducer)
-  const dispatch = useDispatch()
-  useEffect(() => {
-    dispatch(fetchPosts())
-  }, [])
 
   return (
     <>

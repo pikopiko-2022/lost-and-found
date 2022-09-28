@@ -14,6 +14,7 @@ import Nav from './Nav'
 import CheckAuthenticated from './CheckAuthenticated'
 import Footer from './Footer'
 import DelayComponent from './DelayComponent'
+import { fetchPosts } from '../actions/posts'
 
 function App() {
   useCacheUser()
@@ -23,6 +24,7 @@ function App() {
     if (!isAuthenticated) {
       dispatch(clearLoggedInUser())
     } else {
+      dispatch(fetchPosts())
       getAccessTokenSilently()
         .then((token) => getUser(token))
         .then((userInDb) => {
